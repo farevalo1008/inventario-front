@@ -1,0 +1,120 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="status == 'success' ">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+	<strong>{{ mensaje }}</strong>
+  </div>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status == 'error' ">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+	<strong>{{ mensaje }}</strong>
+  </div>
+  
+  
+  <form [formGroup]="myForm" (ngSubmit)="registroActividad()" novalidate>
+	  <div class="form-inline">
+		  <input type="date" min="{{messagetwo}}" max="{{fin}}" formControlName="fecha" class="form-control m-3" required>
+		  
+		  <select class="custom-select m-3"  formControlName="tipo_actividad" required>
+			  <option selected disabled>Tipos de Actividad</option>
+			  <option value="1">Curso</option>
+			  <option value="2">Proyecto</option>
+			  <option value="3">Cliente</option>
+			  <option value="4">Permiso</option>
+			  <option value="5">Otros</option>
+		  </select>
+  
+		  <div *ngIf="myForm.get('hora').errors && myForm.get('hora').dirty">
+			  <div *ngIf="myForm.get('hora').hasError('required')" >
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> Este campo es requerido.
+					  </div>
+				  </div>
+			  </div>
+			  
+			  <div *ngIf="myForm.get('hora').hasError('minlength')" >
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> valor minimo 1 digito.
+					  </div>
+				  </div>
+			  </div>
+			  
+			  <div *ngIf="myForm.get('hora').hasError('maxlength')" >
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> valor maximo 5 digitos.
+					  </div>
+				  </div>
+			  </div>
+  
+			  <div *ngIf="myForm.get('hora').hasError('pattern')">
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> El Formato debe ser: '00.00'.
+					  </div>
+				  </div>
+			  </div>
+  
+			  <div *ngIf="myForm.get('hora').hasError('max')">
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> La cantidad de horas es mayor a 18 horas.
+					  </div>
+				  </div>
+			  </div>
+  
+		  </div>
+  
+		  <input class="form-control m-3" placeholder="Horas" formControlName="hora" maxlength="5" type="number" name="quantity" min="1" max="5">
+  
+		  <div *ngIf="myForm.get('descripcion').errors && myForm.get('descripcion').dirty">
+			  <div *ngIf="myForm.get('descripcion').hasError('maxlength')">
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> Descripcion muy larga.
+					  </div>
+				  </div>
+			  </div>
+  
+			  <div *ngIf="myForm.get('descripcion').hasError('minlength')">
+				  <div class="tooltips">
+					  <div class="alert alert-dismissible tooltipstext" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin: 0px; padding: 0px; margin-right: 2%; margin-top: 1%;">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+							<strong>Advertencia!</strong> Descripcion muy corta.
+					  </div>
+				  </div>
+			  </div>
+  
+		  </div>
+  
+		  <input type="text" class="form-control m-3" placeholder="Descripcion"formControlName="descripcion" required>
+		  <button class="btn color-1 float-right" [disabled]="myForm.invalid"  >Registrar</button>
+	  </div>	
+  </form>
+  
+  
+  
+

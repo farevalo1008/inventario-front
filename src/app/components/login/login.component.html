@@ -1,0 +1,98 @@
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-soaint">
+
+    <a class="navbar-brand" href="#"><i class="fas fa-globe-americas"></i> SOAINT </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse nav navbar-letra justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav pull-xs-right">
+            <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['/aspirante']">Aspirante&nbsp;&nbsp;<i class=""></i></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['/inicio']">Home&nbsp;&nbsp;<i class=""></i></a>
+            </li>
+        </ul>          
+    </div>
+
+</nav>
+
+<!--<div class="container">
+    <img class="cargandoGif" *ngIf="mostrarCargando" src="../../../assets/img/caegando.gif"/>
+</div>-->
+<app-loading *ngIf="loading"></app-loading>
+<div class="modal-dialog text-center">
+    <div class="col-sm-8 main-section">
+        <div class="modal-content">
+            <div class="col-12 user-img">
+                <img src="../../../assets/img/logo.jpg" th:src="@{../../../assets/img/logo.jpg}"/>
+            </div>
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                <div class="form-group">
+                    <i class="far fa-envelope"></i><label for="email"><b>&nbsp;&nbsp;Email</b></label>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" placeholder="Ingrese su Correo Electrónico" required/>
+                    <span *ngIf="!email.valid && email.touched" class="validate-danger"><h6>El email no es válido</h6></span>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-unlock-alt"></i><label for="password"><b>&nbsp;&nbsp;Contraseña</b></label>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" placeholder="Ingrese su Contraseña" required/>
+                    <span *ngIf="!password.valid && password.touched" class="validate-danger"><h6>La clave no es válida</h6></span>
+                </div>
+                <div class="form-group" *ngIf="mensaje">
+                    <span class="validate-danger" >{{ mensaje | titlecase }}</span>
+                </div>
+                <button type="submit" class="btn" style="color:white; background:#006595" [disabled]="!loginForm.form.valid"><i class="fas fa-sign-in-alt"></i>   Ingresar </button>
+            </form>
+            <!--<div class="col-12 forgot">
+                <a href="#">Recordar contrasena?</a>
+            </div>-->
+        </div>
+    </div>
+</div><br><br><br><br><br><br><br><br><br>
+</body>
+<!--<app-loading *ngIf="loading"></app-loading>
+<div class="container">
+    
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 card">
+
+            <div class="form-group text-center">                
+                <label ><img src="../../../assets/img/logo.jpg"></label>
+            </div>
+                      
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+              <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" 
+                        class="form-control"  
+                        placeholder="Ingrese su email" required>
+                  <span *ngIf="!email.valid && email.touched" class="validate-danger">El email no es valido</span>
+              </div>
+
+              <div class="form-group">
+                  <label for="password">Clave</label>
+                  <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" 
+                        class="form-control"  
+                        placeholder="Ingrese su clave" required>
+                  <span *ngIf="!password.valid && password.touched" class="validate-danger">La clave no es valida</span>
+              </div>
+              
+              <div class="form-group" *ngIf="mensaje">
+                <span class="validate-danger" >{{ mensaje | titlecase }}</span>
+              </div>
+              <input type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" value="Aceptar"/>
+            
+            </form>    
+      </div>
+      <div class="col-md-4"></div>  
+    </div>
+
+</div>-->

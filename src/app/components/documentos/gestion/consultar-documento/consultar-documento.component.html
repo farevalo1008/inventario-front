@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buscar</title>
+  </head>
+  
+<body>
+
+  <div class="form_main">
+    <h4 class="heading" style="margin-left:30px;margin-bottom: 100px;padding-top: 25px;"><strong>Consultar </strong>  Documentos<span></span></h4>
+  </div>
+ 
+            <div class="row" style="margin-left: 250px;">
+
+                <div class="col-md-3 mb-5">
+                  <div class="card h-90" style=" border-radius: 20px;">
+                    <a [routerLink]="'/dashboard/documentos/consultarExterno'" style='font-size:80px; text-align: center;'> <i class="far fa-building"></i></a>
+                    <div class="card-body">
+                      <h5 class="card-title" style=' text-align: center'>Externo</h5>
+                      
+                     
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 mb-5" style="margin-left: 70px;">
+                    <div class="card h-90" style=" border-radius: 20px;">
+                        <a [routerLink]="'/dashboard/documentos/consultarInterno'" style='font-size:80px; text-align: center; margin-left: 15px;'><i class="fas fa-map-marked-alt"></i></a>
+                        <div class="card-body">
+                            <h5 class="card-title" style=' text-align: center'>Interno</h5>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+          
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+<table class="table LetraTabla table-striped">
+	<thead class="color-1">
+	    <tr>
+	      <th>Personal</th>
+	      <th>retraso</th>
+	    </tr>
+	</thead>
+
+  	<tbody>
+	    <tr *ngFor="let persona of personal">
+	    	<td>{{ persona.nombres }} {{persona.apellidos}}</td>
+		    <td>{{ retardo }}</td>
+	    </tr>
+  	</tbody>
+</table>

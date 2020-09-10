@@ -1,0 +1,153 @@
+.bg-soaint{
+    background: #006595;
+}
+/* --main-color1: #006595;
+--main-color2: #9FCBED;
+--secondary-color: #A1A1A4; */
+.navbar-letra{
+    font-size: 1.25rem;
+    font-family: Titillium;
+    line-height: inherit;
+    white-space: nowrap;
+}
+.som{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.tarjeta{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-top: 20px;
+    height:550px;
+    width: 1140px;
+}
+
+.inicio-datos{
+    margin-top: 10px
+}
+
+.datos-fin{
+    margin-bottom: 15px;
+}
+
+.align-right{
+    float:right;
+    right:254px;
+}
+
+.tabla{
+    margin-left: 23px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width:710px;
+}
+.form_wizard .stepContainer {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 0 solid #CCC;
+    overflow-x: hidden
+}
+.wizard_horizontal ul.wizard_steps {
+    display: table;
+    list-style: none;
+    position: relative;
+    width: 100%;
+    margin: 0 -15px 20px
+}
+.wizard_horizontal ul.wizard_steps li {
+    display: table-cell;
+    text-align: center
+}
+.wizard_horizontal ul.wizard_steps li a,
+.wizard_horizontal ul.wizard_steps li:hover {
+    display: block;
+    position: relative;
+    -moz-opacity: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    color: #666
+}
+.wizard_horizontal ul.wizard_steps li a:before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: #ccc;
+    top: 20px;
+    width: 100%;
+    z-index: 4;
+    left: 0
+}
+.wizard_horizontal ul.wizard_steps li a.disabled .step_no {
+    background: #ccc
+}
+.wizard_horizontal ul.wizard_steps li a .step_no {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto 5px;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    z-index: 5
+}
+.wizard_horizontal ul.wizard_steps li a.selected:before,
+.step_no {
+    background: #34495E;
+    color: #fff
+}
+.wizard_horizontal ul.wizard_steps li a.done:before,
+.wizard_horizontal ul.wizard_steps li a.done .step_no {
+    background: #1ABB9C;
+    color: #fff
+}
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+    left: 50%
+}
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+    right: 50%;
+    width: 50%;
+    left: auto
+}
+.wizard_verticle .stepContainer {
+    width: 80%;
+    float: left;
+    padding: 0 10px
+}
+.form_wizard .loader {
+    display: none
+}
+.form_wizard .msgBox {
+    display: none
+}
+.uno{
+    width: 218px;
+    height: 69px;
+}
+.dos{
+    width: 218px;
+    height: 69px;
+}
+.tres{
+    width: 218px;
+    height: 69px;
+}
+.cuatro{
+    width: 218px;
+    height: 69px;
+}
+.cinco{
+    width: 219px;
+    height: 69px;
+}
+
+.tarjetaa{
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    margin-top: 5px;
+    height: 400px;
+    width: 1000px; 
+}
+.margen{
+    margin-left: 42%;
+    margin-top: -100px;
+}

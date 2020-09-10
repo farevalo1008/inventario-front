@@ -1,0 +1,64 @@
+<div *ngIf="error" class="alert alert-info">{{ error }}</div>
+<div *ngIf="show && !error">
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-6" *ngFor="let basic of basicos">
+      <div class="card border-primary mb-3 sombra">
+        <div class="text-left">
+          <h6 class="card-footer card-header text-left">{{ basic.cargo | titlecase }}</h6>
+        </div>
+        <div class="card-body mt-0 col-sm-12">
+          <div class="left col-xs-7 ">
+            <h6 class="text-left"><b>{{ basic.nombres | titlecase }}&nbsp;{{ basic.apellidos | titlecase }}</b></h6>
+            <h6 class="text-left"><i class="fa fa-building"></i>&nbsp;Profesión: </h6>
+            <h6><i class="fas fa-graduation-cap"></i>&nbsp;{{ basic.profesion | titlecase }}</h6>
+            <h6 class="text-left"><i class="fas fa-mobile-alt"></i>&nbsp;Célular: {{ basic.tel_movil }}</h6>
+          </div>
+          <div class="right col-xs-5 text-center ct">
+            <img src="assets/img/descarga.png" alt class="img-circle img-responsive posicion som">
+          </div>
+          <!-- <div class="img-circle img-responsive ct som">
+            <div class="posicion">
+              <h1>
+                {{basic.nombres.substring(0, 1)}}{{basic.apellidos.substring(0, 1)}}<br>
+              </h1>
+            </div>
+          </div> -->
+        </div>
+      
+        <div class="card-footer card-header text-left">
+          <div class="text-center">
+            <!-- <button title="Imprimir Curriculo del Empleado." type="button" class="btn btn-success btn-xs mr-2 som">
+              <i class="fa fa-download"></i>&nbsp;C.V
+            </button>
+            <button title="Ver Perfil del Empleado." type="button" class="btn btn-xs som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/recursosinternos/visualizarrecursointerno/' + basic.id_candidato]">
+              <i class="fa fa-user"></i>
+              " Ver Perfil "
+            </button> -->
+            <button title="Ver Perfil del Empleado." type="button" class="btn btn-xs som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/recursosinternos/visualizarrecursointerno/' + basic.id_candidato]">
+              <i class="fa fa-user"></i>
+              " Ver Perfil "
+            </button>
+          </div>
+          <!--<div class="text-center">
+            <a>4.0</a>
+            <a (click)="onClickMe()" [routerLink]="['/dashboard/reclutamiento/recursosinternos']">
+              <span class="fa fa-star ml-1" style="color:gold"></span>
+            </a>
+            <a (click)="onClickMe()" [routerLink]="['/dashboard/reclutamiento/recursosinternos']">
+              <span class="fa fa-star" style="color:gold"></span>
+            </a>
+            <a (click)="onClickMe()" [routerLink]="['/dashboard/reclutamiento/recursosinternos']">
+              <span class="fa fa-star" style="color:gold"></span>
+            </a>
+            <a (click)="onClickMe()" [routerLink]="['/dashboard/reclutamiento/recursosinternos']">
+              <span class="fa fa-star" style="color:gold"></span>
+            </a>
+            <a (click)="onClickMe()" [routerLink]="['/dashboard/reclutamiento/recursosinternos']">
+              <span class="far fa-star" style="color:gold"></span>
+            </a>
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div class="alert alert-success" *ngIf="estado == 'success' ">{{ message }}</div>
+<div class="alert alert-danger" *ngIf="estado == 'error' ">{{ message }}</div>
+
+	<app-reloj></app-reloj>
+
+
+	<div align="center" class="col-md-6 my-3">
+		<div class="btn-group mr-2">
+			<button data-toggle="dropdown" class="btn btn-round dropdown-toggle btn-lg color-1" type="button" aria-expanded="false">
+				Entrada <span class="caret"></span>
+			</button>
+
+		  	<ul role="menu" class="dropdown-menu">
+		    	<form #asistencias="ngForm" (ngSubmit)="onSubmit(1);">
+			        <input matInput type="text" id='evento' name="evento"  hidden="">
+			        <li><button class="sin-btn" [disabled]="!asistencias.form.valid">Entrada Laboral</button>
+			        </li>
+		    	</form>
+
+		 		<form (ngSubmit)="Submit(2);" #asistencias="ngForm">
+			        <input type="text" id='evento' name="1" id="entrada" hidden="">
+			        <li> <button class="sin-btn" [disabled]="!asistencias.form.valid">Entrada Almuerzo</button>
+			        </li>
+		        </form>  
+
+		        <form *ngIf="show" (ngSubmit)="Submit(5);" #asistencias="ngForm">
+			        <input matInput type="text" id='evento' name="evento"  hidden="">
+			        <li><button class="sin-btn" style="font-size: 14px;" [disabled]="!asistencias.form.valid">Entrada Pausa Activa</button>
+			        </li>
+		    	</form>
+		  	</ul>
+		</div>
+
+
+		<div class="btn-group mr-2">
+			<button data-toggle="dropdown" class="btn color-3 btn-round dropdown-toggle btn-lg" type="button" aria-expanded="false">
+				Salida <span class="caret"></span>
+			</button>
+			<ul role="menu" class="dropdown-menu">
+		 		<form (ngSubmit)="Submit(3);" #asistencias="ngForm">
+			        <input type="text" name="salida_laboral" hidden="">
+			        <li><button class="sin-btn" [disabled]="!asistencias.form.valid">Salida Laboral</button>
+			        </li>
+		  		</form>
+
+		 		<form (ngSubmit)="Submit(4);" #asistencias="ngForm">
+			        <input type="text" name="salida_Almuerzo" hidden="">
+			        <li><button class="sin-btn" [disabled]="!asistencias.form.valid">Salida Almuerzo</button>
+			        </li>
+				</form>
+
+				<form *ngIf="show" (ngSubmit)="Submit(6);" #asistencias="ngForm">
+			        <input matInput type="text" id='evento' name="evento"  hidden="">
+			        <li><button class="sin-btn" [disabled]="!asistencias.form.valid">Salida Pausa Activa</button>
+			        </li>
+		    	</form>
+			</ul>
+		</div>
+
+		<div class="btn-group">
+			<button data-toggle="dropdown" class="btn color-1 btn-round dropdown-toggle btn-lg" type="button" aria-expanded="false">
+				Otros
+			</button>
+			<ul  role="menu" class="dropdown-menu">
+			 	<form  *ngIf="showOtrosEntrada" (ngSubmit)="permisoEntrada();">
+               		<li><button class="sin-btn">Entrada Otros</button></li>
+               	</form>
+               	<li><button class="sin-btn" data-toggle="modal" data-target=".bs-example-modal-sm" *ngIf="showOtrosSalida">Salida Otros</button></li>
+            </ul>                       
+		</div>
+
+		<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+
+		  			<div class="modal-header">
+			    		<h4 class="modal-title" id="myModalLabel2">
+			    			Exposición de Motivo
+			    		</h4>
+			    		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			    			<span aria-hidden="true">×</span>
+			    		</button>
+		  			</div>
+		  			<form (ngSubmit)="permisoSalida(Permiso);" #Permiso="ngForm">
+			  			<div class="modal-body">
+			  					<textarea matInput #evento class="form-control" [(ngModel)]="PermisoModel.evento" rows="5"  name="evento" required></textarea>
+			  					<div class="my-2">¿Usted retornara a la empresa?</div>
+			  					<div class="input-group justify-content-center ">
+				  					<div class="custom-control custom-radio mr-5">
+										<input  matInput #status  type="radio" id="customRadio1" name="status" class="custom-control-input" [(ngModel)]="PermisoModel.status" value="1" required>
+										<label class="custom-control-label" for="customRadio1">Si</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input matInput #status type="radio" id="customRadio2" name="status" class="custom-control-input" [(ngModel)]="PermisoModel.status" value="2">
+										<label class="custom-control-label" for="customRadio2">No</label>
+									</div>	
+			  					</div>
+								
+			  			</div>
+			 			<div class="modal-footer justify-content-center">
+			    			<button type="button" class="btn color-3 btn-round" data-dismiss="modal">Cerrar</button>
+			    			<button class="btn color-1 btn-round" [disabled]="!Permiso.form.valid">Guardar</button>
+			  			</div>
+		  			</form>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+
+
+<div class="x_panel">
+		<div class="x_title">
+			<h3>Historial de Asistencias</h3>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div class="x_content">
+			<table class="table mt-3 LetraTabla table-striped">
+				<thead class="color-1">
+					<tr>
+						<th>Fecha</th>
+						<th>Hora de Entrada</th>
+						<th>Hora de Salida</th>
+						<th>Evento</th>
+					</tr>
+				</thead>
+			
+					<tbody>
+					<tr *ngFor="let asistencia of historialAsistencias">
+						<td>{{ asistencia.fecha }}</td>
+						<td>{{ asistencia.hora_entrada }}</td>
+						<td>{{ asistencia.hora_salida }}</td>
+						<td>{{ asistencia.evento }}</td>
+					</tr>
+					</tbody>
+			</table>
+		</div>
+</div>
+
+

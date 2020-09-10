@@ -1,0 +1,46 @@
+.tarjeta{
+    margin-bottom:10%;
+}
+.som{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.sombra{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-right: 21%;
+    margin-left: 22%;
+    width: 760px;
+    height: 560px;
+}
+.sombra1{
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 700px;
+    height: 555px;
+}
+.sombra2{
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    /* margin-right: 1%; */
+    /* margin-left: 2%; */
+    margin-top: 2%;
+    /* margin-bottom: 2%; */
+    width: 700px;
+    height: 515px;
+}
+
+.margen{
+    position: absolute;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* height: 80px;
+    width: 150px; */
+    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.derecha{
+    margin-right: 5%;
+}

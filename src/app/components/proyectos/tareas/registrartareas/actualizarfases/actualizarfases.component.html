@@ -1,0 +1,138 @@
+
+<div class= "text-center">
+  <h3 class="arial">
+    Actividades del Sprint a Actualizar
+</h3>
+</div>
+
+<form #actualizoForm="ngForm" (ngSubmit)="onSubmit(actualizoForm)">
+    <div class="alert alert-info" *ngIf="status == 'success'">
+        La Fase se Actualizo Correctamente
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            La  Fase no se Actualizo Correctamente
+        </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputNombre">Proyectos</label>
+          <!--<   (change)="obtener()"   input type="nombre" class="form-control" id="inputNombre" placeholder="Nombre">-->
+       
+      
+       
+        <div *ngIf="id_proyecto == null">Cargando...</div>
+        <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #proyecto [(ngModel)]="actualizarfases.id_proyecto">
+          <option value="null">Selecciona...</option>  
+          <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+          
+          </select>
+        </div>
+        <div class="margenlado">
+          </div>
+         
+       
+          <div class="form-group col-md-2">
+              <label for="inputAddress">Fecha Inicio</label>
+              
+              <p>{{fecha}}</p>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputAddress2">Fecha Fin</label>
+                
+                <p>{{ffin}}</p>
+              </div>
+          
+      </div>
+      <div class= "margen">
+        </div>
+      <div class= "margen">
+      
+    <div class="form-row">  
+<div class="form-group col-md-4">
+  <label for="inputsfases4">Sprints</label>
+  <select  (change)="coger()" class="form-control" id="sel_id_periodo" name="idperiodo" matInput #idperiodo [(ngModel)]="actualizarfases.id_periodo">
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}</option>                         
+      
+      </select>
+      
+  
+</div>
+
+        <div class="form-group col-md-2">
+          <label for="inputames4">Mes</label>
+          <p>{{mesi}}</p>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputames4">Dias</label>
+          <p>{{diasi}}</p>
+       
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputames4">Hora Inicio</label>
+          <p>{{horainicio}}</p>
+         
+        </div>
+    
+        <div class="form-group col-md-2">
+          <label for="inputames4">Hora Fin</label>
+          <p>{{horafin}}</p>
+         
+        </div>
+      </div>
+      </div>
+
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="inputames4">Sprints</label>
+                      <input type="text" name="sprint"   class="form-control" id="inputmes4" placeholder="sprint" #sprint="ngModel" [(ngModel)]="actualizarfases.sprint">
+                    </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputames4">Mes</label>
+                    <input type="text" name="mes"   class="form-control" id="inputmes4" placeholder="mes" #mes="ngModel" [(ngModel)]="actualizarfases.mes">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputturno">Dias</label>
+                    <!--<input type="text" class="form-control" id="TURNO" placeholder="TURNO">-->
+                    <input type="text" name="dias"   class="form-control" id="inputactividad4" placeholder="actividad" #dias="ngModel" [(ngModel)]="actualizarfases.dias">
+
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Hora Inicio</label>
+                    <input type="text" name="hora_inicio"  class="form-control" id="text" placeholder="horas" #hora_inicio="ngModel" [(ngModel)]="actualizarfases.hora_inicio">
+                  </div>
+                    <div class= "margen">
+      </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Hora Fin</label>
+                    <input type="text" name="hora_fin"   class="form-control" id="text" placeholder="horas" #hora_fin="ngModel" [(ngModel)]="actualizarfases.hora_fin">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputturno">TURNO</label>
+                    <!--<input type="text" class="form-control" id="TURNO" placeholder="TURNO">-->
+                    <select class="form-control"  name="Turno" id="sel_turno" matInput #Turno  [(ngModel)]="actualizarfases.id_turno">
+                      <option disabled selected value="null">Turno</option> 
+                      <div *ngIf="id_turno==null">Cargando...</div>
+                      <option *ngFor="let idturno of id_turno" value="{{ idturno.id_turno }}">{{ idturno.descripcion }}</option>
+                      
+                      </select>
+
+                  </div>
+                  
+      
+                  </div>
+                  
+                  
+                    <div class="form-group col-md-2">
+                      
+        
+                      <div class="form-group col-md-2; boton3">
+                          
+                          <button type="submit" class="btn btn-primary">Registrar</button>
+                      </div>
+                   
+                  
+                </div>
+                 
+              
+
+  </form>

@@ -1,0 +1,76 @@
+<div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="show">
+	  <strong>{{ message }}</strong>
+</div>
+
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Historial de Actividades </h2>
+		<button class="btn color-1 float-right" type="button" [routerLink]="['/dashboard/intranet/controldeactividades']">
+			Registro de Actividades
+		</button>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="x_content">
+		<div class="row">
+			<div class="col-12">
+				<select class="custom-select mx-1 mb-2" id="mes" (change)="ngGetReportePersonalActividades()">
+					<option selected disabled value="00">Mes</option>
+					<option value="01">Enero</option>
+					<option value="02">Febrero</option>
+					<option value="03">Marzo</option>
+					<option value="04">Abril</option>
+					<option value="05">Mayo</option>
+					<option value="06">Junio</option>
+					<option value="07">Julio</option>
+					<option value="08">Agosto</option>
+					<option value="09">Septiembre</option>
+					<option value="10">Octubre</option>
+					<option value="11">Noviembre</option>
+					<option value="12">Diciembre</option>
+				</select>
+			</div>
+		</div>
+		<div class="row my-2" *ngIf="mostrar">
+			<div class="col-4 text-center">
+				<strong>Horas en curso:</strong> {{ hora_curso }} hr. <br>
+				<strong>Horas en proyecto:</strong> {{ hora_proyecto}} hr.
+			</div>
+			<div class="col-4 text-center">
+				<strong>Horas en cliente:</strong> {{ hora_cliente }} hr. <br>
+				<strong>Horas en permiso:</strong> {{ hora_permiso }} hr.
+			</div>
+			<div class="col-4 text-center">
+				<strong>Horas en otros:</strong> {{ hora_otros }} hr. <br>
+				<strong>Horas totales:</strong> {{ total_horas }} hr.
+			</div>
+		</div>
+
+		<div class="row" *ngIf="mostrar">
+			<div class="col-12">
+				<table class="table table-striped">
+					<thead class="color-1">
+					    <tr>
+					      <th>Fecha</th>
+					      <th>Tipo de Actividad</th>
+					      <th>Hora</th>
+					      <th>Descripción</th>
+					    </tr>
+					</thead>
+
+				  	<tbody>
+					    <tr *ngFor="let actividad of actividades">
+						    <td>{{ actividad.fecha }}</td>
+						    <td>{{ actividad.tipo_actividad }}</td>
+						    <td>{{ actividad.hora }}</td>
+						    <td>{{ actividad.descripcion }}</td>
+					    </tr>
+				  	</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>

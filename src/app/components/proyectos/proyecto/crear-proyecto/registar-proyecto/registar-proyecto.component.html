@@ -1,0 +1,52 @@
+
+<form #registerForm="ngForm" (ngSubmit)="OnSubmit(registerForm)">
+    <div class="alert alert-info" *ngIf="status == 'success'">
+        El Proyecto se Registro Correctamente
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            El Proyecto no se Registro Correctamente
+        </div>
+
+  <div class= "text-center">
+    <h1><p class="arial">
+    Registrar Proyecto
+  </p></h1>
+</div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputNombre4">Nombre</label>
+        <input type="text" name="nombre"  #name="ngModel" [(ngModel)]="registrarproyecto.nombre" class="form-control" placeholder="Nombre" required />
+        <!--span *ngIf="!name.valid && name.touched">
+          el campo esta vacio
+        </span-->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="cliente">cliente</label>
+        <input type="text" name="Cliente" #cliente="ngModel" [(ngModel)]="registrarproyecto.cliente" class="form-control"  placeholder="Cliente" required />
+        <!--span *ngIf="!cliente.valid && cliente.touched"> esta vacio el campo</span-->
+      
+      </div>
+
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="fecha_inicio">fecha inicio</label>
+      <input type="date" name="fecha_inicio" #fecha_inicio="ngModel" [(ngModel)]="registrarproyecto.fecha_inicio" class="form-control" id="date" placeholder="fecha_inicio" required />
+      <!--span *ngIf="!fecha_inicio.valid && fecha_inicio.touched"> esta vacio el campo</span-->
+    </div>
+    <div class="form-group col-md-6">
+      <label for="fecha_fin">fecha fin</label>
+      <input type="date" name="fecha_fin" #fecha_fin="ngModel" [(ngModel)]="registrarproyecto.fecha_fin" class="form-control" id="date" placeholder="fecha_fin" required/>
+      <!--span *ngIf="!fecha_fin.valid && fecha_fin.touched"> esta vacio el campo</span-->
+    </div>
+
+    </div>
+
+
+
+
+    <input type="submit" value="registrar" class="btn btn-outline-info"/>
+  </form>
+

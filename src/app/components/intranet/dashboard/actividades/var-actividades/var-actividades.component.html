@@ -1,0 +1,122 @@
+ <div class="herramienta-actividades" (click)="ngremoveClass()" *ngIf="show">
+    <h5 class="text-light plus-n" style=""><i class="fas fa-ellipsis-v" style="padding-left:6px; "></i></h5>
+    <div id="var-actividades" class="d-none">
+    	
+	   	<h3 class="text-success plus mt-1" data-toggle="modal" data-target="#editarActividad"><i class="fas fa-pencil-alt"></i></h3>
+	    <h3 class="text-danger plus mt-1" data-toggle="modal" data-target="#eliminarActividad"><i class="fas fa-times-circle"></i></h3>
+	    <h3 class="text-primary plus mt-1" data-toggle="modal" data-target="#crearActividad"><i class="fas fa-plus-circle"></i></h3>   
+    </div>
+</div>
+
+<!-- Modal de herramientas de Actividades -->
+<div class="modal fade" id="crearActividad"  tabindex="-1" role="dialog" aria-labelledby="doActivity" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h5 class="modal-title" id="doActivity">Agregar Actividad</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form (ngSubmit)="ngCreateActividad(Actividades);" #Actividades="ngForm">
+				<div class="modal-body" style="font-size: 17px;">
+
+					<label for="titulo" class=""><strong>Titulo: </strong></label>
+					<input matInput #titulo [(ngModel)]="ActividadModel.titulo" id="titulo" type="text" class="form-control mb-3" name="titulo">
+					<label for="descripcion" class="mr-3"><strong>Descripción:</strong></label>
+					<textarea matInput #descripcion [(ngModel)]="ActividadModel.descripcion" name="descripcion" id="descripcion" cols="80" rows="3" class="form-control mb-3"></textarea>
+					<strong>Encargado de la Actividad: </strong> <input matInput #encargado [(ngModel)]="ActividadModel.encargado" type="text" class="form-control mb-3" name="encargado"> 
+					<div class="input-group">
+						<label for="fecha_inicio" class="mr-3"><strong>Fecha de inicio: </strong></label>
+						 <input matInput #fecha_inicio [(ngModel)]="ActividadModel.fecha_inicio" id="fecha_inicio" type="date" class="form-control mr-3" name="fecha_inicio">
+						 <label for="fecha_fin" class="mr-3"><strong>Fecha de culminación: </strong></label> 
+						<input matInput #fecha_fin [(ngModel)]="ActividadModel.fecha_fin" id="fecha_fin" type="date" class="form-control " name="fecha_fin"> 
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        		<button class="btn color-1" [disabled]="!Actividades.form.valid">Agregar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="editarActividad"  tabindex="-1" role="dialog" aria-labelledby="editActivity" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content ">
+
+			<div class="modal-header">				
+				<h5 class="modal-title" id="editActivity">Editar Actividad</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form (ngSubmit)="ngEditActividad(EditActivity)" #EditActivity="ngForm">
+				<div class="modal-body" style="font-size: 17px;">
+					<select class="custom-select" (change)="ngGetActivity()" id="id">
+					  <option selected value="0">Actividad</option>
+					  <option *ngFor="let actividad of allactividad" value="{{actividad.id}} ">{{actividad.titulo}}</option>
+					</select>
+					
+					<label for="titulo" class="mt-1"><strong>Titulo: </strong></label>
+					<input value="{{ t }}"  type="text" class="form-control mb-3" id="title">
+
+					<label for="description" class="mr-3"><strong>Descripción:</strong></label>
+					<textarea id="description" cols="80" rows="3" class="form-control mb-3" value=" {{ d }} "  ></textarea>
+
+					<strong>Encargado de la Actividad: </strong> 
+					<input value="{{ e }}" type="text" class="form-control mb-3" id="boss"> 
+
+					<div class="input-group">
+						<label for="date" class="mr-3"><strong>Fecha de inicio: </strong></label>
+						 <input value="{{ fi }}" id="date" type="date" class="form-control mr-3" >
+						 <label for="date_end" class="mr-3"><strong>Fecha de culminación: </strong></label> 
+						<input value="{{ ff }}" id="date_end" type="date" class="form-control " > 
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        		<button class="btn color-1" [disabled]="!EditActivity.form.valid" >Editar</button>
+				</div>
+			</form>
+			
+
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="eliminarActividad"  tabindex="-1" role="dialog" aria-labelledby="deleteActivity" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteActivity">Eliminar Actividad</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form (ngSubmit)="ngDeleteActividad(DeleteActivity)" #DeleteActivity="ngForm">
+				<div class="modal-body" style="font-size: 17px;">
+					<select class="custom-select" (change)="ngGetActivityE()" id="delete" name="delete">
+						  <option selected value="0">Actividad</option>
+						  <option *ngFor="let actividad of allactividad" value="{{actividad.id}} ">{{actividad.titulo}}</option>
+					</select>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        		<button class="btn color-1" [disabled]="!DeleteActivity.form.valid" >Eliminar</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>

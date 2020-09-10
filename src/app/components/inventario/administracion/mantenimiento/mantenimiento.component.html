@@ -1,0 +1,298 @@
+<div class="cabecera">
+    <div class="titulo">
+      <h2> <b> Articulos en Mantenimiento </b></h2><hr>
+    </div>
+    <br>
+
+    <div *ngIf="showDelete" class="InfoFin alert alert-success">{{ message }}<button class="checkBorrar alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+    <div *ngIf="showMante" class="InfoFin alert alert-success">{{ message }}<button class="checkMante alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+    <div *ngIf="showActualizar" class="InfoFin alert alert-success">Articulo Actualizado Correctamente<button class="checkActualizar alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+    <div *ngIf="showMensaje" class="alert alert-danger">No existen Articulos en Mantenimiento</div>
+    <div *ngIf="showManteOtro" class="InfoFin alert alert-danger">Este Articulo no se encuentra en Mantenimiento<button class="checkManteOtro alert alert-danger" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+
+<div *ngIf="showMenu">    
+
+    <div class="form-row ">
+        <div class="form-group col-md-2">
+           <label for="id_tipo_articulo" ><b>Clasificación:</b></label>
+           <select (change)="capturaTipo()" class="form-control" id="sel_clasificacion" [(ngModel)]="getclasificacion.id_clas_art" name="clasificacion">
+           <option value="0">Selecciona...</option>  
+           <option *ngFor="let clas of clasificacion" value="{{ clas.id_clas_art }}">{{ clas.descripcion | titlecase }}</option>                         
+           </select> 
+       </div> 
+       
+        <div class="form-group col-md-2" *ngIf="verselect == getclasificacion.id_clas_art">
+           <label for="id_tipo_articulo" ><b>Tipo de Articulo:</b></label>
+           <select (change)="capturaMarca()" class="form-control" id="sel_id_tipo_articulo" matInput #tipo_articulo [(ngModel)]="TipoModel.id_tipo_articulo" name="tipo_articulo">
+           <option value="null">Selecciona...</option>  
+           <option *ngFor="let idtipo of id_tipo_articulo" value="{{ idtipo.id_tipo_articulo }}">{{ idtipo.descripcion | titlecase }}</option>                         
+           </select> 
+       </div>  
+       
+       <div class="form-group col-md-2" *ngIf="verselect2 == TipoModel.id_tipo_articulo">
+         <label for="marca"><b>Marca:</b></label>
+         <select (change)="capturar()" class="form-control" matInput #marca [(ngModel)]="TipoModel.marca"  name="marca">
+         <option value="null">Selecciona...</option>  
+         <option *ngFor="let idart of objeto" value="{{ idart.marca }}">{{ idart.marca| uppercase }}</option>                         
+         </select> 
+       </div>
+
+ <!-- CUADRO DE BUSQUEDA -->
+ <div class="Busqueda form-row">
+  <div class="CuadroBusqueda form-group" >
+  <form (ngSubmit)="Busquedas(FormDatos)" #FormDatos="ngForm"  method="POST">
+     <label for="id_tipo_articulo" ><b>Codigo:</b></label>
+    <input type="text" name ="busqueda" class="form-control" matInput #busqueda [(ngModel)]="codigo.cod_soaint" placeholder="Ingrese codigo" required> 
+    <button type="submit" class="botonBuscar btn btn-primary" [disabled]="!FormDatos.form.valid">Buscar</button>
+  </form>
+ </div>
+  
+ </div>
+<!------------------------>
+
+    </div>
+<table class="table table-striped table-hover" id="articulos-list" >
+    <thead class="listatabla">
+      <tr>
+           <th><b>Nro</b></th>
+           <th><b>Código</b></th>
+          <th><b>Modelo</b></th>
+          <!-- <th><b>Serial</b></th> -->
+          <th><b>Caracteristicas</b></th>
+          <th>Usuario</th>
+          <th>Ingreso</th>
+          <th></th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="articulos">
+      <tr *ngFor= "let listaArticulo of articulos | paginate: {itemsPerPage: 7, currentPage: pageActual}; let indice = index ">
+        
+        <td>     
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal"><b>{{indice+1}}</b></a> 
+        </td>
+  
+        <td>      
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal"><strong>{{listaArticulo.cod_soaint}}</strong></a>
+        </td>
+        
+        <td>
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.modelo | titlecase}}</a>
+        </td>
+
+        <!-- <td>
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.serial | titlecase}}</a>
+        </td> -->
+        
+        <td>
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.caracteristicas | titlecase}}</a>
+        </td>
+
+        <td>
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.usuario | titlecase}}</a>
+        </td>
+
+        <td>
+          <a (click)='visualizar(id_articulo = listaArticulo.id_articulo)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.ingreso | titlecase}}</a>
+        </td>
+        
+       
+        <td>
+            <button (click)='visualizar(id_articulo = listaArticulo.id_articulo)' type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" ><i class="far fa-trash-alt"></i> </button>
+        </td>
+        <td>
+          <button (click)='visualizar(id_articulo = listaArticulo.id_articulo)' type="button" class="btn btn-success" data-toggle="modal" data-target="#reincorporar"><i class="far fa-check-square"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginacion">
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+  </div>
+</div> 
+  
+  <!-- Modal DETALLES DEL ARTICULO-->
+  <div class="modal fade-modal-lg" id="exampleModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel"><b>Informacion del Producto Averiado</b></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+  <form class="texto" #detallesForm="ngForm" (ngSubmit)="actualizar(detallesForm)" method="POST">    
+  
+        <div class="modal-body" *ngFor= "let articulo of articulo">
+          
+            <div>    
+                <b>CLASIFICACIÓN: </b>{{articulo.clasificacion | uppercase}} <b class="tipo">TIPO DE ARTICULO: </b>{{articulo.tipo_articulo | uppercase}}
+            </div>
+  
+            <div>
+                
+            </div>
+  
+            <div>  
+              <b>CÓDIGO  DE LA EMPRESA: </b>{{articulo.cod_soaint }}
+            </div>
+            <br>
+            
+  <div class="info">          
+            <div class="form-group row">
+                <label for="marca" class="col-sm-3 col-form-label"><b>MARCA: </b></label>
+                <div class="col-sm-6">
+                  <input type="text" name ="marca" [(ngModel)]="articulo.marca" class="form-control" value="{{articulo.marca}} | uppercase">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="modelo" class="col-sm-3 col-form-label"><b>MODELO: </b></label>
+                <div class="col-sm-6">
+                    <input type="text" name ="modelo" matInput #modelo [(ngModel)]="articulo.modelo" class="form-control" value="{{articulo.modelo | uppercase}}"> 
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="serial" class="col-sm-3 col-form-label"><b>SERIAL: </b></label>
+                <div class="col-sm-6">
+                    <input type="text" name ="serial" matInput #serial [(ngModel)]="articulo.serial" class="form-control" value="{{articulo.serial}}">                   
+                </div>
+            </div>
+           
+            <div class="form-group row">
+                <label for="costo" class="col-sm-3 col-form-label"><b>PRECIO DEL PRODUCTO: </b></label>
+                <div class="col-sm-6">                
+                    <input type="text" name ="costo" matInput #costo [(ngModel)]="articulo.costo" class="form-control" value="{{articulo.costo}}">(Dolares)
+                </div>
+            </div>
+           
+            <div class="form-group row">
+                <label for="status" class="col-sm-3 col-form-label"><b>ESTADO DEL ARTICULO: </b></label>
+                <div class="col-sm-6">
+                    <input type="text" name ="status" matInput #status [(ngModel)]="articulo.status" class="form-control" value="{{articulo.status | uppercase}}"> 
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="caracteristicas" class="col-sm-3 col-form-label"><b>CARACTERISTICAS: </b></label>
+                <div class="col-sm-6">
+                    <textarea name="caracteristicas" cols="8" rows="4" matInput #caracteristicas [(ngModel)]="articulo.caracteristicas" class="form-control" value="{{articulo.caracteristicas}}"></textarea>
+                    
+                </div>
+            </div>
+
+            <div class="observacion form-group row">
+                    <label for="observaciones" class="col-sm-3 col-form-label"> <b>OBSERVACIONES: </b></label>
+                    <div class="col-sm-6">
+                        <textarea name="observaciones" cols="8" rows="4" matInput #observaciones [(ngModel)]="articulo.observaciones" class="form-control" value="{{articulo.observaciones}}"></textarea>
+                    </div>
+            </div>
+
+           
+  </div>  
+    
+        </div>
+
+       
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" >Actualizar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  
+    <!-- Modal REINCORPORACION-->
+  <div class="modal fade" id="reincorporar" tabindex="-1" role="dialog" aria-labelledby="reincorporarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="reincorporarLabel"><i class="far fa-check-square"></i> Mover al Inventario Activo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                
+                <div *ngFor= "let articulo of articulo">
+            
+                    <div>    
+                        <b>CLASIFICACIÓN: </b>{{articulo.clasificacion | uppercase}} 
+                    </div>
+          
+                    <div>
+                        <b>TIPO DE ARTICULO: </b>{{articulo.tipo_articulo | uppercase}}
+                    </div>
+          
+                    <div>  
+                      <b>CÓDIGO  DE LA EMPRESA: </b> {{ articulo.cod_soaint }}
+                    </div>
+                    <br>
+    
+                <label for="reincorporar" class="col-sm-3 col-form-label"><b>OBSERVACIONES: </b></label>
+                <div class="col-sm-12">
+                    <textarea name="reincorporar" cols="12" rows="4" matInput #reincorporar [(ngModel)]="envio.descripcion" class="form-control"></textarea>
+                </div>
+    
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button (click)='Reincorporar()' type="button" class="btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <!-- Modal BORRAR-->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-trash-alt"></i> Eliminar Articulo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+              <div *ngFor= "let articulo of articulo">
+    
+            <div>    
+                <b>CLASIFICACIÓN: </b>{{articulo.clasificacion | uppercase}} 
+            </div>
+  
+            <div>
+                <b>TIPO DE ARTICULO: </b>{{articulo.tipo_articulo | uppercase}}
+            </div>
+  
+            <div>  
+              <b>CÓDIGO  DE LA EMPRESA: </b> {{ articulo.codigo }}
+            </div>
+            <br>
+
+        <label for="observaciones" class="col-sm-12 col-form-label"><b>Motivo de Salida del Inventario: </b></label>
+        <div class="col-sm-12">
+            <textarea name="borrar" cols="12" rows="4" matInput #borrar [(ngModel)]="ManteModel.observaciones" class="form-control"></textarea>
+            
+        </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button (click)='Borrar()' type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+   
+    

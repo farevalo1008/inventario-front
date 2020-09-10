@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buscar</title>
+  </head>
+
+<body>
+    <div class="alert alert-success alert-dismissable" *ngIf="status == 'success'">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> Se ha actualizado correctamente.
+      </div>
+   <div class="container h-50" style="width:2000px;">
+    <div class=" justify-content-center h-50">
+
+
+
+      <form class="form-inline" #archivarForm="ngForm" (ngSubmit)="onSubmit()" >
+          
+          <div class="input-group mb-4 form-inline1">
+              <a [routerLink]="'/dashboard/documentos/consultar'"> 
+                <i class="fas fa-long-arrow-alt-left" style="font-size: 30px;"></i>
+              </a>
+       
+              <input type="search" name="nombre"  #nombre [(ngModel)]="buscarmodel.nombre"  (ngModelChange)="buscarmodel.nombre = $event.toUpperCase()" placeholder="Buscar..." aria-describedby="button-addon5" class="form-control1">
+              <div class="input-group-append">
+                <button id="button-addon5" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                
+              </div>
+              <div class="fuente" style="margin-top:30px;margin-left:355px;">
+                  <label>
+                    Tipo de Busqueda: Nombre, Código y Tipo de Documento
+                  </label>
+                </div>
+            </div>
+
+    
+
+
+      <div *ngIf="bandera">
+        <div class="table-responsive-sm" style="padding-left: 2px;">
+          <table class="table" style="width: 1080px;">
+
+            <thead>
+              <tr>
+
+               
+                <th scope="col" >Nombre</th>
+                <th scope="col">Tipo Documento</th>
+                <th scope="col">Código</th>
+                <th scope="col">Extensión</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Fecha Emisión</th>
+                <th scope="col">Fecha Entrega</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let buscar of datanombres | paginate: { itemsPerPage: 5, currentPage: p } ">
+              
+                <td >{{ buscar.nombre  }} </td>
+                <td>{{ buscar.tipodoc }}</td>
+                <td>{{ buscar.codigo }}</td>
+                <td>{{ buscar.ext }}</td>
+                <td>{{ buscar.dpto }}</td>
+                <td>{{ buscar.fecha_emision }}</td>
+                <td>{{ buscar.fecha_entrega }}</td>
+                <td>
+              <i class="fas fa-download" (click)="descargarArchivo(buscar)"></i>
+
+            
+
+              <i class="far fa-edit" style="margin-left: 4px;" data-toggle="modal" data-target="#editar"  (click)="traerDatos(buscar)">  </i>
+             
+            </td>
+
+        
+
+
+                  <!-- Modal -->
+                  <div class="modal fade-modal-lg" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModal3Label"><i class='fas fa-pencil-alt margen'></i>Editar Documento Interno</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body  modal-lg">
+                          <div class="container col-md-9 col-sm-6">
+
+                            <form class="form-inline" enctype="multipart/form-data" #editarForm="ngForm" (ngSubmit)="Editar(editarForm)" >
+                              <div class="form-inline">
+                              <div class="form-group">
+                                <i class='far fa-file-alt margen'></i>
+                                <input value="{{ buscarmodel.nombre }}"  type="text" matInput #nombre name="nombre" [(ngModel)]="buscarmodel.nombre" (ngModelChange)="buscarmodel.nombre = $event.toUpperCase()" class="form-control" placeholder="Nombre del Documento" required>
+                              </div>
+
+                              <div class="form-group ">
+                                <i class='fas fa-pencil-alt margen'></i>
+                                <input value="{{ buscarmodel.descripcion }}"  type="text" matInput #descripcion name="descripcion" [(ngModel)]="buscarmodel.descripcion" (ngModelChange)="buscarmodel.descripcion = $event.toUpperCase()" class="form-control" placeholder="Descripción del Documento" required>
+                              </div>
+
+                              <div class="form-group " style="margin-top: 40px;">
+                                <i class='fas fa-clipboard-list margen'></i>
+                                  <select class="form-control" matInput #extension  [(ngModel)]="buscarmodel.id_extension" name="extension" id="extension" >
+                                   <option disabled selected value="null">Extension</option>
+                                    <option *ngFor="let idextension of id_extension" value="{{ idextension.id_extension }}">{{ idextension.nombre }}</option>
+                                  </select>
+                              </div>
+
+
+                              <div class="form-group m" style="margin-left: 8px;">
+                                <i class='far fa-file-code margen'></i>
+                                <input value="{{ buscarmodel.codigo }}"  type="email" name="codigo" matInput #codigo [(ngModel)]="buscarmodel.codigo" (ngModelChange)="buscarmodel.codigo = $event.toUpperCase()"class="form-control" placeholder="Código del Documento"  disabled required>
+                              </div>
+
+
+                              <div class="form-group m">
+                                <i class='fas fa-code-branch margen' style="margin-left:21px;"></i>
+                                <select class="form-control" disabled (change)="capturar()"  matInput [(ngModel)]="buscarmodel.id_procedencia" name="opcionSeleccionado" id="opcionSeleccionado">
+                                  <option disabled selected value="null">Procedencia</option>
+                                  <option *ngFor="let idprocedencia of id_procedencia" value="{{ idprocedencia.id_procedencia }}">{{ idprocedencia.nombre }}</option>
+                                </select>
+                              </div>
+
+
+
+
+                                <div class="form-group m" >
+                                  <i class='fas fa-home margeni'></i>
+                                  <input  value="{{ buscarmodel.destinatario }}" type="text" name="destinatario"  matInput #destinatario [(ngModel)]="buscarmodel.destinatario" (ngModelChange)="buscarmodel.destinatario = $event.toUpperCase()" class="form-control" placeholder="Origen" required >
+                              </div>
+
+                                <div class="form-group m ">
+                                  <i class='far fa-calendar-alt margen'></i>
+                                  <input  value="{{ buscarmodel.fecha_emision }}"  type="date" name="fecha_emision" min="{{messagetwo}}" max="{{message}}" matInput #fecha_emision [(ngModel)]="buscarmodel.fecha_emision" class="form-control" placeholder="Fecha de Emisión" required>
+                                </div>
+
+                                <p style="font-size: 12px;position: relative;right: 150px;top: 60px;">Fecha de Emisión</p>
+
+
+
+                                <div class="form-group m" style="position: relative;left: 258px;bottom: 80px;">
+                                    <i class='far fa-calendar-alt margeni'></i>
+                                    <input value="{{ buscarmodel.fecha_entrega }}"  type="date" name="fecha_entrega"  matInput #fecha_entrega [(ngModel)]="buscarmodel.fecha_entrega" class="form-control" placeholder="Fecha de Entrega" name="Entrega">
+                                </div>
+
+                                <p style="font-size: 12px;position: relative;left: 115px;bottom:20px">Fecha de Entrega</p>
+
+                                <div class="form-group m" style="margin-left: 2px;position: relative;bottom:80px">
+                                  <i class='far fa-building margen'></i>
+                                   <select class="form-control"  matInput #departamento [(ngModel)]="buscarmodel.id_departamento" name="opcionDepartamento" id="opcionDepartamento">
+                                      <option disabled selected value="null">Departamento</option>
+                                      <option *ngFor="let iddepartamento of id_departamento" value="{{ iddepartamento.id_departamento }}">{{ iddepartamento.nombre | titlecase }}</option>
+                                    </select>
+                                </div>
+
+                                  <div class="form-group m"style="position: relative;bottom:80px">
+                                      <i class='far fa-file-alt margen' style="margin-left:23px"></i>
+                                      <select class="form-control"  matInput #tipo_documento [(ngModel)]="buscarmodel.id_tipo_doc" name="opcionTipoDocumento" id="opcionTipoDocumento">
+                                        <option disabled selected value="null">Tipo de Documento</option>
+                                        <option *ngFor="let idtipodoc of id_tipo_doc" value="{{ idtipodoc.id_tipo_doc }}">{{ idtipodoc.nombre | titlecase }}</option>
+                                      </select>
+                                  </div>
+                                 
+                                  <div class="form-group "  style="position: absolute;top: 392px;">
+                                      <i class="fas fa-upload margen"></i>
+                                      <input  type="file" style="width: 500px;"  accept=".doc,.xlsx, .pdf,.docx,.pptx"  #fileupload [(ngModel)]="myFile" name="myFile" required (change)="fileEvent($event)" />
+                                  </div>
+
+                              </div>
+                              <div class="modal-footer" style="position: relative;top:20px">
+                                <button  class="btn btn-primary" style="margin-left: 220px;" [disabled]="!editarForm.form.valid">Actualizar</button>
+                              </div>
+                                 </form>
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+              </tr>
+            </tbody>
+            
+          </table>
+             <div style="margin-left:380px;">
+                <pagination-controls (pageChange)="p = $event" previousLabel=""  nextLabel=""></pagination-controls>
+             </div>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="mensajeError" style="margin-top:50px;">
+      <div class="alert alert-info ">No se encontro ningún resultado en esta búsqueda.</div>
+    </div>
+
+  </div>
+    </div>
+
+
+</body>
+</html>

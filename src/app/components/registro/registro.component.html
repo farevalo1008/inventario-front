@@ -1,0 +1,137 @@
+<div class="container card som">
+<div class="row">
+  <div class="col-md-12 register">
+    <h4><i class="fas fa-user"></i>&nbsp;&nbsp;Registro de Usuarios para el Sistema</h4><hr>
+  </div>
+</div>
+    <div class="row">
+        <div class="col-md-1"></div>  
+
+        <div class="col-md-10">
+            <div class="alert alert-success" *ngIf="status == 'success' ">{{ message | titlecase }}</div>
+            <div class="alert alert-danger" *ngIf="status == 'error' ">{{ message | titlecase }}</div>
+
+            <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email"
+                          [(ngModel)]="user.email" 
+                          required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Rol</label>
+                    <div *ngIf="roles==null">Cargando...</div>
+                    <select name="rol" class="form-control" *ngIf="roles" 
+                          [(ngModel)]="user.rol"
+                          required>
+                      <option value="null">Seleccione...</option>
+                      <option *ngFor="let rol of roles" value="{{ rol.id_rol }}">{{ rol.descripcion | titlecase }}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label >País</label>
+                      <div *ngIf="pais==null">Cargando...</div>
+                      <select name="pais" class="form-control" *ngIf="pais" 
+                            [(ngModel)]="user.pais"
+                            required>
+                        <option value="null">Seleccione...</option>
+                        <option *ngFor='let pais of pais' value="{{ pais.id_pais }}" >{{ pais.descripcion | titlecase }}</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Nacionalidad</label>
+                      <div *ngIf="nacionalidad==null">Cargando...</div>
+                        <select name="nacionalidad" class="form-control" *ngIf="nacionalidad"
+                            [(ngModel)]="user.nacionalidad"
+                            required>
+                            <option value="null">Seleccione...</option>
+                            <option *ngFor="let nac of nacionalidad" value="{{ nac.id_nacionalidad }}">{{ nac.descripcion | titlecase }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Documento de Identidad</label>
+                      <input type="number" name="dni" class="form-control" placeholder="Documento de Identidad" 
+                            [(ngModel)]="user.dni"
+                            required>
+
+                    </div>
+                  </div>
+
+                  
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="nombres">Nombres</label>
+                          <input type="text" name="nombres" class="form-control" placeholder="Nombres" 
+                            [(ngModel)]="user.nombres"
+                            required>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="apellidos">Apellidos</label>
+                          <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" 
+                            [(ngModel)]="user.apellidos"
+                            required>
+                      </div>
+                  </div>
+
+
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="fecNac">Fecha de Nacimiento</label>
+                        <input matInput max="{{messageone}}" type="date" name="fecnac" class="form-control"
+                            [(ngModel)]="user.fecnac">
+                      </div>
+                      <div class="form-group col-md-6">
+                          
+                        <label for="genero">Género</label>
+                          <div *ngIf="genero==null">Cargando...</div>
+                          <select class="form-control" name="genero"
+                            [(ngModel)]="user.genero">
+                            <option value="null">Seleccione...</option>  
+                            <option *ngFor="let sex of genero" value="{{ sex.id_genero }}">{{ sex.descripcion | titlecase }}</option>                         
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="telHab">Teléfono Habitación</label>
+                        <input type="number" name="telhab" class="form-control" placeholder="0000-00-00-000"
+                            [(ngModel)]="user.telhab">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="telmov">Télefono Móvil</label>
+                        <input type="number" name="telmov" class="form-control" placeholder="0000-00-00-000"
+                            [(ngModel)]="user.telmov">                            
+                      </div>
+
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-12 text-center">
+                          <i class="far fa-user-circle fa-7x"></i>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-12 text-center">
+                        <input type="file" name="image" >
+                      </div>
+                    </div>               
+
+                <!--<input type="submit" class="btn color-1" value="Aceptar"/>-->
+                <button  class="btn mb-2 som" style="color:white; background:#006595" value="Aceptar" [disabled]="!registerForm.form.valid">
+                  <i class="fas fa-check-circle"></i>&nbsp;Aceptar
+                </button>
+                <button type="reset" class="btn btn-secondary ml-2 mb-2 som">
+                  <i class="fas fa-sync-alt"></i>&nbsp;Limpiar
+                </button>
+            </form>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

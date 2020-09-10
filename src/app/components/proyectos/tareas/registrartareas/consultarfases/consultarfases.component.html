@@ -1,0 +1,108 @@
+
+<div class= "text-center">
+  <h3 class="arial">
+    Consultar Actividades del Sprint 
+</h3>
+</div>
+
+<form >
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputNombre">Proyectos</label>
+          <!--<input type="nombre" class="form-control" id="inputNombre" placeholder="Nombre">-->
+       
+      
+       
+        <div *ngIf="id_proyecto == null">Cargando...</div>
+        <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #proyecto [(ngModel)]="consultarfases.id_proyecto">
+          <option value="null">Selecciona...</option>  
+          <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+          
+          </select>
+        </div>
+      
+       
+          <div class="form-group col-md-2">
+              <label for="inputAddress">Fecha Inicio</label>
+              
+              <p>{{fecha}}</p>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputAddress2">Fecha Fin</label>
+                
+                <p>{{ffin}}</p>
+              </div>
+          
+      </div>
+<div class="form-row">  
+<div class="form-group col-md-4">
+  <label for="inputsfases4">Sprints</label>
+  <select (change)="coger()"  class="form-control" id="sel_id_periodo" name="idperiodo" matInput #idperiodo [(ngModel)]="consultarfases.id_periodo">
+    <option value="null">Selecciona...</option>  
+    <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}</option>                         
+    
+    </select>
+  </div>
+
+   
+    <div class="form-group col-md-2">
+      <label for="inputames4">Mes</label>
+      <p>{{mes}}</p>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputames4">Dias</label>
+      <p>{{dias}}</p>
+     
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputames4">Hora Inicio</label>
+      <p>{{horainicio}}</p>
+     
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputames4">Hora Fin</label>
+      <p>{{horafin}}</p>
+     
+    </div>
+  
+</div>
+
+
+                      <div class="form-group col-md-2; boton3">
+                          
+                          <input type="submit" value= "consultar" data-toggle="modal" data-target="#myModal" />
+                      </div>
+                   
+                  
+                      <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                      
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header" value= "consultar">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Consultar Fases</h4>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <fusioncharts
+                              [width]="width"
+                              [height]="height"
+                              [type]="type"
+                              [dataFormat]="dataFormat"
+                              [dataSource]="dataSource"
+                            >
+                            </fusioncharts>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                      
+                        </div>
+                      </div>
+                 
+              
+
+  </form>

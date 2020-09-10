@@ -1,0 +1,17 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="status == 'success' ">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>{{ message }}.</strong>
+</div>
+
+<div class="" *ngIf="show">
+	<form (ngSubmit)="news(News);" #News="ngForm">
+		<textarea matInput #publicacion [(ngModel)]="NewsModel.publicacion" class="textArea form-control" name="publicacion"></textarea>
+		<div class="form-group form-inline">
+			<input type="text" matInput #departamento class="news pb-2 form-control" [(ngModel)]="NewsModel.departamento" placeholder="Departemento"  name="departamento" style="width: 85%;">
+			<button class="btn btn-lg btn-round btn-news mt-1" [disabled]="!News.form.valid">Publicar</button>
+		</div>
+
+	</form>
+</div>

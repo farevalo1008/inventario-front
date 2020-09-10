@@ -1,0 +1,37 @@
+<div class="evento">
+	<h3 class="mb-4">Actividades</h3>
+	<div *ngFor='let actividad of actividades '>
+		<h5 data-toggle="modal" [attr.data-target]="'#Actividad-' + actividad.id" style="cursor: pointer;"> <span class="badge badge-pill bg-evento">{{actividad.titulo}}</span></h5>
+	
+
+        <!-- Modal de Actividades -->
+        <div class="modal fade" [attr.id]="'Actividad-' + actividad.id"  tabindex="-1" role="dialog" aria-labelledby="InfoActividad" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title" id="InfoActividad">{{actividad.titulo}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body" style="font-size: 17px;">
+                <h5><strong>Descripción:</strong></h5>
+                <p>{{actividad.descripcion}}</p>
+                <strong>Encargado de la Actividad:</strong> {{actividad.encargado}} <br>
+                <strong>Fecha de inicio: </strong>{{actividad.fecha_inicio}} <br>
+                <strong>Fecha de culminación: </strong>{{actividad.fecha_fin}} <br>
+              </div>
+
+              <div class="modal-footer">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+	</div>
+
+
+</div>

@@ -1,0 +1,175 @@
+
+<div class= "text-center">
+  <h3 class="arial">
+  Actividades del Proyectos a Actualizar
+</h3>
+</div>
+
+<form #actualizoForm="ngForm" (ngSubmit)="onSubmit(actualizoForm)">
+    <div class="alert alert-info" *ngIf="status == 'success'">
+        La Actividad se Actualizo Correctamente
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            La Actividad Actualizo no se Registro Correctamente
+        </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputNombre">Proyectos</label>
+      <!--<input type="nombre" class="form-control" id="inputNombre" placeholder="Nombre">-->
+   
+  
+   
+    <div *ngIf="id_proyecto == null">Cargando...</div>
+    <select (change)="cobtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #proyecto [(ngModel)]="actualizaractividades.id_proyecto">
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+      
+      </select>
+    </div>
+  
+   
+      <div class="form-group col-md-2">
+          <label for="inputAddress">Fecha Inicio</label>
+          
+          <p>{{fecha}}</p>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputAddress2">Fecha Fin</label>
+            
+            <p>{{ffin}}</p>
+          </div>
+      
+  </div>
+  <div class= "margen">
+    </div>
+  <div class="form-group col-md-4">
+    <label for="inputNombre4">Sprints</label>
+   <!-- <input type="sprint" class="form-control" id="inputsprint4" placeholder="sprint">
+   <div(change)="obtener(id_actividad)"  (change)="obtener(id_actividad)"  *ngIf="id_periodo == null">Cargando...</div>-->
+    <select (change)="obtener()" class="form-control" id="sel_id_periodo" name="periodo" matInput #idperiodo [(ngModel)]="actualizaractividades.id_periodo">
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}</option>                         
+      
+      </select>
+  </div>
+
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputactividades4">Actividad</label>
+                    <select (change)="obtener()" class="form-control" id="sel_id_actividad" name="idactividad" matInput #idactividad [(ngModel)]="actualizaractividades.id_actividad">
+                      <option value="null">Selecciona...</option>   
+                      <option *ngFor="let idactividad of id_actividad" value="{{ idactividad.id_actividad }}">{{ idactividad.nombre | titlecase }}</option>                         
+                      
+                      </select>
+                  
+                  
+                  </div>
+                  <!--div class="form-group col-md-2">
+                    <label for="inputturno">TURNO</label>
+                    
+                      <p>{{turn}}</p>
+
+                  </div-->
+                
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Duracion</label>
+                    
+                    <p>{{dura}}</p>
+                  </div>
+                  
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Observaciones</label>
+                    
+                    <p>{{observa}}</p>
+                  </div>
+               
+                    <div class="form-group col-md-2">
+                      <label for="fecha_inicio">Fecha Inicio</label>
+                      <p>{{fechat}}</p>
+                      <!--input type="date" name="fecha_inicio" #fecha_inicio="ngModel" [(ngModel)]="actualizaractividades.fecha_inicio" class="form-control" id="date" placeholder="fecha_inicio" required />
+                      <span *ngIf="!fecha_inicio.valid && fecha_inicio.touched"> esta vacio el campo</span-->
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="fecha_fin">Fecha Fin</label>
+                      <p>{{fechat}}</p>
+                      <!--input type="date" name="fecha_fin" #fecha_fin="ngModel" [(ngModel)]="actualizaractividades.fecha_fin" class="form-control" id="date" placeholder="fecha_fin" required/>
+                      <span *ngIf="!fecha_fin.valid && fecha_fin.touched"> esta vacio el campo</span-->
+                    </div>
+                
+                    
+                  <!--div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Avance</label>
+                   
+                    <p>{{avan}}</p>
+                    <p>{{proy}}</p>
+                  </div-->
+      
+                  </div>
+
+                  <div class= "margen">
+                    </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="inputactividades4">Actividad</label>
+                      <input type="text" name="actividad"   class="form-control" id="text" placeholder=" {{activ}}" matInput #idactividad [(ngModel)]="actualizaractividades.nombre">
+  
+                    
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="fecha_inicio">Fecha Inicio</label>
+                          <input type="date" name="fecha_inicio" #fecha_inicio="ngModel" [(ngModel)]="actualizaractividades.fecha_inicio" class="form-control" id="date" placeholder="fecha_inicio" required />
+                          <span *ngIf="!fecha_inicio.valid && fecha_inicio.touched"> esta vacio el campo</span>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="fecha_fin">Fecha Fin</label>
+                          <input type="date" name="fecha_fin" #fecha_fin="ngModel" [(ngModel)]="actualizaractividades.fecha_fin" class="form-control" id="date" placeholder="fecha_fin" required/>
+                          <span *ngIf="!fecha_fin.valid && fecha_fin.touched"> esta vacio el campo</span>
+                        </div>
+                    
+                        </div>
+                    <!--div class="form-group col-md-2">
+                      <label for="inputturno">TURNO</label>
+                      <select class="form-control"> 
+                        <option disabled selected value="null">Turno</option> 
+                        <div *ngIf="id_turno==null">Cargando...</div>
+                        <option *ngFor="let idturno of id_turno" value="{{ idturno.id_turno }}">{{ idturno.descripcion }}</option>
+                        
+                        </select>
+                       
+  
+                    </div-->
+                  
+                    <div class="form-group col-md-2">
+                      <label for="inputfecha_inicio">Duracion</label>
+                      <input type="text" name="duracion"   class="form-control" id="text" placeholder="text" #duracion="ngModel" [(ngModel)]="actualizaractividades.duracion">
+                     
+                    </div>
+                    
+                    <div class="form-group col-md-2">
+                      <label for="inputfecha_inicio">Observaciones</label>
+                      <input type="text" name="observaciones"  class="form-control" id="text" placeholder="text" #observaciones="ngModel" [(ngModel)]="actualizaractividades.observaciones">
+                    
+                    </div>
+                    <!--div class="form-group col-md-2">
+                      <label for="inputfecha_inicio">Avance</label>
+                      <input type="text" name="avance"   class="form-control" id="text" placeholder="text" #avance="ngModel" [(ngModel)]="actualizaractividades.avance">
+                   
+                    </div-->
+        
+                    </div>
+
+
+
+                  <div class="form-row">
+
+                      <div class="form-group col-md-2; boton3">
+                          
+                          <button type="submit" class="btn btn-primary">Registrar</button>
+                      </div>
+                    
+                </div>
+                 
+              
+
+  </form>

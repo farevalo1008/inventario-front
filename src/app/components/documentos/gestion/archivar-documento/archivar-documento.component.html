@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+
+<div class="alert alert-success" *ngIf="status == 'success'">
+  El registro se ha completado correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status == 'error'">
+  El registro NO se ha completado
+</div>
+
+<body ng-app="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="form_main">
+          <h4 class="heading"><strong>Guardar </strong> Documento <span></span></h4>
+          <br>
+          <div class="container col-md-10 col-sm-6">
+
+            <form class="form-inline" enctype="multipart/form-data" #archivarForm="ngForm"
+              (ngSubmit)="onSubmit1(archivarForm)">
+              <div class="form-group">
+                <i class='far fa-file-alt margen'></i>
+
+                <input type="text" matInput #nombre name="nombre" [(ngModel)]="documentos.nombre"
+                  (ngModelChange)="documentos.nombre = $event.toUpperCase()" class="form-control"
+                  placeholder="Nombre del Documento" required>
+              </div>
+
+              <div class="form-group ">
+                <i class='fas fa-pencil-alt margen'></i>
+
+                <input type="text" matInput #descripcion name="descripcion" [(ngModel)]="documentos.descripcion"
+                  (ngModelChange)="documentos.descripcion = $event.toUpperCase()" class="form-control"
+                  placeholder="Descripción del Documento" required>
+              </div>
+
+
+
+              <div class="form-group ">
+                <i class='fas fa-clipboard-list margen'></i>
+
+                <select class="form-control" matInput #extension [(ngModel)]="documentos.id_extension"
+                  (ngModelChange)="documentos.id_extension = $event.toUpperCase()" name="extension" id="extension">
+                  <option disabled selected value="null">Extension</option>
+                  <div *ngIf="id_extension==null">Cargando...</div>
+                  <option *ngFor="let idextension of id_extension" value="{{ idextension.id_extension }}">
+                    {{ idextension.nombre }}</option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group m">
+                <i class='far fa-file-code margen'></i>
+                <input type="text" name="codigo" id="paramaconi" matInput #codigo [(ngModel)]="paramaconi" (ngModelChange)="documentos.codigo = $event.toUpperCase()" class="form-control" required disabled>
+              </div>
+
+
+
+              <div class="form-group m">
+                <i class='fas fa-code-branch margen' style="margin-left:25px;"></i>
+                <select class="form-control" (change)="capturar()" matInput [(ngModel)]="documentos.id_procedencia"
+                  name="opcionSeleccionado" id="opcionSeleccionado">
+                  <option disabled selected value="null">Procedencia</option>
+                  <option *ngFor="let idprocedencia of id_procedencia" value="{{ idprocedencia.id_procedencia }}">
+                    {{ idprocedencia.nombre }}</option>
+                </select>
+              </div>
+
+
+
+              <div *ngIf="verSeleccion == 1" class="form-inline">
+                <div class="form-group m">
+                  <i class='fas fa-home margenit'></i>
+                  <input type="text" name="destinatario" matInput #destinatario [(ngModel)]="documentos.destinatario"
+                    (ngModelChange)="documentos.destinatario = $event.toUpperCase()" class="form-control"
+                    placeholder="Destinatario" required>
+                </div>
+
+
+                <div class="form-group m">
+                  <i class='far fa-file-alt margen' style="margin-left:22px;"></i>
+                  <div *ngIf="id_tipo_doc==null">Cargando...</div>
+                  <select class="form-control" matInput #tipo_documento [(ngModel)]="documentos.id_tipo_doc"
+                    (ngModelChange)="documentos.id_tipo_doc = $event.toUpperCase()" name="opcionTipoDocumento"
+                    id="opcionTipoDocumento">
+                    <option disabled selected value="null">Tipo de Documento</option>
+                    <option *ngFor="let idtipodoc of id_tipo_doc" value="{{ idtipodoc.id_tipo_doc }}">
+                      {{ idtipodoc.nombre | titlecase }}</option>
+                  </select>
+                </div>
+
+                <div class="form-group m">
+                  <i class='far fa-building margen'></i>
+                  <div *ngIf="id_departamento==null">Cargando...</div>
+                  <select class="form-control" matInput #departamento [(ngModel)]="documentos.id_departamento"
+                    (ngModelChange)="documentos.id_departamento = $event.toUpperCase()" name="opcionDepartamento"
+                    id="opcionDepartamento">
+                    <option disabled selected value="null">Departamento</option>
+                    <option *ngFor="let iddepartamento of id_departamento" value="{{ iddepartamento.id_departamento }}">
+                      {{ iddepartamento.nombre | titlecase }}</option>
+                  </select>
+                </div>
+
+                <div class="form-group m ">
+                  <i class='far fa-calendar-alt margen'></i>
+                  <input min="{{messagetwo}}" max="{{message}}" type="date" name="fechaInspeccion" matInput #fecha_emision
+                    [(ngModel)]="documentos.fecha_emision" class="form-control" placeholder="Fecha de Emisión" required>
+                </div>
+
+                <p style="font-size: 12px;position: relative;right: 150px;top: 60px;">Fecha de Emisión</p>
+
+                <div class="form-group m" style="position: relative;right: 100px;">
+                  <i class='far fa-calendar-alt margen'></i>
+                  <input type="date" name="fecha_entrega" matInput #fecha_entrega [(ngModel)]="documentos.fecha_entrega"
+                    class="form-control" placeholder="Fecha de Entrega" required>
+                </div>
+
+                <p style="font-size: 12px;position: relative;right: 250px;top: 60px;">Fecha de Entrega</p>
+
+
+
+                <!-- Prueba Upload-->
+
+
+
+
+                <div class="form-group m">
+                  <i class="fas fa-upload margen"></i>
+                  <input type="file" style="margin-top:2px;width: 500px;"  required accept=".doc,.xlsx, .pdf,.docx,.pptx"  #fileupload [(ngModel)]="myFile" name="myFile" (change)="fileEvent($event)" />
+                </div>
+
+
+
+
+
+                <button type="submit" value="Guardar" class="btn btn-primary mb-2 " style="margin-left: 350px; margin-top: 40px;" [disabled]="!archivarForm.form.valid">Guardar</button>
+             
+
+                <!-- fin prueba Upload-->
+
+
+
+
+
+
+
+              </div>
+
+
+              <div *ngIf="verSeleccion == 2" class="form-inline">
+                <div class="form-group m">
+                  <i class='far fa-building margeni'></i>
+                  <input type="text" name="origen" matInput #origen [(ngModel)]="documentos.origen"
+                    (ngModelChange)="documentos.origen = $event.toUpperCase()" class="form-control" placeholder="Origen"
+                    required>
+                </div>
+
+                <div class="form-group m">
+                  <i class='far fa-building margen'></i>
+                  <div *ngIf="id_departamento==null">Cargando...</div>
+                  <select class="form-control" matInput #departamento [(ngModel)]="documentos.id_departamento"
+                    (ngModelChange)="documentos.id_departamento = $event.toUpperCase()" name="opcionDepartamento"
+                    id="opcionDepartamento">
+                    <option disabled selected value="null">Departamento</option>
+                    <option *ngFor="let iddepartamento of id_departamento" value="{{ iddepartamento.id_departamento }}">
+                      {{ iddepartamento.nombre | titlecase }}</option>
+                  </select>
+                </div>
+
+
+                <div class="form-group m">
+                  <i class='far fa-file-alt margen' style="margin-left:23px;"></i>
+                  <div *ngIf="id_tipo_doc==null">Cargando...</div>
+                  <select class="form-control" matInput #tipo_documento [(ngModel)]="documentos.id_tipo_doc"
+                    (ngModelChange)="documentos.id_tipo_doc = $event.toUpperCase()" name="opcionTipoDocumento"
+                    id="opcionTipoDocumento">
+                    <option disabled selected value="null">Tipo de Documento</option>
+                    <option *ngFor="let idtipodoc of id_tipo_doc" value="{{ idtipodoc.id_tipo_doc }}">
+                      {{ idtipodoc.nombre | titlecase }}</option>
+                  </select>
+                </div>
+
+                <div class="form-group m">
+                  <i class='fas fa-user-tie margeni ' style="margin-left:18px;"></i>
+                  <div *ngIf="id_cliente==null">Cargando...</div>
+                  <select class="form-control" matInput #clientes [(ngModel)]="documentos.id_cliente"
+                    (ngModelChange)="documentos.id_cliente = $event.toUpperCase()" name="opcionClientes"
+                    id="opcionClientes">
+                    <option disabled selected value="null">Clientes</option>
+                    <option *ngFor="let idcliente of id_cliente" value="{{ idcliente.id_cliente }}">
+                      {{ idcliente.nombre | titlecase }}</option>
+                  </select>
+                </div>
+
+                <div class="form-group m ">
+                  <i class='far fa-calendar-alt margen'></i>
+                  <input type="date" name="fecha_emi" min="{{messagetwo}}" max="{{message}}" matInput #fecha_emision [(ngModel)]="documentos.fecha_emision"
+                    class="form-control" placeholder="Fecha de Emisión" required>
+                </div>
+
+                <p style="font-size: 12px;position: relative;right: 150px;top: 60px;">Fecha de Emisión</p>
+
+                <div class="form-group m" style="position: absolute;left: 515px;top: 195px;">
+                  <i class='far fa-calendar-alt margeni' style="margin-left:22px;"></i>
+                  <input type="date" name="fecha_entre" matInput #fecha_entrega [(ngModel)]="documentos.fecha_entrega"
+                    class="form-control" placeholder="Fecha de Entrega" required>
+                </div>
+
+                <p style="font-size: 12px;position: absolute;left: 615px;top: 275px;">Fecha de Entrega</p>
+                
+                <div class="form-group "  style="position: absolute;top: 320px;">
+                    <i class="fas fa-upload margen"></i>
+                    <input type="file" style="width: 500px;"  accept=".doc,.xlsx, .pdf,.docx,.pptx"  #fileupload [(ngModel)]="myFile" name="myFile" (change)="fileEvent($event)" />
+                </div>
+
+                <button type="submit" value="Guardar" class="btn btn-primary mb-2 " style="margin-left: 350px; position: absolute;top: 380px;" [disabled]="!archivarForm.form.valid">Guardar</button>
+             
+              </div>
+
+              
+                
+            
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</body>
+
+
+</html>
+
+<script>
+
+
+
+</script>

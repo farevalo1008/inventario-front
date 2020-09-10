@@ -1,0 +1,14 @@
+.color-1{
+    background: var(--main-color1) !important;
+    color: white;
+}
+
+.p-tr{
+	cursor: pointer;
+}
+
+.p-tr:hover{
+	background: var(--main-color1) !important;
+    color: white;
+}
+

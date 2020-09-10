@@ -1,0 +1,23 @@
+.boton1{
+  width: 10%;
+  margin-top: 0%;
+  margin-left: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.boton2{
+  width: 100%;
+  margin-top: 0%;
+  display: flex;
+  justify-content: center;
+}
+.boton3{
+  width: 165%;
+  margin-left: 0px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+

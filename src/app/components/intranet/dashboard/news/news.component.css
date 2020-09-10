@@ -1,0 +1,23 @@
+.textArea{
+    min-height: 80px;
+    max-height: 80px;
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-round {
+    border-radius: 30px
+}
+
+.btn-news{
+	background: var(--main-color1) !important;
+	color:#ffff;
+    font-size: 15px;
+}
+
+.news{
+	margin-right: 20px;
+	height: 35px;
+}

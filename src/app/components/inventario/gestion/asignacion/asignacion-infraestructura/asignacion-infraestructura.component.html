@@ -1,0 +1,28 @@
+<body>
+  
+  <div  class="navbar navbar-light" >
+    <span class="navbar-brand mb-0 h1" style="color: RGB(0, 101, 149)"><h2>
+        <a [routerLink]="'/dashboard/inventario/intranet'" ><i class="fas fa-arrow-alt-circle-left" style="color: RGB(0, 101, 149);"></i> </a> 
+      TIPO DE ASIGNACIÓN <i class="fas fa-laptop" style="margin-left: 2%"></i><hr></h2></span>
+  </div>
+   
+  <div class="row">
+    <div class="perso">
+        <div class="persoimagen">
+            <img src="assets/img/descarga.png" alt="">
+        </div>
+        <div class="persobuttonr">
+                <a [routerLink]="'/dashboard/inventario/tipo/asignacion/personal/computacion'" class=" botonmobi btn btn-primary" style="width: 180px;margin-top: 35px;">Personal</a>
+        </div>
+    </div>
+
+    <div class=dep>
+        <div class="depimagen">
+            <img src="assets/img/departamento.png" alt="">
+        </div>
+        <div class="depbuttonr">            
+                <a [routerLink]="'/dashboard/inventario/tipo/asignacion/departamental/computacion'" class=" botonmobi btn btn-primary" style="width: 180px">Departamental</a>
+        </div>
+    </div>
+  </div>
+</body>

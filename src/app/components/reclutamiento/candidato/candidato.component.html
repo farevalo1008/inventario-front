@@ -1,0 +1,126 @@
+<form (ngSubmit)="nombresSubmit();" #buscarnombres="ngForm">
+    
+    <div class="row">
+      <div class="input-group px-0 offset-md-8 col-md-3">
+          <input type="text" class="form-control" name ="nombres" placeholder="Buscar por Nombres" aria-label="" #nombres aria-describedby="basic-addon1" [(ngModel)]="BuscarNombresModel.nombres">
+          <div class="input-group-append">
+            <button class="btn color-1 text-white" [disabled]="!buscarnombres.form.valid"><i class="fas fa-search"></i></button>
+          </div>
+      </div>
+    </div>
+  
+    <div *ngIf="bnombres">
+      <div class="row">
+        <div class="col-md-2 col-sm-4 col-xs-6">
+    
+        </div>
+        <!-- <div class="col-md-8 col-sm-4 col-xs-6">
+          <div class="card mt-2 fondo">
+            <div class="card-body">
+              <h4 class="fas fa-copy"><b>&nbsp;&nbsp;  </b></h4>
+              <table class="table table-sm table-hover">
+                <thead>
+                  <th>Solicitante</th>
+                  <th>Tipo de Requerimiento</th>
+                  <th>Cargo</th>
+                  <th>Descripción</th>
+                  <th class="text-center">Operación</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let datCar of datasolicitante">
+                      <td>{{ datCar.solicitante | titlecase }}</td>
+                      <td>{{ datCar.requerimiento | titlecase }}</tdListado de Solicitudes>
+                      <td>{{ datCar.cargo | titlecase }}</td>
+                      <td>{{ datCar.descripcion_trabajo }}</td>
+                      <td class="text-center">
+                          <button title="Visualizar la Solicitud." class="btn text-white text-center" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/solicitud/visualizar/' + datCar.id_solicitud]">
+                            <i class="far fa-edit"></i>
+                          </button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>    
+        </div> -->
+        <div class="col-md-8 col-sm-4 col-xs-6">
+            <div class="card mt-2 fondo">
+              <div class="card-body">
+                <h4 class="fa fa-users"><b>&nbsp;&nbsp;  Listado de candidatos</b></h4>
+                <table class="table table-sm table-hover">
+                    <thead>
+                      <th>Nombres</th>
+                      <th>Apellidos</th>
+                      <th>Teléfono</th>
+                      <th class="text-center">Operación</th>
+                    </thead>
+                  <tbody>
+                    <tr *ngFor="let candid of datanombres">
+                      <td>{{ candid.nombres | titlecase }}</td>
+                      <td>{{ candid.apellidos | titlecase }}</td>
+                      <td>{{ candid.tel_movil }}</td>
+                      <td class="text-center">
+                        <a title="Visualizar Candidato." class="btn color-1 text-white" [routerLink]="['/dashboard/reclutamiento/candidato/visualizar/' + candid.id_candidato]">
+                          <i class="far fa-edit"></i>  
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+  
+        </div>
+      </div>
+      
+      
+    </div>
+  </form>
+  <br>
+  <div *ngIf="mensajeError">
+    <div class="alert alert-info ">No se encontro ningún resultado en esta búsqueda.</div>
+  </div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>   
+<div *ngIf="!error && !bnombres">
+    <div class="row">
+      <div class="col-md-2 col-sm-4 col-xs-6">
+
+      </div>
+      <div class="col-md-8 col-sm-4 col-xs-6">
+        <div *ngIf="getCandidatos">
+        <div class="card mt-2 fondo">
+          <div class="card-body">
+            <h4 class="fa fa-users"><b>&nbsp;&nbsp;  Listado de candidatos</b></h4>
+            <table class="table table-sm table-hover">
+                <thead>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Télefono</th>
+                  <th class="text-center">Operación</th>
+                </thead>
+              <tbody>
+                <tr *ngFor="let candidato of datosCandidatos">
+                  <td>{{ candidato.nombres }}</td>
+                  <td>{{ candidato.apellidos }}</td>
+                  <td>{{ candidato.tel_movil }}</td>
+                  <td class="text-center">
+                    <a title="Visualizar Candidato." class="btn color-1 text-white" [routerLink]="['/dashboard/reclutamiento/candidato/visualizar/' + candidato.id_candidato]">
+                      <i class="far fa-edit"></i>  
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6">
+
+      </div>
+    </div>
+  
+</div>

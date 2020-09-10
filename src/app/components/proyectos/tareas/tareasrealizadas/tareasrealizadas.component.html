@@ -1,0 +1,70 @@
+<div class= "text-center">
+    <h3 class="arial">
+        Actividades Realizadas
+  </h3>
+  </div>
+
+
+<form #registerForm="ngForm" (ngSubmit) = "OnSubmit()">
+    <div class="alert alert-info" *ngIf="status == 'success'">
+        La Actividad se Registro Correctamente
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            La Actividad no se Registro Correctamente
+        </div>
+    <div class="form-row col-md-6 align-items-center">
+        <label for="input2 " class="align-items-center">Actividades</label>
+        
+        <select (chage)="actividaduser()" class="form-control" id="sel_id_actividad" name="actividad" #idactividad [(ngModel)]="tareasrealizadas.id_actividad">
+            <option value="null">Selecciona...</option>  
+            <option *ngFor="let idactividad of id_actividad" value="{{ idactividad.id_actividad }}">{{ idactividad.nombre | titlecase }}</option>                         
+            
+            </select>
+      </div>
+
+<div class="form-row col-md-12">
+
+    <div class="form-group col-md-4">
+      <label for="inputEmail4">Fecha Inicio</label>
+      <input type="date" name="fecha_inicio_real" #fecha_inicio_real="ngModel" [(ngModel)]="tareasrealizadas.fecha_inicio_real" class="form-control" id="text"  placeholder="fechainicioreal">
+    
+      
+    
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPassword4">Fecha Fin</label>
+      <input type="date" name="fecha_fin_real" #fecha_fin_real="ngModel" [(ngModel)]="tareasrealizadas.fecha_fin_real" class="form-control" id="text"  placeholder="fechafin"> <!--class="form-control" id="input4" placeholder="date"-->
+    </div>
+    <div class="form-group col-md-4">
+        <label for="inputPassword4">Turno</label>
+     
+        <select class="form-control" matInput #Turno  [(ngModel)]="tareasrealizadas.id_turno" name="Turno" id="sel_turno">
+          <option disabled selected value="null">Turno</option> 
+          <div *ngIf="id_turno==null">Cargando...</div>
+          <option *ngFor="let idturno of id_turno" value="{{ idturno.id_turno }}">{{ idturno.descripcion }}</option>
+          
+          </select>
+      </div>
+  </div>
+  
+  <div class="form-row col-md-6">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Duracion de Ejecucion</label>
+      <input type="text" name="duracion_de_ejecucion" #duracion_de_ejecucion="ngModel" [(ngModel)]="tareasrealizadas.duracion_de_ejecucion" class="form-control" id="text"  placeholder="duracion de ejecucion">
+    
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Avance</label>
+      
+          <input type="text" name="avance" #avance="ngModel" [(ngModel)]="tareasrealizadas.avance" class="form-control" id="text"  placeholder="avance">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputCity">Observaciones</label>
+      <input type="text" name="observaciones" #observaciones="ngModel" [(ngModel)]="tareasrealizadas.observaciones" class="form-control" id="text"  placeholder="observaciones">
+    
+    </div>
+    
+  </div>
+
+  <button type="submit" class="btn btn-primary">Registrar</button>
+</form>

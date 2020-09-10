@@ -1,0 +1,170 @@
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>   
+
+<div *ngIf="!error && getdatosPosiblesEmpleados">
+  <div class="row">
+      <div class="col-md-3 col-sm-4 col-xs-6">
+
+      </div>
+      <div class="col-md-6 col-sm-4 col-xs-6">
+          <div *ngIf="getdatosPosiblesEmpleados" class="som">
+              <div class="card mt-2 fondo som">
+                <div class="card-body">
+                  <h4 class="fas fa-address-card"><b>&nbsp;&nbsp;  Listado de Posibles Empleados</b></h4>
+                  <table class="table table-sm table-hover">
+                    <thead>
+                      <th>Nombres</th>
+                      <th>Apellidos</th>
+                      <th class="text-center" colspan="4"> 
+                          Oferta Trabajo
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let datPos of datosPosiblesEmpleados">
+                        <td>{{ datPos.nombres | titlecase }}</td>
+                        <td>{{ datPos.apellidos | titlecase }}</td>
+                        <td>
+                            <button title="Acepto la Oferta de Trabajo." type="button" class="btn btn-info text-white" data-toggle="modal" [attr.data-target]="'#Modal-'+datPos.id_candidato"><i class="fas fa-check-square"></i></button>
+                        </td>
+                        <td>
+                          <button title="Rechazo la Oferta de Trabajo." type="button" class="btn btn-danger text-white" data-toggle="modal" [attr.data-target]="'#Modal-1'+datPos.id_candidato"><i class="fas fa-times-circle"></i></button>
+                        </td>
+                        <td>
+                          <button title="Se le Realizara una Contra Oferta de Trabajo." type="button" class="btn btn-success text-white" data-toggle="modal" [attr.data-target]="'#Modal-2'+datPos.id_candidato"><i class="fas fa-bookmark"></i></button>            
+                        </td>
+                        <td>
+                          <a title="Detalle del Contrato o Del Rechazo de la Oferta." class="btn text-white" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados/' + datPos.id_candidato]">
+                            <i class="fas fa-file-contract"></i>  
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-3 col-sm-4 col-xs-6">
+
+      </div>
+  </div>
+  
+</div>
+
+<!--Modal-->
+<div *ngFor="let datPos of datosPosiblesEmpleados">
+  <div class="modal" [attr.id]="'Modal-'+datPos.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="datPos.id_candidato" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [attr.id]="datPos.id_candidato">Oferta Laboral</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #aceptoForm="ngForm" (ngSubmit)="onSubmit(aceptoForm)" method="POST" action="/reclutamiento/posiblesempleados">
+          <div class="modal-body">
+            <div class="text-justify">
+              <label>Cargo a Ejercer</label>
+              <select name="cargo" class="form-control" *ngIf="cargos" 
+                    [(ngModel)]="aceptocontrato.id_cargo"
+                    required>
+                <option value="null">Seleccione...</option>
+                <option *ngFor="let cargo of cargos" value="{{ cargo.id_cargo }}">{{ cargo.descripcion | titlecase }}</option>
+              </select>
+              <label>Fecha de Ingreso</label>
+              <input type="date" name="fecha_ingreso" class="form-control"
+                      [(ngModel)]="aceptocontrato.fecha_ingreso" 
+                      required>
+              <label>Salario</label>
+              <input type="text" name="salario" class="form-control"
+                      [(ngModel)]="aceptocontrato.salario" 
+                      required>
+              <label>Observaciones</label>
+              <textarea rows="3" type="text" name="observaciones" class="form-control"
+                      [(ngModel)]="aceptocontrato.observaciones" 
+                      required>
+              </textarea>
+              <input type="hidden" name="id_candidato" class="form-control" 
+               id="id_candidato" [attr.value]='datPos.id_candidato' 
+                          required>
+              <!-- <button (click)="onSubmit(datPos.id_candidato, datPos.nombres )">Prueba</button> -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary som" data-dismiss="modal">Cerrar&nbsp;<i class="far fa-window-close"></i></button>
+            <button class="btn som" style="color:white; background:#006595" [disabled]="!aceptoForm.form.valid" (click)="onSubmit(datPos.id_candidato)">Guardar&nbsp;<i class="fas fa-save"></i></button>
+          </div>
+        </form>       
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal -->
+<!--Modal1-->
+<div *ngFor="let datPos of datosPosiblesEmpleados">
+  <div class="modal" [attr.id]="'Modal-1'+datPos.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="datPos.id_candidato" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [attr.id]="datPos.id_candidato">Motivo del Rechazo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #rechazoForm="ngForm" (ngSubmit)="onSubmit1(rechazoForm)" method="POST" action="/reclutamiento/posiblesempleados">
+          <div class="modal-body">
+            <div class="text-justify">
+              <label>Observaciones</label>
+              <textarea rows="3" type="text" name="observaciones" class="form-control"
+                      [(ngModel)]="rechazocontrato.observaciones" 
+                      required>
+              </textarea>
+              <input type="hidden" name="id_candidato" class="form-control" 
+              id="id_candidato" [attr.value]='datPos.id_candidato'
+                          required>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar&nbsp;<i class="far fa-window-close"></i></button>
+                <button class="btn" style="color:white; background:#006595" [disabled]="!rechazoForm.form.valid" (click)="onSubmit1(datPos.id_candidato)">Guardar&nbsp;<i class="fas fa-save"></i></button>
+              </div>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal1 -->
+<!--Modal2-->
+<div *ngFor="let datPos of datosPosiblesEmpleados">
+    <div class="modal" [attr.id]="'Modal-2'+datPos.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="datPos.id_candidato" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" [attr.id]="datPos.id_candidato">Motivo de la Contra Oferta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form #rechazoForm="ngForm" (ngSubmit)="onSubmit1(rechazoForm)" method="POST" action="/reclutamiento/posiblesempleados">
+            <div class="modal-body">
+              <div class="text-justify">
+                <label>Observaciones</label>
+                <textarea rows="3" type="text" name="observaciones" class="form-control"
+                        [(ngModel)]="rechazocontrato.observaciones" 
+                        required>
+                </textarea>
+                <input type="hidden" name="id_candidato" class="form-control" 
+                id="id_candidato" [attr.value]='datPos.id_candidato'
+                            required>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar&nbsp;<i class="far fa-window-close"></i></button>
+                  <button class="btn" style="color:white; background:#006595" [disabled]="!rechazoForm.form.valid" (click)="onSubmit1(datPos.id_candidato)">Guardar&nbsp;<i class="fas fa-save"></i></button>
+                </div>
+              </div>
+            </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal2 -->

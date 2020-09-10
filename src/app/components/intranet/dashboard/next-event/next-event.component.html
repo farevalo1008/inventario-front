@@ -1,0 +1,35 @@
+<div class="x_panel mt-3">
+	<div class="x_title">
+		<h3>Próximos Eventos</h3>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+		<div class="row">
+			<div class="col-3 p-0 pl-2">
+				<article class=" fecha media event my-2" *ngFor="let mat of matriz">
+					<a class="pull-left date"> 
+						<p class="month">
+							{{ mat[0] }}
+						</p>
+						<p class="day">
+							{{ mat[1] }}
+						</p>
+					</a>
+				</article>
+			</div>
+			<div class="col-9 p-0">
+				<article class="encargado media event text-left" id="encargado" *ngFor="let next of nextEvent">
+					<div class="media-body">
+						<a class="title">
+							{{ next.titulo | titlecase }}
+						</a>
+						<!-- <p>
+							{{ next.encargado | titlecase }}
+						</p>  -->
+					</div>		
+				</article>
+			</div>
+		</div>
+	</div>
+</div>
+

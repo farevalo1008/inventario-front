@@ -1,0 +1,30 @@
+          
+            <div class="x_title">
+                <h2>Info SOA <small>Noticias</small></h2>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <ul class="list-unstyled timeline">
+                        <li *ngFor="let publicacion of publicaciones">
+                            <div class="block">
+                                <div class="tags">
+                                    <a class="tag">
+                                        <span>{{publicacion.departamento}}</span>
+                                    </a>
+                                </div>
+                                <div class="block_content">
+                                    <h2 class="title">
+                                        <p class="excerpt">{{publicacion.publicacion}}.
+                                    </p>
+                                    </h2>
+                                    <div class="byline">
+                                        <span>Publicado el {{publicacion.created_at}} </span><a> por {{publicacion.user_name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+            </div>
+
+    

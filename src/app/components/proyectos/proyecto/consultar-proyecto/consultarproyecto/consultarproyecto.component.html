@@ -1,0 +1,73 @@
+
+<div class= "text-center">
+
+  <h1><p class="arial">
+ Consultar Proyecto
+</p></h1>
+
+</div>
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputNombre4">Proyecto</label>
+      
+      <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #idproyecto [(ngModel)]="consultarproyecto.id_proyecto">
+        <option value="null">Selecciona...</option>  
+        <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+        
+        </select>
+    
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputCliente4">Cliente</label>
+      <!--<input type="cliente" class="form-control" id="Cliente4" placeholder="Cliente">-->
+      <p>{{cliente}}</p>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputAddress">Fecha Inicio</label>
+      <p>{{fecha}}</p>
+      <!--<input type="date" class="form-control" id="date" placeholder="fecha_inicio">-->
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputAddress2">Fecha Fin</label>
+      <p>{{ffin}}</p>
+     <!-- <input type="date" class="form-control" id="date" placeholder="fecha_fin">-->
+    </div>
+  </div>
+
+  <div class="form-group; text-center">
+    
+    <input type="submit" class="btn btn-primary" value= "consultar" data-toggle="modal" data-target="#myModal" />
+  </div>
+ 
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" value= "consultar">
+          <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+          <h4 class="modal-title"> Proyecto </h4>
+        </div>
+        <div class="modal-body">
+          
+          <fusioncharts
+          [width]="width"
+          [height]="height"
+          [type]="type"
+          [dataFormat]="dataFormat"
+          [dataSource]="dataSource"
+        >
+        </fusioncharts>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+
+</form>

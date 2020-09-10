@@ -1,0 +1,121 @@
+.titulo{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.table > tbody > tr:hover {
+    background-color: #F2F2F2;
+    cursor: pointer;
+  }
+
+.listatabla{
+    background: RGB(0, 101, 149);
+    color: white;
+}
+
+.cabecera{
+    background: white;
+}
+
+
+.info{
+    margin-left: 150px ;
+}    
+
+.tipo{
+    margin-left: 30px;
+}
+
+.table-hover tbody tr:hover > td {
+    background-color: RGB(0, 101, 149);
+    color: white;
+}
+
+
+.btn-warning{
+    background: gray !important;
+    border-color: gray !important;
+    color: white;
+}
+
+.paginas{
+    margin-left: 15%;
+    color:  RGB(0, 101, 149);
+}
+
+.paginacion{
+    margin-left: 25%;
+}
+
+.paginacion > span {
+    color:  RGB(0, 101, 149) !important; 
+}
+
+.InfoFin{
+    height: 50px;
+}
+
+.checkBorrar{
+    padding: 0%;
+    left: 50%;
+}
+
+.checkMante{
+    padding: 0%;
+    left: 65%;
+}
+
+.checkActualizar{
+    padding: 0%;
+    left: 65%;
+}
+
+.checkManteOtro{
+    padding: 0%;
+    left: 65%;
+}
+
+.Unidades{
+    margin-left: -2%;
+}
+
+.UniDisponible{
+    height: 40px;
+    margin-top: 3%;
+    
+}
+
+.UniMante{
+    height: 40px;
+    margin-top: 3%;
+    margin-left: -3%;
+}
+
+.UniAsignados{
+    height: 40px;
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+.Total{
+    height: 40px;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 10%;
+}
+
+.CuadroBusqueda{
+    width: 200px;
+
+}
+
+.botonBuscar{
+    margin-left: 100%;
+    margin-bottom: 0px;
+    margin-top: -34%;
+    height: 38px;
+}
+
+.Busqueda{
+    margin-left: 24%;
+}
+

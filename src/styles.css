@@ -1,0 +1,135 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Titillium;
+    src: url(assets/fonts/TitilliumWeb-Regular.ttf) format("opentype");
+  }
+@font-face {
+    font-family: OpenSans;
+    src: url(assets/fonts/OpenSans-Regular.ttf) format("opentype");
+  }
+
+:root {
+    --main-color1: #006595;
+    --main-color2: #9FCBED;
+    --secondary-color: #A1A1A4;
+}
+
+
+.title {
+  font-family: "Titillium";
+  color: var(--main-color1) !important;
+  font-size: 1.2em;
+}
+
+body{
+  font-family: "OpenSans";
+  color: var(--main-color1);
+  font-size: 1em;
+}
+
+::placeholder{
+  font-family: "OpenSans";
+  color: var(--secondary-color);
+  font-size: 0.8em;
+}
+
+.validate-danger {
+  font-family: "OpenSans";
+  letter-spacing: 0.2em;
+  word-spacing: 0.2em;
+  font-size: 0.7em;
+  color: #C52F2F;
+}
+
+.cargandoGif {
+  position:absolute;
+  left:40% !important ;
+  top:40% !important ;
+  z-index:999;
+}
+
+.icon {
+  padding-right: 10px
+}
+
+.img-thumb {
+  width: 50px;
+  height: 50px;
+}
+
+.puntero {
+  cursor: pointer;
+}
+
+.img-circle {
+  border-radius: 100%;
+  width: 150px;
+}
+
+/* Animaciones */
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+} 
+
+.tooltips {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltips .tooltipstext {
+  visibility: block;
+  width: 450px;
+  background-color: #f7052b;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 5%;
+  left: 50%;
+  margin-left: 10px;
+  margin-bottom: 35px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltips .tooltipstext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 5%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f7052b transparent transparent transparent;
+}
+
+.tooltips .tooltipstext {
+  visibility: visible;
+  opacity: 1;
+}

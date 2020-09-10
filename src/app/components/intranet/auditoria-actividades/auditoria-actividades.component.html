@@ -1,0 +1,25 @@
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Auditoría de Actividades </h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content row">
+		<div class="col-12">
+			<table class="table table-striped">
+				<thead class="color-1">
+				    <tr>
+				      <th>Nombres</th>
+				      <th>C.I</th>
+				    </tr>
+				</thead>
+
+			  	<tbody>
+				    <tr *ngFor="let persona of personal" class="p-tr">
+				    	<td [routerLink]="['actividadespersonales/' + persona.id_user]">{{ persona.nombres }} {{persona.apellidos}}</td>
+					    <td [routerLink]="['actividadespersonales/' + persona.id_user]">{{ persona.dni }} </td>
+				    </tr>
+			  	</tbody>
+			</table>		
+		</div>
+	</div>
+</div>

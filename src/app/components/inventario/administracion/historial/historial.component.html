@@ -1,0 +1,186 @@
+<div class="cabecera">
+  <div class="titulo">
+    <h2> <b> Historial del Inventario </b></h2><hr>
+  </div>
+  <br>
+ 
+ <div *ngIf="showDelete" class="InfoFin alert alert-success">{{ message }}<button class="checkBorrar alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+ 
+ 
+ 
+ <div class="form-row">
+  <div class="form-group col-md-2">
+     <label for="id_tipo_articulo" ><b>Clasificación:</b></label>
+     <select (change)="capturaTipo()" class="form-control" id="sel_clasificacion" [(ngModel)]="getclasificacion.id_clas_art" name="clasificacion">
+     <option value="0">Selecciona...</option>  
+     <option *ngFor="let clas of clasificacion" value="{{ clas.id_clas_art }}">{{ clas.descripcion | titlecase }}</option>                         
+     </select> 
+ </div> 
+ 
+  <div class="form-group col-md-2" *ngIf="verselect == getclasificacion.id_clas_art">
+     <label for="id_tipo_articulo" ><b>Tipo de Articulo:</b></label>
+     <select (change)="capturaMarca()" class="form-control" id="sel_id_tipo_articulo" matInput #tipo_articulo [(ngModel)]="TipoModel.id_tipo_articulo" name="tipo_articulo">
+     <option value="null">Selecciona...</option>  
+     <option *ngFor="let idtipo of id_tipo_articulo" value="{{ idtipo.id_tipo_articulo }}">{{ idtipo.descripcion | titlecase }}</option>                         
+     </select> 
+ </div>  
+
+ <!-- CUADRO DE BUSQUEDA -->
+ <div class="Busqueda form-row">
+ <div class="CuadroBusqueda form-group" >
+ <form (ngSubmit)="Busqueda(FormDatos)" #FormDatos="ngForm"  method="POST">
+    <label for="id_tipo_articulo" ><b>Codigo:</b></label> 
+   <input type="text" name ="busqueda" class="form-control" matInput #busqueda [(ngModel)]="codigo.cod_soaint" placeholder="Ingrese codigo" required> 
+   <button type="submit" class="botonBuscar btn btn-primary" [disabled]="!FormDatos.form.valid">Buscar</button>
+  </form>
+</div>
+
+</div>
+ <!------------------------>
+ </div>
+
+ </div>
+ 
+ 
+ <div>
+ <table class="table table-striped table-hover" id="articulos-list" >
+   <thead class="listatabla">
+     <tr>
+          <th><b>Nro</b></th>
+          <th><b>Código</b></th>
+         <th><b>Clasificación</b></th>
+         <th><b>Tipo de Artículo</b></th>
+         <th><b>Acción</b></th>
+         <th><b>Realizado Por</b> </th>
+         <th><b>Fecha / Hora</b></th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor= "let listaArticulo of articulos | paginate: {itemsPerPage: 10, currentPage: pageActual}; let indice = index ">
+       
+       <td>     
+         <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal"><b>{{indice+1}}</b></a> 
+       </td>
+ 
+       <td>      
+         <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal"><strong>{{listaArticulo.cod_soaint}}</strong></a>
+       </td>
+       
+       <td>
+         <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.clasificacion | titlecase}}</a>
+       </td>
+       
+       <td>
+         <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.tipo_articulo | titlecase}}</a>
+       </td>
+ 
+       <td>
+        <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.accion | titlecase}}</a>
+       </td>
+       <td>
+        <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.created_users_by | titlecase}}</a>
+       </td>
+       <td>
+        <a (click)='visualizar(id_hist = listaArticulo.id_hist)' data-toggle="modal" data-target="#exampleModal">{{listaArticulo.created_at | titlecase}}</a>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+ <div class="paginacion">
+ <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+ </div>
+ 
+ </div>
+ 
+ <!-- Modal DETALLES DEL ARTICULO-->
+ <div class="modal fade-modal-lg" id="exampleModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h4 class="modal-title" id="exampleModalLabel"><b>Informacion Detallada</b></h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+ 
+ <form class="texto">    
+ 
+       <div class="modal-body" *ngFor= "let articulo of articulo">
+         
+           <div>    
+               <b>CLASIFICACIÓN: </b>{{articulo.clasificacion | uppercase}} <b class="tipo">TIPO DE ARTICULO: </b>{{articulo.tipo_articulo | uppercase}}
+           </div>
+ 
+           <div>
+               
+           </div>
+ 
+           <div>  
+             <b>CÓDIGO  DE LA EMPRESA: </b>{{articulo.codigo }}
+           </div>
+           <br>
+           
+ <div class="info">          
+           <div class="form-group row">
+               <label for="marca" class="col-sm-3 col-form-label"><b>MARCA: </b></label>
+               <div class="col-sm-6">
+                 {{articulo.marca | uppercase}} 
+               </div>
+           </div>
+           
+           <div class="form-group row">
+               <label for="modelo" class="col-sm-3 col-form-label"><b>MODELO/COLOR: </b></label>
+               <div class="col-sm-6">
+                   {{articulo.modelo | uppercase}}
+               </div>
+           </div>
+           
+           <div class="form-group row">
+               <label for="serial" class="col-sm-3 col-form-label"><b>SERIAL: </b></label>
+               <div class="col-sm-6">
+                  {{articulo.serial}}                 
+               </div>
+           </div>
+          
+           <div class="form-group row">
+               <label for="costo" class="col-sm-3 col-form-label"><b>PRECIO DEL PRODUCTO($): </b></label>
+               <div class="col-sm-6">                
+                   {{articulo.costo}}
+               </div>
+           </div>
+          
+           <div class="form-group row">
+               <label for="status" class="col-sm-3 col-form-label"><b>ESTADO DEL ARTICULO: </b></label>
+               <div class="col-sm-6">
+                  {{articulo.status | uppercase}} 
+               </div>
+           </div>
+           
+           <div class="form-group row">
+               <label for="caracteristicas" class="col-sm-3 col-form-label"><b>CARACTERISTICAS: </b></label>
+               <div class="col-sm-6">
+                   {{articulo.caracteristicas}}    
+               </div>
+           </div>
+           <div class="form-group row">
+            <label for="descripcion" class="col-sm-3 col-form-label"><b>OBSERVACIONES: </b></label>
+            <div class="col-sm-6">
+                {{articulo.descripcion}}    
+            </div>
+        </div>
+ </div>  
+   
+       </div>
+     
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+       </div>
+     </form>
+     </div>
+   </div>
+ </div>
+ 
+   
+ 
+ 
+   

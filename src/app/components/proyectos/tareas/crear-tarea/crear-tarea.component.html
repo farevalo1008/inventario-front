@@ -1,0 +1,107 @@
+<div class="text-center">
+  <h3 class="arial">
+    Actividades a Consultar
+    
+  </h3>
+</div>
+
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+  <!--selecionar el proyecto-->
+  <!--Mostrar los datos del proyecto-->
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputNombre">Proyectos</label>
+
+
+      <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #proyecto
+        [(ngModel)]="consultaractividad.id_proyecto">
+        <option value="null">Selecciona...</option>
+        <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">
+          {{ idproyecto.nombre | titlecase }}</option>
+
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputNombre4">Cliente</label>
+
+      <p>{{cliente}}</p>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputAddress">Fecha Inicio</label>
+
+      <p>{{fecha}}</p>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputAddress2">Fecha Fin</label>
+
+      <p>{{ffin}}</p>
+    </div>
+    <!--consultar actividades-->
+  </div>
+  <div class="text-center">
+    <h6>
+      <p class="arial">
+        Actividades del Sprint
+      </p>
+    </h6>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+    <label for="inputNombre4">Sprints</label>
+
+    <select (change)="caturaSprint()" class="form-control" id="sel_id_periodo" name="periodo" matInput #idperiodo
+      [(ngModel)]="consultaractividad.id_periodo">
+      <option value="null">Selecciona...</option>
+      <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}
+      </option>
+    </select>
+  </div>
+    
+      <div class="form-group col-md-4">
+                <label for="inputactividades4">Actividad</label>
+                <select  (change)="cobtener()" (change)="actividadrealizada()" class="form-control" id="sel_id_actividad" name="idactividad" matInput #idactividad [(ngModel)]="consultaractividad.id_actividad">
+                  <option value="null">Selecciona...</option>   
+                  <option *ngFor="let idactividad of id_actividad" value="{{ idactividad.id_actividad }}">{{ idactividad.nombre | titlecase }}</option>                         
+                  
+                  </select>
+              
+              </div>
+  
+      <div class="form-group; boton3"></div>
+      <input type="submit" class="btn btn-primary" value="consultar" data-toggle="modal" data-target="#myModal" />
+    
+  </div>
+
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content                 "-->
+      <div class="modal-content">
+        <div class="modal-header" value="consultar">
+          <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+          <h4 class="text-center" >Actividades</h4>
+        </div>
+        <div class="modal-body">
+        
+          <fusioncharts
+          [width]="width"
+          [height]="height"
+          [type]="type"
+          [dataFormat]="dataFormat"
+          [dataSource]="dataSource"
+        >
+        </fusioncharts>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</form>

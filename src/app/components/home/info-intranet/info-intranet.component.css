@@ -1,0 +1,42 @@
+
+.bg-soaint-2{
+    background: #9FCBED;
+    color: #ffff;
+    height: 350px;
+}
+
+.bg-soaint-3{
+    background: #A1A1A4;
+    opacity: 0.8;
+    color: #ffff;
+    height: 350px;
+}
+
+.bg-soaint-1{
+    background: #006595;
+    opacity: 0.8;
+    color: #ffff;
+    height: 350px;
+}
+
+.a-content{
+  text-decoration: none;
+  color: #ffff;
+  border: 2px;
+  border-style: solid;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.a-content:hover{
+  border-style: none;
+  font-size:  18px;
+}
+
+.tittle-intranet{
+  font-family: Titillium;
+  margin-top: 30px;
+  margin-left: 10px;
+  font-weight: bold;
+}

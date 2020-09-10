@@ -1,0 +1,82 @@
+<div class= "text-center">
+ 
+  Actualizar Asignaciones 
+
+</div>
+
+<form #actualizoForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="alert alert-info" *ngIf="status == 'success'">
+     la Asignscion se a Actualizado Correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      la Asignscion no se a Actualizado Correctamente
+    </div>
+  <div class="form-group col-md-6">
+    <label for="inputNombre">Proyectos</label>
+    <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="id_proyecto" matInput #idproyecto [(ngModel)]="actualizarasignacion.id_proyecto">
+    <option value="null">Selecciona...</option>  
+    <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+    
+    </select>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="inputNombre4">Sprints</label>
+    <select (change)="cobtener()" class="form-control" id="sel_id_periodo" name="periodo" matInput #idperiodo [(ngModel)]="actualizarasignacion.id_periodo">
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}</option>                         
+      
+      </select>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputactividades4">Actividad</label>
+      <select (change)="cobtener()" (change)="cobtenera()" class="form-control" id="sel_id_actividad" name="id_actividad" matInput #idactividad [(ngModel)]="actualizarasignacion.id_actividad">
+        <option value="null">Selecciona...</option>   
+        <option *ngFor="let idactividad of id_actividad" value="{{ idactividad.id_actividad }}">{{ idactividad.nombre | titlecase }}</option>                         
+        
+        </select>
+       
+
+    </div>
+
+
+    <div class="form-group col-md-6">
+        <label for="inputactividades4">Consultor</label>
+        <select  class="form-control" id="sel_id_datpers" name="id_datpers" matInput #datpers [(ngModel)]="actualizarasignacion.id_datpers">
+            <option value="null">Selecciona...</option> 
+            <option *ngFor="let id_datpers of id_datpers" value="{{ id_datpers.id_datpers }}">{{ id_datpers.nombres | titlecase }}</option>                         
+           
+            </select>
+          
+      </div>
+
+
+     
+  
+      <div class="form-group">
+          <label for="input">Consultor</label>
+          <select  class="form-control" id="sel_id_datperss" name="id_datperss" matInput #datperss [(ngModel)]="actualizarasignacion.id_datperss">
+              <option value="null">Selecciona...</option> 
+              <option *ngFor="let id_datperss of id_datperss" value="{{ id_datperss.id_datpers }}">{{ id_datperss.nombres | titlecase }}</option>                         
+              
+              </select>
+              
+        </div>
+     
+
+
+
+
+   
+    <div class="form-group col-md-2">
+      
+      <div class="boton3">
+          <button type="submit" class="btn btn-primary">Asignar</button>
+     
+    </div>
+
+    </div>
+  </div>
+</form>
+   

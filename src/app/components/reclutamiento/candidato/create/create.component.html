@@ -1,0 +1,91 @@
+<div class="container card tarjeta som">
+  <div class="row">
+    <div class="col-md-12 register-candidato">
+   <h4><i class="fas fa-user-edit"></i>&nbsp;&nbsp;Registro Candidato</h4><hr>
+    </div>
+  </div>
+      <div class="row">
+          <div class="col-md-2"></div>
+
+          <div class="col-md-8">
+              <div class="alert alert-success" *ngIf="status == 'success' ">{{ message | titlecase }}</div>
+              <div class="alert alert-danger" *ngIf="status == 'error' ">{{ message | titlecase }}</div>
+
+              <form #crearForm="ngForm" (ngSubmit)="onSubmit(crearForm)" method="POST" action="/reclutamiento/candidato">
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label >Documento de Identidad</label>
+                      <input type="number" name="dni" class="form-control" placeholder="Documento de Identidad" 
+                            [(ngModel)]="user.dni"
+                            required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label>Nombres</label>
+                          <input type="nombres" name="nombres" class="form-control" placeholder="Nombres"
+                                [(ngModel)]="user.nombres"
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Apellidos</label>
+                          <input type="apellidos" name="apellidos" class="form-control" placeholder="Apellidos"
+                                [(ngModel)]="user.apellidos"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="fecNac">Fecha de Nacimiento</label>
+                          <input matInput max="{{messageone}}" type="date" name="fecnac" class="form-control"
+                              [(ngModel)]="user.fecnac">
+                        </div>
+                        <div class="form-group col-md-6">
+
+                          <label for="genero">Género</label>
+                            <div *ngIf="genero==null">Cargando...</div>
+                            <select class="form-control" name="genero"
+                              [(ngModel)]="user.genero">
+                              <option value="null">Seleccione...</option>  
+                              <option *ngFor="let sex of genero" value="{{ sex.id_genero }}">{{ sex.descripcion | titlecase }}</option>                         
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="telHab">Teléfono Habitación</label>
+                        <input type="number" name="telhab" class="form-control"  placeholder="0000-00-00-000"
+                            [(ngModel)]="user.telhab">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="telmov">Teléfono Móvil</label>
+                        <input type="number" name="telmov" class="form-control" placeholder="0000-00-00-000"
+                            [(ngModel)]="user.telmov">
+                      </div>
+                  </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email"
+                          [(ngModel)]="user.email" 
+                          required>
+                  </div>
+                </div>
+                <div class="candidato-fin">
+                  <button  class="btn" style="color:white; background:#006595" value="Aceptar" [disabled]="!crearForm.form.valid">
+                    <i class="fas fa-check-circle"></i>&nbsp;Aceptar
+                  </button>
+                  <button type="reset" class="btn btn-secondary ml-2">
+                    <i class="fas fa-sync-alt"></i>&nbsp;Limpiar
+                  </button>
+                </div>
+              </form>
+  
+          </div>
+          <div class="col-md-2"></div>
+      </div>
+</div>

@@ -1,0 +1,137 @@
+<html>
+  <head></head>
+  <body>
+    
+  
+    <div *ngIf="show" class="mensajeFin alert alert-success">{{ message }}<button class="check alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+    <div *ngIf="showErase" class="mensajeEliminado alert alert-success">{{message}}<button class="check alert alert-success" (click)=aceptar()><i class="far fa-check-square"></i></button></div>
+<div class="form-row">
+    <div class="flecha">
+        <a [routerLink]="'/dashboard/inventario/asignacion'" ><i class="fas fa-arrow-alt-circle-left fa-2x" style="color: RGB(0, 101, 149);"></i> </a>
+    </div>
+
+    <div class="depa form-group col-md-3">
+      <select (change)="capturaDep()" class="form-control" matInput #id_dep [(ngModel)]="depusuario.id_dep" name="id_dep">
+      <option value="null">Departamento...</option>
+      <option *ngFor="let depa of departamento" value="{{ depa.id_dep }}">{{ depa.descripcion | titlecase }}</option>                         
+      </select> 
+    </div>  
+</div>
+    
+  
+  <!--FORMULARIO PARA ASIGNAR EQUIPO-->
+  <div *ngIf="depusuario.id_dep">
+  <form (ngSubmit)="SetDatos(FormDatos)" #FormDatos="ngForm" method="POST">
+
+  <div class="AsignacionBOX">
+   
+    <div class="tituloAsignacion"><h3>Asignación:</h3></div>
+
+    <div *ngIf="showred" class="alert alert-danger">No hay articulos de este tipo</div>
+    <div *ngIf="showNoDisponible" class="alert alert-danger">No quedan articulos de esta marca disponibles</div>
+    
+    
+    <hr>
+  <div class="CombosArticulos form-row ">
+    <div class="form-group col-md-3">
+        
+        <label for="id_tipo_articulo" ><b>Tipo de Articulo:</b></label>
+        <select (change)="capturaMarca()" class="form-control" id="sel_id_tipo_articulo" matInput #tipo_articulo [(ngModel)]="TipoModel.id_tipo_articulo" name="tipo_articulo" required>
+        <option value="null">Selecciona...</option>  
+        <option *ngFor="let idtipo of id_tipo_articulo" value="{{ idtipo.id_tipo_articulo }}">{{ idtipo.descripcion | titlecase }}</option>                         
+        </select> 
+    </div>  
+    <div class="form-group col-md-3" *ngIf="verselect == TipoModel.id_tipo_articulo">
+      <label for="id_articulo"><b>Marca:</b></label>
+      <select (change)="capturar()" class="form-control" id="marca" matInput #marca [(ngModel)]="TipoModel.marca"  name="marca" required>
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idart of id_articulo" value="{{ idart.marca }}">{{ idart.marca| uppercase }}</option>                         
+      </select> 
+  </div>  
+  <div class="form-group col-md-3" *ngIf="vermarca == TipoModel.marca">
+      
+      <label for="listaCodigo"><b>Codigo Soaint:</b></label>
+      <select class="form-control" id="sel_id_articulo" matInput #articulo [(ngModel)]="TipoModel.id_articulo"  name="id_articulo" required>
+      <option value="null">Selecciona...</option>  
+      <option *ngFor="let idart of listaCodigo" value="{{ idart.id_articulo }}">{{ idart.cod_soaint| uppercase }}</option>                         
+      </select> 
+  </div> 
+  
+  <div class="CuadroMotivo form-group" >
+      <label for="caracteristicas">Motivo de la Asignacion:</label>
+      <input type="text" name ="motivo"  class="form-control" matInput #motivo [(ngModel)]="TipoModel.caracteristica" placeholder="Descripción" required> 
+  </div>
+ </div>
+
+  <div>
+    <button type="submit" class=" botonAsignar btn btn-primary" [disabled]="!FormDatos.form.valid" >Asignar</button>
+  </div>
+
+  </div>
+  </form>
+  </div>
+  
+  <!--VISUALIZACION DEL EQUIPO ASIGNADO-->
+  <div *ngIf="infoarticulo"  class= "ListaBox">
+      <form >
+        <h3 style="color: RGB(0, 101, 149); padding-top: 15px;">Lista de Asignacion</h3>
+        <hr>
+        <table class="table table-stripped" id="AsigModel">
+          <tr class="listatabla">
+            <th><b>#</b></th>
+            <th><b>Codigo</b></th>
+            <th><b>Equipo</b></th>
+            <th><b>Marca</b></th>
+            <th><b>Caracteristica</b></th>
+            <th></th>
+          </tr>
+          <tr *ngFor= "let equipo of verEquipo; let indice=index" > 
+            <td>     
+              <p *ngIf="infoarticulo.equipo !=  '' "><b>{{indice+1}}</b></p>  
+            </td>
+            <td>     
+              <p *ngIf="infoarticulo.cod_soaint !=  '' ">{{equipo.cod_soaint| uppercase}}</p>  
+            </td>
+            <td>     
+              <p *ngIf="infoarticulo.equipo !=  '' ">{{equipo.equipo| uppercase}}</p>  
+            </td>
+            <td>     
+              <p *ngIf="infoarticulo.marca !=  '' ">{{equipo.marca| uppercase}}</p>  
+            </td>
+            <td>     
+              <p *ngIf="infoarticulo.caracteristicas !=  '' ">{{equipo.caracteristicas| uppercase}}</p>  
+            </td>
+            <td>
+                <button (click)='visualizar(indice)' type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter"><i class="far fa-trash-alt"></i> Borrar</button>
+            </td>
+          </tr>  
+        </table>  
+        </form>
+        <form (ngSubmit)="GuardarAsigancion(FormSave)" #FormSave="ngForm">
+          <button type="submit" class="botonGuardar btn btn-success" >Guardar</button>
+        </form>
+      </div>
+
+<!-- Modal BORRAR-->
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle"> Desasignar Equipo ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> No</button>
+          <button (click)='BorrarAsignacion()' type="button" class="btn btn-success"><i class="fas fa-check"></i> Si</button>
+        </div>
+      
+    </div>
+  </div>
+ </div>
+  
+    
+    </body>
+  </html>

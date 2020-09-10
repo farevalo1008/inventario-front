@@ -1,0 +1,134 @@
+<div class="row tile_count">
+  <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user">
+
+      </i>
+      "Total Usuarios"
+    </span>
+    <div class="count" *ngFor="let datUser of datosContUser"> {{ datUser.count}} </div>
+    <span class="count_bottom">
+      <i class="green" *ngFor="let uUser of ultUser"> {{ uUser.count}}&nbsp; </i>
+      "En la última Semana."
+    </span>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user">
+
+      </i>
+      "Total Candidatos"
+    </span>
+    <div class="count" *ngFor="let datCandi of datosContCan"> {{ datCandi.count}} </div>
+    <span class="count_bottom">
+      <i class="green" *ngFor="let uCandi of ultCan"> {{ uCandi.count}}&nbsp; </i>
+      "En la última Semana."
+    </span>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user">
+
+      </i>
+      "Total Empleados"
+    </span>
+    <div class="count" *ngFor="let datEmpl of datosContEmp"> {{ datEmpl.count}} </div>
+    <span class="count_bottom">
+      <i class="green" *ngFor="let uEmpl of ultEmp"> {{ uEmpl.count}}&nbsp; </i>
+      "En la última Semana."
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fas fa-copy">
+
+      </i>
+      "Total Solicitudes"
+    </span>
+    <div class="count" *ngFor="let datSoli of datosContSol"> {{ datSoli.count}} </div>
+    <span class="count_bottom">
+      <i class="green" *ngFor="let uSoli of ultSol"> {{ uSoli.count}}&nbsp; </i>
+      "En la última Semana."
+    </span>
+  </div>
+</div>
+
+
+<div class="padre mb-3">
+  <div class="solicitudes">
+    <tr>
+      Tiene {{ solicitudsincandidatos }} Solicitudes Pendientes por Candidato! 
+      <div class="align-center">
+        <a class="buttonReclutamiento align-center" [routerLink]="['/dashboard/reclutamiento/solicitudes']" role="button">Ver Más...</a>
+      </div>
+    </tr>
+  </div>
+  <div class="aspirantes">
+    <tr>
+      Tiene {{ candidatossinsolicitud }} Aspirantes Pendientes por Vacantes!
+      <div class="align-center">
+        <a class="buttonReclutamiento align-center" [routerLink]="['/dashboard/reclutamiento/candidatos']" role="button">Ver Más...</a>
+      </div>
+    </tr>
+  </div>
+  <!-- <div class="empleados">
+    <tr *ngFor="let datEmpl of datosContEmp">
+      Se Cuenta con {{ datEmpl.count}} Recursos en la Empresa!
+      <div class="align-center">
+        <a class="buttonReclutamiento" [routerLink]="['/reclutamiento/empleados']" role="button">Ver Mas...</a>
+      </div>
+    </tr>
+  </div> -->
+</div>
+
+<div class="row">
+  <div class="col-md-2 col-sm-4 col-xs-6"></div>
+  <div class="col-md-2 col-sm-4 col-xs-6">
+    <div class="card border-primary mb-3 sombra">
+      <div class="card-header card-footer text-center">{{dialetra}}</div>
+      <div class="card-body">
+        <h1 class="card-text text-center">{{dia}}</h1>
+        <h5 class="card-text text-center">{{mesletra}}</h5>
+        <h6 class="card-text text-center">{{anio}}</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-6">
+    <div *ngIf="mostrarcita && !ocultarcita">
+      <div class="card border-primary mb-3 sombra">
+        <div class="card-header card-footer  text-center"><b>Citas Para hoy: </b></div>
+        <div class="card-body" *ngFor="let cit of cita">
+          {{ cit.nombres | titlecase }}&nbsp;{{ cit.apellidos | titlecase }}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!mostrarcita && ocultarcita">
+      <div class="alert alert-info alert-dismissible fade show sombra" role="alert">
+        <strong>No hay Citas Pautadas para para el Día de Hoy.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-6">
+    <div *ngIf="mostrarsolicitud && !ocultarsolicitud">
+      <div class="card border-primary mb-3 sombra">
+        <div class="card-header card-footer text-center"><b>Solicitudes Realizadas Hoy: </b></div>
+        <div class="card-body" *ngFor="let soli of solicitud">
+          {{ soli.solicitante | titlecase }}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!mostrarsolicitud && ocultarsolicitud">
+      <div class="alert alert-info alert-dismissible fade show sombra" role="alert">
+        <strong>No se han realizado Solicitud de Personal el Día de Hoy.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6"></div>
+</div>
+

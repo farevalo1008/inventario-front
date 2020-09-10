@@ -1,0 +1,79 @@
+.flecha{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.autocomplete{
+   padding: 1%;
+   width: 1000px;
+}
+
+
+.listatabla{
+    color: white;
+    background :RGB(0, 101, 149);
+}
+
+.AsignacionBOX{
+    background:  aliceblue;
+    margin-top: 30px; 
+    padding-left: 15px; 
+    padding-right: 15px;
+}
+
+.tituloAsignacion{
+    color: RGB(0, 101, 149);
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.ListaBox{
+    background:  aliceblue;
+    margin-top: 30px; 
+    padding-left: 15px; 
+    padding-right: 15px;
+}
+
+.tipoArticulo{
+    width: 80%;
+}
+
+.Marca{
+    width: 80%;
+}
+
+.Codigo{
+    width: 80%;
+}
+
+
+.CombosArticulos{
+    padding-right: 100px;
+    color: RGB(0, 101, 149);
+}
+
+.botonAsignar{
+    position: absolute;
+    left: 92%;
+    margin-top: -3.5%;
+}
+
+.botonGuardar{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.mensajeEliminado{
+    height: 50px;
+}
+.check{
+    padding: 0%;
+    left: 76%;
+}
+
+.AsignacionFin{
+    height: 50px;
+}
+
+
+

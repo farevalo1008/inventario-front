@@ -1,0 +1,63 @@
+<div container>
+    <div *ngIf="show" class="alert alert-success">
+        {{ message }}
+    </div>
+<div class="alert alert-danger" *ngIf="status=='error'">{{ message | titlecase }}</div>
+
+<form #mobiForm="ngForm"  (ngSubmit)="OnSubmit(mobiForm)">
+  <h1>
+      <a [routerLink]="'/dashboard/inventario/nuevoregistro'" ><i class="fas fa-arrow-alt-circle-left" style="color: RGB(0, 101, 149);"></i> </a>
+      <i class="fas fa-couch"  style="margin-left: 2%"></i>
+      <b class="titulo"> Registro de Mobiliario</b>
+    </h1><hr>
+ 
+  <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="id_tipo_articulo"> <b>Tipo:</b></label>
+          
+          <select class="form-control" name="tipo_articulo" matInput #tipo_articulo [(ngModel)]="articulo.id_tipo_articulo" required>
+          <option value="null">Seleccione...</option>  
+          <option *ngFor="let idtipo of id_tipo_articulo" value="{{ idtipo.id_tipo_articulo }}">{{ idtipo.descripcion | titlecase }}</option>                         
+          </select>
+      </div>
+      
+      
+
+      <div class="form-group col-md-3">
+        <label for="marca"> <b> Marca:</b> </label>
+        <input type="text" name ="marca"  matInput #marca [(ngModel)]="articulo.marca" class="form-control" placeholder="Escriba la marca del equipo">
+    </div>
+
+    <div class="form-group col-md-3">
+            <label for="color"> <b> Color: </b> </label>
+            <input type="text" class="form-control" name="color" matInput #color [(ngModel)]="articulo.modelo" class="form-control" placeholder="Color">
+        </div>
+      
+  </div>
+
+  <div class="form-row">
+        <div class="form-group col-md-3">
+                <label for="costo"> <b> Precio Unitario: </b></label>
+                <input type="number"  name ="costo" matInput #costo [(ngModel)]="articulo.costo" class="form-control" placeholder="Monto">                </div>
+                <div class="form-group col-md-6">
+                    <label for="caracteristicas"> <b> Caracteristicas: </b> </label>
+                    <input type="text" name ="caracteristicas" matInput #caracteristicas [(ngModel)]="articulo.caracteristicas" class="form-control" placeholder="Caracteristicas">
+                </div>
+  </div>
+
+<div class="form-row">
+        <div class="form-group col-md-3">
+                <label for="id_status"> <b> Status:</b></label>
+                    
+                    <select class="form-control" name="status" matInput #status [(ngModel)]="articulo.id_status" required>
+                    <option value="null">Seleccione...</option>  
+                    <option *ngFor="let idstatus of id_status" value="{{ idstatus.id_status }}">{{ idstatus.descripcion | titlecase }}</option>                         
+                    </select>
+            </div>
+</div>
+  
+
+<button type="submit" class="btn btn-success" [disabled]="!mobiForm.form.valid">Registrar</button>
+
+</form>
+</div>

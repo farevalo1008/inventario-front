@@ -1,0 +1,72 @@
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>   
+
+<div *ngIf="!error">
+  <div class="row">
+    <div class="col-md-1 col-sm-4 col-xs-6">
+
+    </div>
+    <div class="col-md-10 col-sm-4 col-xs-6">
+      <div class="card som" id="user">
+        <div class="card-body">
+          <h4 class="fa fa-users"><b>&nbsp;&nbsp;  Listado de Usuarios Registrados en el Sistema</b></h4>
+          <table class="table table-sm table-hover">
+              <thead>
+                <th>Email</th>
+                <th>Rol</th>
+            
+                <th class="text-center">Eliminar</th>
+              </thead>
+            <tbody>
+              <tr *ngFor="let usuarios of datosUsuarios">
+        
+                <td>{{ usuarios.email |titlecase }}</td>
+                <td>{{ usuarios.rol |titlecase }}</td>
+      
+            
+                <td class="auto" class="text-center">
+                    <button title="Eliminar Usuario." class="btn btn-danger text-white"  data-toggle="modal" [attr.data-target]="'#Modal-1'+usuarios.id">
+                      <i class="fas fa-trash-alt"></i>  
+                    </button>
+                    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 col-sm-4 col-xs-6">
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngFor="let usuarios of datosUsuarios">
+    <div class="modal" [attr.id]="'Modal-1'+usuarios.id" tabindex="-1" role="dialog" [attr.aria-labelledby]="usuarios.id" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" [attr.id]="usuarios.id">Eliminar Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <label for="email">Email</label><br>
+                <input type="text" class="text-center" style="width: 400px" [attr.value]='usuarios.email |titlecase'/><br><br>
+                <label for="rol">Rol</label><br>
+                <input type="text" class="text-center" style="width: 400px" [attr.value]='usuarios.rol |titlecase'/><br>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary som" data-dismiss="modal">Cerrar&nbsp;<i class="far fa-window-close"></i></button>
+              <button class="btn color-1 text-white som" id="removeCourse" (click)="remove(usuarios.id)">Eliminar&nbsp;<i class="fas fa-trash-alt"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div> 
+ 
+                            

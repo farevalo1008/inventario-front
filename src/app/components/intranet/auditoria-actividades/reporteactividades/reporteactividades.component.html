@@ -1,0 +1,60 @@
+
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Auditoría de Actividades </h2>
+			<div class="float-right mx-0">
+				<div class="btn-group">
+					<a class="btn color-1" [routerLink]="['/dashboard/intranet/auditoriadeactividades']"><i class="fas fa-caret-left"></i></a>
+					<button class="btn color-1" (click)="generarPDF()">PDF</button>
+				</div>
+			</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+		<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="show">
+		  <strong>{{ message }}</strong>
+		</div>
+		<div class="row" id="datos">
+			<div class="col-lg-3">
+				<strong>Nombres:</strong><span id="nombre"> {{nombre}}</span>.<br>
+				<strong>C.I:</strong> {{cedula}}.
+			</div>
+			<div class="col-lg-3">
+				<strong>Horas en curso:</strong> {{ hora_curso }} hr. <br>
+				<strong>Horas en proyecto:</strong> {{ hora_proyecto}} hr.
+			</div>
+			<div class="col-lg-3">
+				<strong>Horas en cliente:</strong> {{ hora_cliente }} hr. <br>
+				<strong>Horas en permiso:</strong> {{ hora_permiso }} hr.
+			</div>
+			<div class="col-lg-3">
+				<strong>Horas en otros:</strong> {{ hora_otros }} hr. <br>
+				<strong>Horas totales:</strong> {{ total_horas }} hr.
+			</div>
+		</div>
+		<div class="row" id="contenido">
+			<div class="col-12">
+				<table class="table mt-3 table-striped">
+					<thead class="color-1">
+					    <tr>
+					    	<th>Fecha</th>
+					    	<th>Tipo de actividad</th>
+					    	<th>Descripción</th>
+					    	<th>Hora</th>
+					    </tr>
+					</thead>
+
+				  	<tbody>
+					    <tr *ngFor="let personal of reporte" class="p-tr">
+					    	<td>{{personal.fecha}}</td>
+					    	<td>{{personal.tipo_actividad}}</td>
+					    	<td>{{personal.descripcion}}.</td>
+					    	<td>{{personal.hora}} hr.</td>
+					    </tr>
+				  	</tbody>
+				</table>		
+			</div>	
+		</div>
+
+	</div>
+</div>

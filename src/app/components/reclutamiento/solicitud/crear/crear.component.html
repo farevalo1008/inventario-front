@@ -1,0 +1,131 @@
+<div class="container card tarjeta som">
+  <div class="row">
+    <div class="col-md-12 register-solicitud">
+   <h4><i class="fas fa-file-alt"></i>&nbsp;&nbsp;Registro Solicitud</h4><hr>
+    </div>
+  </div>
+      <div class="row">
+          <div class="col-md-2"></div>
+
+          <div class="col-md-8">
+              <div class="alert alert-success" *ngIf="status == 'success' ">{{ message | titlecase }}</div>
+              <div class="alert alert-danger" *ngIf="status == 'error' ">{{ message | titlecase }}</div>
+
+              <form #crearForm="ngForm" (ngSubmit)="onSubmit(crearForm)" method="POST" action="/reclutamiento/solicitud">
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Solicitante</label>
+                      <input type="solicitante" name="solicitante" class="form-control" placeholder="Nombre y Apellido"
+                            [(ngModel)]="user.solicitante"
+                            required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Rol</label>
+                      <div *ngIf="roles==null">Cargando...</div>
+                      <select name="rol" class="form-control" *ngIf="roles" 
+                            [(ngModel)]="user.rol"
+                            required>
+                        <option value="null">Seleccione...</option>
+                        <option *ngFor="let rol of roles" value="{{ rol.id_rol }}">{{ rol.descripcion | titlecase }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label >Conocimientos</label>
+                        <div *ngIf="conocimiento==null">Cargando...</div>
+                        <select name="conocimiento" class="form-control" *ngIf="conocimiento" 
+                              [(ngModel)]="user.conocimiento"
+                              required>
+                          <option value="null">Seleccione...</option>
+                          <option *ngFor='let conocimiento of conocimiento' value="{{ conocimiento.id_conocimiento }}" >{{ conocimiento.descripcion | titlecase }}</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Área de Trabajo</label>
+                        <div *ngIf="area_trabajo==null">Cargando...</div>
+                          <select name="area_trabajo" class="form-control" *ngIf="area_trabajo"
+                              [(ngModel)]="user.area_trabajo"
+                              required>
+                              <option value="null">Seleccione...</option>
+                              <option *ngFor="let area_trabajo of area_trabajo" value="{{ area_trabajo.id_area_trabajo }}">{{ area_trabajo.descripcion | titlecase }}</option>
+                          </select>
+                      </div>
+
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Profesión</label>
+                        <div *ngIf="profesion==null">Cargando...</div>
+                          <select name="profesion" class="form-control" *ngIf="profesion"
+                              [(ngModel)]="user.profesion"
+                              required>
+                              <option value="null">Seleccione...</option>
+                              <option *ngFor="let profesion of profesion" value="{{ profesion.id_profesion }}">{{ profesion.descripcion | titlecase }}</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Cargo</label>
+                        <div *ngIf="cargo==null">Cargando...</div>
+                          <select name="cargo" class="form-control" *ngIf="cargo"
+                              [(ngModel)]="user.cargo"
+                              required>
+                              <option value="null">Seleccione...</option>
+                              <option *ngFor="let cargo of cargo" value="{{ cargo.id_cargo }}">{{ cargo.descripcion | titlecase }}</option>
+                          </select>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="experiencia">Experiencia</label>
+                          <input type="text" name="experiencia" class="form-control" placeholder="Experiencia" 
+                            [(ngModel)]="user.experiencia"
+                            required>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="otros_requisitos">Otros Requisitos</label>
+                          <input type="text" name="otros_requisitos" class="form-control" placeholder="Otros Requisitos" 
+                            [(ngModel)]="user.otros_requisitos"
+                            required>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Descripción del Trabajo</label>
+                        <div *ngIf="descripcion_trabajo==null">Cargando...</div>
+                        <select name="descripcion_trabajo" class="form-control" *ngIf="descripcion_trabajo" 
+                              [(ngModel)]="user.descripcion_trabajo"
+                              required>
+                          <option value="null">Seleccione...</option>
+                          <option *ngFor="let descripcion_trabajo of descripcion_trabajo" value="{{ descripcion_trabajo.id_descripcion_trabajo }}">{{ descripcion_trabajo.descripcion | titlecase }}</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Tipo Requerimiento</label>
+                        <div *ngIf="tipo_requerimiento==null">Cargando...</div>
+                        <select name="tipo_requerimiento" class="form-control" *ngIf="tipo_requerimiento" 
+                              [(ngModel)]="user.tipo_requerimiento"
+                              required>
+                          <option value="null">Seleccione...</option>
+                          <option *ngFor="let tipo_requerimiento of tipo_requerimiento" value="{{ tipo_requerimiento.id_tipo_requerimiento }}">{{ tipo_requerimiento.descripcion | titlecase }}</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="solicitud-fin">
+                    <button type="submit" class="btn som" style="color:white; background:#006595" value="Aceptar" [disabled]="!crearForm.form.valid">
+                      <i class="fas fa-check-circle"></i>&nbsp;Aceptar
+                    </button>
+
+                    <button type="reset" class="btn btn-secondary ml-2 som">
+                      <i class="fas fa-sync-alt"></i>&nbsp;Limpiar
+                    </button>
+                  </div>
+
+              </form>
+  
+          </div>
+          <div class="col-md-2"></div>
+      </div>
+  </div>

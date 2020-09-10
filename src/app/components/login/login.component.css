@@ -1,0 +1,111 @@
+.container{
+    width: 500% !important;
+}
+
+body{
+    background: url(/assets/img/torre.png) no-repeat center center fixed;
+    background-size: cover;
+    font-family: "OpenSans";
+    color: var(--main-color1);
+    font-size: 1em;
+}
+
+.main-section{
+    margin:0 auto;
+    margin-top:15%;
+    padding: 0;
+}
+
+.modal-content{
+    background-color: #A1A1A4;
+    opacity: .85;
+    padding: 0 20px;
+    box-shadow: 0px 0px 3px white;
+}
+.user-img{
+    margin-top: -50px;
+    margin-bottom: 15px;
+}
+
+.user-img img{
+    width: 100xp;
+    height: 100px;
+    box-shadow: 0px 0px 3px #006595;
+    border-radius: 50%;
+}
+
+.form-group input{
+    height: 42px;
+    font-size: 18px;
+    border:0;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.form-group::before{
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top:4px;
+}
+
+.form-group#user-group::before{
+    content: "\f0e0";
+}
+
+.form-group#contra-group::before{
+    content: "\f23e";
+}
+
+button{
+    width: 60%;
+    margin: 5px 0 25px;
+}
+
+.forgot{
+    padding: 5px 0;
+}
+
+.forgot a{
+    color: white;
+}
+
+
+.card{
+    background-color: #ffffff;
+    opacity: 0.85;
+    padding: 0 10px;
+    box-shadow: 0px 0px 40px #006595, 0px 0px 80px #A1A1A4;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+/*
+.user-img{
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    opacity: 1;
+}*/
+
+input{
+    margin-bottom: 20px;
+    color:#A1A1A4;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}
+
+.bg-soaint{
+    background: #006595;
+    opacity: .95;
+}
+/* --main-color1: #006595;
+--main-color2: #9FCBED;
+--secondary-color: #A1A1A4; */
+.navbar-letra{
+    font-size: 1.25rem;
+    font-family: Titillium;
+    line-height: inherit;
+    white-space: nowrap;
+}

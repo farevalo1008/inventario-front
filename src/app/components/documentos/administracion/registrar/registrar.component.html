@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+
+<div class="alert alert-success" *ngIf="status == 'success'">
+  El registro se ha completado correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status == 'error'">
+  El registro NO se ha completado
+</div>
+
+<body ng-app="">
+
+  <!--Registrar Cliente-->
+  <div class="form_main">
+  <h4 class="heading" style="margin-left:30px;margin-bottom: 100px;padding-top: 25px;"><strong>Registrar </strong>Documentos  <span></span></h4>
+</div>
+  <div class="row" style="margin-left: 150px;">
+
+    <div class="col-md-3 mb-5">
+      <div class="card h-100" style=" border-radius: 20px;">
+        <a style='font-size:60px; text-align: center;'> <i class="fas fa-user-tie"></i></a>
+        <div class="card-body">
+          <h5 class="card-title" style=' text-align: center'>Clientes</h5>
+          
+          <div style="margin-left: 80px;">
+            <input type="radio" name="cambiar" [(ngModel)]="myVar" value="1">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-3 mb-5">
+      <div class="card h-90" style=" border-radius: 20px;">
+        <a style='font-size:60px; text-align: center; margin-left: 12px;'>
+          <i class="far fa-file-alt "></i>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title" style=' text-align: center'>Tipo de Documento</h5>
+          <div style="margin-left: 80px;">
+            <input type="radio" name="cambiar" [(ngModel)]="myVar" value="2">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-5">
+      <div class="card h-100" style=" border-radius: 20px;">
+        <a style='font-size:60px; text-align: center;'> <i class="far fa-building"></i>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title" style=' text-align: center'>Departamentos</h5>
+          <div style="margin-left: 80px;">
+            <input type="radio" name="cambiar" [(ngModel)]="myVar" value="3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div [ngSwitch]="myVar">
+    <div *ngSwitchCase="1">
+      <div class="form-inline">
+        <div class="container col-md-10 col-sm-6">
+
+          <form class="form-inline" #registrarForm="ngForm" (ngSubmit)="onSubmit(registrarForm)"
+            style="margin-left: 80px;">
+            <div class="form-inline">
+              <div class="form-group m ">
+                <i class='fas fa-user-tie margeni'></i>
+                <input type="text" name="nombre" matInput #nombre [(ngModel)]="clientes.nombre" (ngModelChange)="clientes.nombre = $event.toUpperCase()" class="form-control" placeholder="Nombre del Cliente" required>
+              </div>
+              <div class="form-group m">
+                <i class='fas fa-road  margeni'></i>
+                <input type="text" name="direccion" matInput #direccion [(ngModel)]="clientes.direccion" (ngModelChange)="clientes.direccion = $event.toUpperCase()"
+                  class="form-control" placeholder="Dirección" required>
+              </div>
+
+              <div class="form-group m">
+                <i class='fas fa-phone-square margeni'></i>
+                <input type="number" name="telefono_fijo" matInput #telefono_fijo [(ngModel)]="clientes.telefono_fijo"
+                  class="form-control" placeholder="Teléfono Fijo" required>
+              </div>
+              <div class="form-group m">
+                <i class='fas fa-mobile-alt margenit'></i>
+                <input type="number" name="telefono_celular" matInput #telefono_celular
+                  [(ngModel)]="clientes.telefono_celular" class="form-control" placeholder="Celular" required>
+              </div>
+              <div class="form-group m">
+                <i class='fas fa-user-friends margenn'></i>
+                <input type="text" name="persona_contacto" matInput #persona_contacto 
+                  [(ngModel)]="clientes.persona_contacto" (ngModelChange)="clientes.persona_contacto = $event.toUpperCase()" class="form-control" placeholder="Persona Contacto" required>
+              </div>
+
+            </div>
+
+            <button type="submit" value="Guardar" class="btn btn-primary mb-2 "
+              style="margin-left: 340px; margin-top: 50px" [disabled]="!registrarForm.form.valid">Guardar</button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="2">
+      <div class="row container-fluid">
+        <div class="container col-md-10 col-sm-6">
+
+          <form class="form-inline" #registrarForm2="ngForm" (ngSubmit)="onSubmit2(registrarForm2)">
+            <div class="row container-fluid ">
+
+              <div class="form-inline">
+                <div class="form-group m ">
+                  <i class='far fa-file-alt margeni' style="margin-left: 150px;"></i>
+                  <input type="text" name="nombre" matInput #nombre [(ngModel)]="tipo_documentos.nombre"
+                  (ngModelChange)="tipo_documentos.nombre = $event.toUpperCase()" class="form-control" placeholder="Nombre del Tipo de Doc" required>
+                </div>
+
+                <div class="form-group m ">
+                    <i class="fas fa-file-signature margeni" style="margin-left: 80px;"></i>
+                    <input type="text" name="descripcion" matInput #descripcion [(ngModel)]="tipo_documentos.descripcion"
+                    (ngModelChange)="tipo_documentos.descripcion = $event.toUpperCase()" class="form-control" placeholder="Descripción" required>
+                </div>
+
+              </div>
+            </div>
+            <button type="submit" value="Guardar" class="btn btn-primary mb-2 "
+              style="margin-left: 380px; margin-top: 50px" [disabled]="!registrarForm2.form.valid">Guardar</button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="3">
+      <div class="row container-fluid">
+        <div class="container col-md-10 col-sm-6">
+
+          <form class="form-inline" #registrarForm3="ngForm" (ngSubmit)="onSubmit3(registrarForm3)">
+            <div class="row container-fluid ">
+
+              <div class="form-inline">
+                <div class="form-group m ">
+                  <i class='far fa-building margeni' style="margin-left: 300px;"></i>
+                  <input type="text" name="nombre" matInput #nombre [(ngModel)]="departamentos.nombre"     class="form-control" placeholder="Nombre del Departamento"  (ngModelChange)="departamentos.nombre = $event.toUpperCase()"required>
+                </div>
+
+              </div>
+            </div>
+            <button type="submit" value="Guardar" class="btn btn-primary mb-2 "
+              style="margin-left: 380px; margin-top: 50px" [disabled]="!registrarForm3.form.valid">Guardar</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+

@@ -1,0 +1,144 @@
+<div *ngIf="rechazoon && aceptoon" class="alert alert-info som">
+  <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+  <p>No Tiene Observaciones sobre Contrato.</p>
+  <br>
+  <ul class="text-right">
+    <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados']"><i class="fas fa-backward"></i></button>
+  </ul>
+</div>
+
+<div *ngIf="contratoon">
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      <!-- <ul class="text-right">
+        <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados']"><i class="fas fa-backward"></i>&nbsp;&nbsp;Volver</button>
+      </ul> -->
+    </div>
+    <div class="col-md-8 col-sm-4 col-xs-6" *ngFor="let obs of observacionesContrato">
+      <!-- <div class="container sombra"> -->
+        <!-- <div class="row-fluid"> -->
+          <!-- <div class="table-responsive"> -->
+                            
+                <table class="table table-striped table-bordered table-hover table-sm border-primary som">
+                  <tbody>
+                    <td colspan="2">
+                      <h5 class="card-header text-center"><b>Observaciones del Contrato</b></h5>
+                    </td>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Nombres y Apellidos: </b></h6>
+                        <p class="card-text">{{ obs.nombres | titlecase }}&nbsp;{{ obs.apellidos | titlecase }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Fecha de Ingreso: </b></h6>
+                        <p class="card-text">{{ obs.fecha_ingreso }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Cargo a Ejercer: </b></h6>
+                        <tr *ngFor="let carg of cargoContrato">
+                        <p class="card-text">{{ carg.cargo | titlecase }}</p>
+                        </tr>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Salario: </b></h6>
+                        <p class="card-text">{{ obs.salario }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Observaciones: </b></h6>
+                        <p class="card-text">{{ obs.observaciones }}</p> 
+                      </td>
+                    </tr>
+    
+                      <td colspan="2">
+                        <div class="card-footer text-center">
+                            {{ obs.fecha_ingreso }}
+                        </div>
+                      </td>
+                    
+                  </tbody>
+                </table>
+            
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      <ul>
+        <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados']"><i class="fas fa-backward"></i></button>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="contratooon">
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      <!-- <ul class="text-right">
+        <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados']"><i class="fas fa-backward"></i>&nbsp;&nbsp;Volver</button>
+      </ul> -->
+    </div>
+    <div class="col-md-8 col-sm-4 col-xs-6" *ngFor="let obsrec of rechazoObsContrato">
+      <!-- <div class="container sombra"> -->
+        <!-- <div class="row-fluid"> -->
+          <!-- <div class="table-responsive"> -->
+            
+                
+                <table class="table table-striped table-bordered table-hover table-sm border-primary som">
+                  <tbody>
+                    <td colspan="2">
+                      <h5 class="card-header text-center"><b>Observaciones del Contrato</b></h5>
+                    </td>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Nombres y Apellidos: </b></h6>
+                        <p class="card-text">{{ obsrec.nombres | titlecase }}&nbsp;{{ obsrec.apellidos | titlecase }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title"><b>Observaciones: </b></h6>
+                        <p class="card-text">{{ obsrec.observaciones }}</p> 
+                      </td>
+                    </tr>
+      
+                      <td colspan="2">
+                        <div class="card-footer text-center">
+                            {{ obsrec.created_at | date }}
+                        </div>
+                      </td>
+                      
+                    </tbody>
+                </table>
+            
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6">
+      <ul>
+        <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/posiblesempleados']"><i class="fas fa-backward"></i></button>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,537 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-soaint">
+
+  <a class="navbar-brand" href="#"><i class="fas fa-globe-americas"></i> SOAINT </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse nav navbar-letra justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav pull-xs-right">
+        <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/login']">Login&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i></a>
+        </li>
+        </ul>          
+    </div>
+
+</nav>
+
+<div>
+  <form (ngSubmit)="onSubmit()" #aspirante="ngForm">
+    <div class="container card mt-4 mb-2 py-0 tarjeta">
+        <div class="row">
+          <div class="col-md-3 px-4 mt-4 mb-3">
+              <h3 class="fas fa-user"><b>&nbsp;&nbsp;Aspirante</b> </h3>
+          </div>
+          <div class="input-group px-5 offset-md-4 col-md-5 mt-4 mb-4">
+              <input type="text" class="form-control" name ="dni" placeholder="Ingrese su Cédula" aria-label="" #dni aria-describedby="basic-addon1" [(ngModel)]="AspiranteModel.dni">
+              <div class="input-group-append">
+                <button title="Buscar Aspirante." class="btn" style="background:#006595; color:white" [disabled]="!aspirante.form.valid"><i class="fas fa-search"></i></button>
+              </div>
+          </div>
+        </div>
+
+        
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>     
+        <div *ngIf="show && !error">
+          <hr>
+          <div id="wizard" class="form_wizard wizard_horizontal">
+            <ul class="wizard_steps anchor">
+              <li class="uno">
+                <a class="done" isdone="1" rel="1">
+                  <span class="step_no"><i class="fa fa-user"></i></span>
+                  <span class="step_descr">
+                      <small>"Datos Básicos"</small>
+                  </span>
+                </a>
+              </li>
+              <li class="dos">
+                <a class="selected" isdone="0" rel="2">
+                  <span class="step_no"><i class="fas fa-graduation-cap"></i></span>
+                  <span class="step_descr">
+                    <small>"Datos Académicos"</small>
+                  </span>
+                </a>
+              </li>
+              <li class="tres">
+                <a class="selected" isdone="0" rel="3">
+                  <span class="step_no"><i class="fas fa-briefcase"></i></span>
+                  <span class="step_descr">
+                    <small>"Datos Laborales"</small>
+                  </span>
+                </a>
+              </li>
+              <li class="cuatro">
+                <a class="selected" isdone="0" rel="4">
+                  <span class="step_no"><i class="fas fa-star"></i></span>
+                  <span class="step_descr">
+                    <small>"Habilidades"</small>
+                  </span>
+                </a>
+              </li>
+              <li class="cinco">
+                <a class="selected" isdone="0" rel="5">
+                  <span class="step_no"><i class="fas fa-archive"></i></span>
+                  <span class="step_descr">
+                    <small>"Archivos"</small>
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="stepContainer" style="height:450px;">
+              <div id="step-1" class="content" style="display: block;">
+                  <div class="container">
+                    <h4>Datos Básicos</h4>
+                  </div>
+
+                    <div *ngFor="let datAs of datosAspirante">
+      
+                      <div class="row">
+      
+                        <div class="col-md-2"></div>
+      
+                        <div class="col-md-8">
+      
+                          <form #crearForm="ngForm" (ngSubmit)="onSubmit(createForm)" method="POST" action="/aspirante/update">
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Documento de Identidad</label>
+                                <input type="number" name="dni" class="form-control" value="{{ datAs.dni }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ datAs.email }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Nombres</label>
+                                <input type="nombres" name="nombres" class="form-control" value="{{ datAs.nombres | titlecase }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Apellidos</label>
+                                <input type="apellidos" name="apellidos" class="form-control" value="{{ datAs.apellidos | titlecase }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                  <label for="fecNac">Fecha de Nacimiento</label>
+                                  <input type="date" name="fecnac" class="form-control" value="{{ datAs.fec_nac }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                  <label for="genero">Género</label>
+                                  <input type="genero" name="genero" class="form-control" value="{{ datAs.genero | titlecase }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                                <div class="form-group col-md-6">
+                                    <label for="telHab">Teléfono Habitación</label>
+                                    <input type="number" name="telhab" class="form-control" value="{{ datAs.tel_habitacion }}">
+                                </div>
+              
+                                <div class="form-group col-md-6">
+                                    <label for="telmov">Teléfono Móvil</label>
+                                    <input type="number" name="telmov" class="form-control" value="{{ datAs.tel_movil }}">
+                                </div>
+              
+                              </div>
+                              <div class="fin-aspirante">
+                                <!-- <input class="btn btn-primary" type="submit" value="Aceptar"/>
+      
+                                <button type="reset" class="btn btn-secondary">
+                                  <i class="fas fa-sync-alt"></i>Limpiar
+                                </button> -->
+                                <ul>
+                                    <a  class="nav-link align-right" [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>
+                              </div>
+                          </form>
+      
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+      
+                      </div>
+      
+                    </div>
+              </div>
+              <div id="step-2" class="content" style="display: none;">
+                  <div class="container">
+                      <h4>Datos Basicos2</h4>
+                    </div>
+                    <div *ngFor="let datAs of datosAspirante">
+      
+                      <div class="row">
+      
+                        <div class="col-md-2"></div>
+      
+                        <div class="col-md-8">
+      
+                          <form #crearForm="ngForm" (ngSubmit)="onSubmit(createForm)" method="POST" action="/aspirante/update">
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Documento de Identidad</label>
+                                <input type="number" name="dni" class="form-control" value="{{ datAs.dni }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ datAs.email }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Nombres</label>
+                                <input type="nombres" name="nombres" class="form-control" value="{{ datAs.nombres }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Apellidos</label>
+                                <input type="apellidos" name="apellidos" class="form-control" value="{{ datAs.apellidos }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                  <label for="fecNac">Fecha de Nacimiento</label>
+                                  <input type="date" name="fecnac" class="form-control" value="{{ datAs.fec_nac }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                  <label for="genero">Género</label>
+                                  <input type="genero" name="genero" class="form-control" value="{{ datAs.genero }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                                <div class="form-group col-md-6">
+                                    <label for="telHab">Teléfono Habitación</label>
+                                    <input type="number" name="telhab" class="form-control" value="{{ datAs.tel_habitacion }}">
+                                </div>
+              
+                                <div class="form-group col-md-6">
+                                    <label for="telmov">Teléfono Móvil</label>
+                                    <input type="number" name="telmov" class="form-control" value="{{ datAs.tel_movil }}">
+                                </div>
+              
+                              </div>
+                              <div class="fin-aspirante">
+                                <!-- <input class="btn btn-primary" type="submit" value="Aceptar"/>
+      
+                                <button type="reset" class="btn btn-secondary">
+                                  <i class="fas fa-sync-alt"></i>Limpiar
+                                </button> -->
+                                <ul>
+                                  <a class="nav-link align-right" [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>
+                                <!--<ul class="text-right">
+                                    <a  [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>-->
+                              </div>
+                          </form>
+      
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+      
+                      </div>
+      
+                    </div>
+              </div>
+              <div id="step-3" class="content" style="display: none;">
+                  <div class="container">
+                      <h4>Datos Básicos</h4>
+                    </div>
+                    <div *ngFor="let datAs of datosAspirante">
+      
+                      <div class="row">
+      
+                        <div class="col-md-2"></div>
+      
+                        <div class="col-md-8">
+      
+                          <form #crearForm="ngForm" (ngSubmit)="onSubmit(createForm)" method="POST" action="/aspirante/update">
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Documento de Identidad</label>
+                                <input type="number" name="dni" class="form-control" value="{{ datAs.dni }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ datAs.email }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Nombres</label>
+                                <input type="nombres" name="nombres" class="form-control" value="{{ datAs.nombres }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Apellidos</label>
+                                <input type="apellidos" name="apellidos" class="form-control" value="{{ datAs.apellidos }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                  <label for="fecNac">Fecha de Nacimiento</label>
+                                  <input type="date" name="fecnac" class="form-control" value="{{ datAs.fec_nac }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                  <label for="genero">Género</label>
+                                  <input type="genero" name="genero" class="form-control" value="{{ datAs.genero }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                                <div class="form-group col-md-6">
+                                    <label for="telHab">Teléfono Habitación</label>
+                                    <input type="number" name="telhab" class="form-control" value="{{ datAs.tel_habitacion }}">
+                                </div>
+              
+                                <div class="form-group col-md-6">
+                                    <label for="telmov">Teléfono Móvil</label>
+                                    <input type="number" name="telmov" class="form-control" value="{{ datAs.tel_movil }}">
+                                </div>
+              
+                              </div>
+                              <div class="fin-aspirante">
+                                <!-- <input class="btn btn-primary" type="submit" value="Aceptar"/>
+      
+                                <button type="reset" class="btn btn-secondary">
+                                  <i class="fas fa-sync-alt"></i>Limpiar
+                                </button> -->
+                                <ul class="text-right">
+                                    <a  [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>
+                              </div>
+                          </form>
+      
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+      
+                      </div>
+      
+                    </div>
+              </div>
+              <div id="step-4" class="content" style="display: none;">
+                  <div class="container">
+                      <h4>Datos Basicos4</h4>
+                    </div>
+                    <div *ngFor="let datAs of datosAspirante">
+      
+                      <div class="row">
+      
+                        <div class="col-md-2"></div>
+      
+                        <div class="col-md-8">
+      
+                          <form #crearForm="ngForm" (ngSubmit)="onSubmit(createForm)" method="POST" action="/aspirante/update">
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Documento de Identidad</label>
+                                <input type="number" name="dni" class="form-control" value="{{ datAs.dni }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ datAs.email }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Nombres</label>
+                                <input type="nombres" name="nombres" class="form-control" value="{{ datAs.nombres }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Apellidos</label>
+                                <input type="apellidos" name="apellidos" class="form-control" value="{{ datAs.apellidos }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                  <label for="fecNac">Fecha de Nacimiento</label>
+                                  <input type="date" name="fecnac" class="form-control" value="{{ datAs.fec_nac }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                  <label for="genero">Genero</label>
+                                  <input type="genero" name="genero" class="form-control" value="{{ datAs.genero }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                                <div class="form-group col-md-6">
+                                    <label for="telHab">Telefono Habitacion</label>
+                                    <input type="number" name="telhab" class="form-control" value="{{ datAs.tel_habitacion }}">
+                                </div>
+              
+                                <div class="form-group col-md-6">
+                                    <label for="telmov">Telefono Movil</label>
+                                    <input type="number" name="telmov" class="form-control" value="{{ datAs.tel_movil }}">
+                                </div>
+              
+                              </div>
+                              <div class="fin-aspirante">
+                                <!-- <input class="btn btn-primary" type="submit" value="Aceptar"/>
+      
+                                <button type="reset" class="btn btn-secondary">
+                                  <i class="fas fa-sync-alt"></i>Limpiar
+                                </button> -->
+                                <ul class="text-right">
+                                    <a  [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>
+                              </div>
+                          </form>
+      
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+      
+                      </div>
+      
+                    </div>
+              </div>
+              <div id="step-5" class="content" style="display: none;">
+                  <div class="container">
+                      <h4>Datos Basicos5</h4>
+                    </div>
+                    <div *ngFor="let datAs of datosAspirante">
+      
+                      <div class="row">
+      
+                        <div class="col-md-2"></div>
+      
+                        <div class="col-md-8">
+      
+                          <form #crearForm="ngForm" (ngSubmit)="onSubmit(createForm)" method="POST" action="/aspirante/update">
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Documento de Identidad</label>
+                                <input type="number" name="dni" class="form-control" value="{{ datAs.dni }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ datAs.email }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                <label >Nombres</label>
+                                <input type="nombres" name="nombres" class="form-control" value="{{ datAs.nombres }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                <label >Apellidos</label>
+                                <input type="apellidos" name="apellidos" class="form-control" value="{{ datAs.apellidos }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                              <div class="form-group col-md-6">
+                                  <label for="fecNac">Fecha de Nacimiento</label>
+                                  <input type="date" name="fecnac" class="form-control" value="{{ datAs.fec_nac }}">
+                              </div>
+      
+                              <div class="form-group col-md-6">
+                                  <label for="genero">Genero</label>
+                                  <input type="genero" name="genero" class="form-control" value="{{ datAs.genero }}">
+                              </div>
+      
+                            </div>
+      
+                            <div class="form-row">
+      
+                                <div class="form-group col-md-6">
+                                    <label for="telHab">Telefono Habitacion</label>
+                                    <input type="number" name="telhab" class="form-control" value="{{ datAs.tel_habitacion }}">
+                                </div>
+              
+                                <div class="form-group col-md-6">
+                                    <label for="telmov">Telefono Movil</label>
+                                    <input type="number" name="telmov" class="form-control" value="{{ datAs.tel_movil }}">
+                                </div>
+              
+                              </div>
+                              <div class="fin-aspirante">
+                                <!-- <input class="btn btn-primary" type="submit" value="Aceptar"/>
+      
+                                <button type="reset" class="btn btn-secondary">
+                                  <i class="fas fa-sync-alt"></i>Limpiar
+                                </button> -->
+                                <ul class="text-right">
+                                    <a  [routerLink]="['/aspirante/datosacademicos', datAs.id_candidato]">Next&nbsp;&nbsp;<i class="fas fa-forward"></i></a>
+                                </ul>
+                              </div>
+                          </form>
+      
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+      
+                      </div>
+      
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+  </form>
+</div>

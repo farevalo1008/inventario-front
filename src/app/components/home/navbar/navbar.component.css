@@ -1,0 +1,11 @@
+
+.bg-soaint{
+    background: #006595;
+}
+
+.navbar-letra{
+    font-size: 1.25rem;
+    font-family: Titillium;
+    line-height: inherit;
+    white-space: nowrap;
+}

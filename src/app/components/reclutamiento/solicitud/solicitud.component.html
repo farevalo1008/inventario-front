@@ -1,0 +1,105 @@
+<form (ngSubmit)="solicitanteSubmit();" #buscarsolicitante="ngForm">
+    
+  <div class="row">
+    <div class="input-group px-0 offset-md-8 col-md-3">
+        <input type="text" class="form-control" name ="solicitante" placeholder="Buscar por Solicitante" aria-label="" #solicitante aria-describedby="basic-addon1" [(ngModel)]="BuscarSolicitanteModel.solicitante">
+        <div class="input-group-append">
+          <button class="btn" style="color:white; background:#006595" [disabled]="!buscarsolicitante.form.valid"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="bsolicitante">
+    <div class="row">
+      <div class="col-md-2 col-sm-4 col-xs-6">
+  
+      </div>
+      <div class="col-md-8 col-sm-4 col-xs-6">
+        <div class="card mt-2 fondo">
+          <div class="card-body">
+            <h4 class="fas fa-copy"><b>&nbsp;&nbsp;  Listado de Solicitudes</b></h4>
+            <table class="table table-sm table-hover">
+              <thead>
+                <th>Solicitante</th>
+                <th>Tipo de Requerimiento</th>
+                <th>Cargo</th>
+                <th>Descripción</th>
+                <th class="text-center">Operación</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let datCar of datasolicitante">
+                    <td>{{ datCar.solicitante | titlecase }}</td>
+                    <td>{{ datCar.requerimiento | titlecase }}</td>
+                    <td>{{ datCar.cargo | titlecase }}</td>
+                    <td>{{ datCar.descripcion_trabajo }}</td>
+                    <td class="text-center">
+                        <button title="Visualizar la Solicitud." class="btn text-white text-center" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/solicitud/visualizar/' + datCar.id_solicitud]">
+                          <i class="far fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>    
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6">
+
+      </div>
+    </div>
+    
+    
+  </div>
+</form>
+<br>
+<div *ngIf="mensajeError">
+  <div class="alert alert-info ">No se encontro ningún resultado en esta búsqueda.</div>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>   
+
+<div *ngIf="!error && !bsolicitante">
+  
+    <div class="row">
+      <div class="col-md-2 col-sm-4 col-xs-6">
+
+      </div>
+      <div class="col-md-8 col-sm-4 col-xs-6">
+        <div *ngIf="getSolicitudes">
+          <div class="card mt-2 fondo">
+            <div class="card-body">
+              <h4 class="fas fa-copy"><b>&nbsp;&nbsp;  Listado de Solicitudes</b></h4>
+              <table class="table table-sm table-hover">
+                <thead>
+                  <th>Solicitante</th>
+                  <th>Tipo de Requerimiento</th>
+                  <th>Cargo</th>
+                  <th>Descripción</th>
+                  <th class="text-center">Operación</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let solicitud of datosSolicitudes">
+                      <td>{{ solicitud.solicitante | titlecase }}</td>
+                      <td>{{ solicitud.requerimiento | titlecase }}</td>
+                      <td>{{ solicitud.cargo | titlecase }}</td>
+                      <td>{{ solicitud.descripcion_trabajo }}</td>
+                      <td class="text-center">
+                          <button title="Visualizar la Solicitud." class="btn text-white text-center" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/solicitud/visualizar/' + solicitud.id_solicitud]">
+                            <i class="far fa-edit"></i>
+                          </button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6">
+
+      </div>
+    </div>
+  
+</div>
+
+

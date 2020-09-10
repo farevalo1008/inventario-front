@@ -1,0 +1,178 @@
+/* .ct{
+    position: absolute;
+    top:20%;
+    left: 70%;
+}
+.posicion{
+    position: relative;
+    left: 28%;
+    top: 25%;
+}
+.img-circle{
+    border-radius: 50%;
+}
+.img-responsive{
+    background-color: #006595;
+    color: white;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    height: 109px;
+    width: 108px;
+} */
+.sombra{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.som{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.posicion{
+    /*position: absolute;*/
+    margin-top: -28%;
+    margin-left: 68%;
+    margin-bottom: 0%;
+    /* margin-right: 5%; */
+
+}
+.img-circle{
+    /*border-radius: 50%;*/
+    border-radius: 50%;
+}
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    height: 109px;
+    width: 108px;
+}
+.right_col {
+    padding: 10px !important
+}
+span.right {
+    float: right;
+    font-size: 14px !important
+}
+.img-circle.profile_img {
+    width: 70%;
+    background: #fff;
+    margin-left: 15%;
+    z-index: 1000;
+    position: inherit;
+    margin-top: 10px;
+    border: 1px solid rgba(52, 73, 94, 0.44);
+    padding: 4px
+}
+.site_title img {
+    max-height: 66px;
+    max-width: 180px;
+}
+.profile.img_2 {
+    text-align: center
+}
+.profile.img_2 .profile_pic {
+    width: 100%
+}
+.profile.img_2 .profile_pic .img-circle.profile_img {
+    width: 50%;
+    margin: 10px 0 0
+}
+.profile.img_2 .profile_info {
+    padding: 15px 10px 0;
+    width: 100%;
+    margin-bottom: 10px;
+    float: left
+}
+.profile_details .profile_view .img-circle {
+    border: 1px solid #E6E9ED;
+    padding: 2px
+}
+ul.msg_list li a .image img {
+    border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    float: left;
+    margin-right: 10px;
+    width: 11%
+}
+.user-profile img {
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    margin-right: 10px
+}
+.attachment ul li img {
+    height: 150px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px
+}
+
+.chat .thumb img {
+width: 27px;
+height: 27px;
+border-radius: 50%
+}
+ul.widget_profile_box li .profile_img {
+    width: 85px;
+    height: 85px;
+    margin: 0;
+    margin-top: -28px
+}
+ul.messages li img.avatar,
+img.avatar {
+    height: 32px;
+    width: 32px;
+    float: left;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 2px;
+    background: #f7f7f7;
+    border: 1px solid #e6e6e6
+}
+.avatar img {
+    border-radius: 50%;
+    max-width: 45px
+}
+.view img {
+    display: block;
+    position: relative
+}
+.view-first img {
+    transition: all 0.2s linear
+}
+.view-first:hover img {
+    transform: scale(1.1)
+}
+.product-image img {
+    width: 90%
+}
+.cropper .img-container,
+.cropper .img-preview {
+    background-color: #f7f7f7;
+    width: 100%;
+    text-align: center
+}
+.cropper .img-container {
+    min-height: 200px;
+    max-height: 516px;
+    margin-bottom: 20px
+}
+@media (min-width: 768px) {
+    .cropper .img-container {
+        min-height: 516px
+    }
+}
+.cropper .img-container>img {
+    max-width: 100%
+}
+.cropper .docs-preview {
+    margin-right: -15px
+}
+.cropper .img-preview {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    overflow: hidden
+}
+.cropper .img-preview>img {
+    max-width: 100%
+}

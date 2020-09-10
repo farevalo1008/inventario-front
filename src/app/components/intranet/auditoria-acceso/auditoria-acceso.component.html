@@ -1,0 +1,50 @@
+<div class="x_panel">
+	<div class="x_title">
+		<h2> Auditoría de Acceso </h2>
+		<div class="btn-group mr-2 float-right ">
+			<button data-toggle="dropdown" class="btn dropdown-toggle btn color-1 " type="button" aria-expanded="false">
+				Reporte <span class="caret"></span>
+			</button>
+
+		  	<ul role="menu" class="dropdown-menu">
+		  
+			        <li>
+			        	<button class="sin-btn" (click)="ngGetReporte(1)">Personal</button>
+			        </li>
+
+			        <li>
+			        	<button class="sin-btn" (click)="ngGetReporte(2)">Colectivo</button>
+			        </li> 
+		  	</ul>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content row" id="auditoria">
+
+		<div class="col-10">
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="personalactivo">
+					<p class=""><app-personalactivo></app-personalactivo></p>
+				</div>
+				<div class="tab-pane" id="personalinactivo">
+					<p class=""><app-personalinactivo></app-personalinactivo></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-2">
+			<app-verticaltabs></app-verticaltabs>
+		</div>
+	</div>
+	<div class="row x_content d-none" id="personal">
+		<div class="col-12">
+			<app-personal></app-personal>	
+		</div>
+	</div>
+	<div class="row x-content d-none" id="colectivo">
+		<div class="col-12">
+			<app-colectivo></app-colectivo>
+		</div>
+	</div>
+</div>

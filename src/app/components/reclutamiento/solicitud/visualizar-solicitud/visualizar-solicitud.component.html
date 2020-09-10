@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-8 col-sm-4 col-xs-6 ml-3" *ngFor="let datSoli of datosSolicitud">
+    <!-- <div class="container sombra"> -->
+      <!-- <div class="row-fluid"> -->
+        <!-- <div class="table-responsive"> -->
+          
+            <table class="table table-striped table-bordered table-hover table-sm border-primary som ml-3">
+              <tbody>
+                <td colspan="2">
+                  <h5 class="card-header text-center"><b>Solicitud De Personal</b></h5>
+                </td>
+                <tr>
+                  <td colspan="2">
+                    <h6 class="card-title"><b>Descripción de la Vacante: </b></h6>
+                    <p class="card-text">{{ datSoli.descripcion_trabajo }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <h6 class="card-title"><b>Solicitante: </b></h6>
+                    <p class="card-text">{{ datSoli.solicitante | titlecase}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h6 class="card-title"><b>Tipo de Requerimiento: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.requerimiento | titlecase }}</p>
+                  </td>
+                  <td>
+                    <h6 class="card-title"><b>Aréa de Trabajo: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.area | titlecase }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h6 class="card-title"><b>Experiencia: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.experiencia }}</p> 
+                  </td>
+                  <td>
+                    <h6 class="card-title"><b>Conocimientos: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.conocimiento | titlecase }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h6 class="card-title"><b>Cargo: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.cargo | titlecase }}</p>
+                  </td>
+                  <td>
+                    <h6 class="card-title"><b>Profesión: </b></h6>
+                    <p class="card-text text-center">{{ datSoli.profesion | titlecase }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <h6 class="card-title"><b>Otros Requisitos: </b></h6>
+                    <p class="card-text">{{ datSoli.otros_requisitos }}</p>
+                  </td>
+                </tr>
+                
+                <td colspan="2">
+                  <div class="card-footer text-center">
+                      {{ datSoli.created_at | date }}
+                  </div>
+                </td>
+              </tbody>
+            </table>
+          
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-6 ml-0">
+    <div *ngIf="!error">
+      <div *ngFor="let verCanSol of verCandidatoSolicitud">
+        <div class="btn-group margen" role="group" aria-label="Basic example">
+          <button type="button" style="background:#006595" class="btn btn-outline-light Cita ml-0" data-toggle="modal" [attr.data-target]="'#Modal-'+verCanSol.id_solicitud"><i class="fas fa-user"></i>&nbsp;Posibles Candidatos</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="error">
+      <p class="alert alert-info"><i class="fas fa-user"></i>&nbsp;No tiene Candidatos Asignados.</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1 col-sm-4 col-xs-6 ml-0">
+    <ul>
+      <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/solicitudes']"><i class="fas fa-backward"></i></button>
+    </ul>
+  </div>
+</div>
+
+<!--Modal-->
+<div *ngFor="let verCanSol of verCandidatoSolicitud">
+    <div class="modal" [attr.id]="'Modal-'+verCanSol.id_solicitud" tabindex="-1" role="dialog" [attr.aria-labelledby]="verCanSol.id_solicitud" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" [attr.id]="verCanSol.id_solicitud">Posibles Candidatos para esta Solicitud</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <table class="table table-striped table-bordered table-sm table-hover border-primary">
+                <thead>
+                  <th colspan="2" class="text-center">Nombres y Apellidos</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let verCanSol of verCandidatoSolicitud">
+                      <td>{{ verCanSol.nombres | titlecase }}&nbsp;{{ verCanSol.apellidos | titlecase }}</td>
+                      <td><a [routerLink]="['/dashboard/reclutamiento/candidato/visualizar/' + verCanSol.id_candidato]" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-forward"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- <div class="text-center">
+              <label for="id_candidato">ID CANDIDATO</label><br>
+              <input type="text" class="text-center" style="width: 400px" [attr.value]='verCanSol.id_candidato'/>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+</div> 
+        
+<!-- Fin Modal -->

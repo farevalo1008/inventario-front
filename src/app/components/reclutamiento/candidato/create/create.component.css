@@ -1,0 +1,22 @@
+.register-candidato{
+    margin-top:2%;
+}
+
+.candidato-fin{
+    margin-bottom:5%;
+}
+
+.tarjeta{
+    margin-bottom:10%;
+}
+.color-1{
+    background: var(--main-color1) !important;
+    color: white;
+}
+.color-3{
+    background: var(--main-color3) !important;
+    color: white;
+}
+.som{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}

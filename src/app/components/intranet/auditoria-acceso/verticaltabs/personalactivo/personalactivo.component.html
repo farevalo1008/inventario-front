@@ -1,0 +1,24 @@
+
+<table class="table  LetraTabla table-striped">
+	<thead class="color-1">
+	    <tr>
+	      <th width="17%">Personal</th>
+	      <th width="13%">Fecha</th>
+	      <th width="10%">Hora de Entrada</th>
+	      <th width="12%">Hora de Salida</th>
+	      <th width="18%">Evento</th>
+	      <th width="30%">Observaciones</th>
+	    </tr>
+	</thead>
+
+  	<tbody>
+	    <tr *ngFor="let persona of personal">
+	    	<td>{{ persona.nombres }} {{persona.apellidos}}</td>
+		    <td>{{ persona.fecha }}</td>
+		    <td>{{ persona.hora_entrada }}</td>
+		    <td>{{ persona.hora_salida }}</td>
+		    <td>{{ persona.evento }}</td>
+		    <td>{{ persona.observaciones }}</td>
+	    </tr>
+  	</tbody>
+</table>

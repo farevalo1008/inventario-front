@@ -1,0 +1,55 @@
+
+
+.alert{
+    font-family: sans-serif;
+}
+.row{
+    position: relative;
+}
+
+/* Titulo de la pagina de los tipos de activos*/
+.tituloact{
+    margin-left: 42%;
+}
+
+/*color de los botones*/
+.botonmobi{
+    color:white;
+}
+
+/*imagen de mobiliario*/
+.mobi{
+    margin-left: 12%;
+    margin-bottom: 50px;
+}
+.mobimagen{
+    margin-left: 35%;
+    position: relative;
+    margin-top: 70px;
+    
+
+}
+.mobibuttonr{
+    position: relative;
+    margin-left: 90px;
+}
+/*------------------------*/
+
+
+/*imagen de computacion*/
+.compu{
+    position: relative;
+    margin-left: 25%;
+    margin-top: 64px;
+}
+
+.compuimagen{
+    position: relative;
+    margin-bottom: 28px;
+    
+}
+.compubuttonr{
+    position: relative;
+    margin-left: 5px;
+}
+/*------------------------*/

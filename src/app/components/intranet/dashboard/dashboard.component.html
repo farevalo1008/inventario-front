@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar" [ngClass]="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/img/logo-soaint.png">
+    </div>
+
+    <ul class="list-unstyled components">
+      <div class="text-center">
+        <p>{{ identity.nombres }} {{ identity.apellidos }}
+          <br>
+          <label class="rol">{{ identity.des_rol | titlecase }}</label>
+        </p>
+      </div>
+      <!--
+      <li class="nav-item" *ngFor="let menu of menu">
+        <a class="nav-link" [routerLink]="menu.url">
+          <label><i class="icon" [ngClass]="menu.icon"></i>{{ menu.descripcion | titlecase }}</label>
+        </a>
+      </li>
+      -->
+      <li *ngFor="let padre of menu">
+        <a *ngIf="padre.unico == 1" class="nav-link" [routerLink]="padre.url"><i class="icon" [ngClass]="padre.icon"></i>{{ padre.descripcion }}</a>
+        <a *ngIf="padre.id_padre == 0  && padre.unico == 0" href="#{{padre.descripcion}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="icon" [ngClass]="padre.icon"></i>{{ padre.descripcion }}</a>
+        <ul class="collapse list-unstyled" id="{{padre.descripcion}}">
+          <li *ngFor="let hijo of menu">
+            <a *ngIf="padre.id == hijo.id_padre" class="nav-link" [routerLink]="hijo.url">
+                <label><i class="icon" [ngClass]="hijo.icon"></i>{{ hijo.descripcion }}</label>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  
+  <div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <button *ngIf="sidebar == 'active'" type="button" (click)="sidebar = ''"  class="btn color-1">
+            <i class="fas fa-align-left"></i>
+          </button>
+        <button *ngIf="sidebar != 'active'" type="button" (click)="sidebar = 'active'"  class="btn color-1">
+          <i class="fas fa-align-left"></i>
+        </button>
+        <button class="btn color-1 mx-2" [routerLink]="'/dashboard/intranet/noticias'">Noticias</button>
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-align-justify"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['logout',1]">
+                <label><i class="icon fas fa-sign-out-alt"></i>Logout</label>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <router-outlet></router-outlet>
+    
+  </div>
+
+</div>

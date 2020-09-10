@@ -1,0 +1,652 @@
+<!-- <div class="row2">
+  <div class="col-4 offset-2" >
+      <div *ngIf="errorcita" class="alert alert-info tamano">
+        {{ errorcita }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>  
+  </div>
+  <div class="col-4">
+      <div *ngIf="errorstatus" class="alert alert-danger tamano">
+        {{ errorstatus }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+  </div>
+</div>
+
+<div *ngIf="citaon && !errorcita">
+  <table class="table table-sm table-hover table-striped tostada" *ngIf="citaCandidato != 'No tiene Cita Asignada el Candidato.'">
+    <thead>
+      <th colspan=2 class="text-center">Cita</th>   
+    </thead>
+    <tbody>
+      <tr *ngFor="let cit of citaCandidato" class="text-center">
+        <td class="auto">
+          {{ cit.fecha_entrevista }}
+        </td>
+        <td class="auto">
+          <button class="btn btn-danger btn-sm text-white" data-toggle="modal" [attr.data-target]="'#Modal-5'+cit.id_candidato_entrevista">
+            <i class="fas fa-trash-alt"></i>  
+          </button>
+        </td>
+      </tr>   
+    </tbody>
+  </table> 
+</div> -->
+
+<!--  
+<div *ngIf="statuson && !errorstatus">
+  <table class="table table-sm table-hover table-striped tostada2" *ngIf="statusCandidatos != 'No tiene Status el Candidato.'">
+    <thead>
+      <th colspan=2 class="text-center">Status</th>   
+    </thead>
+    <tbody>
+      <tr *ngFor="let sta of statusCandidatos" class="text-center">
+        <td class="auto">
+          {{ sta.status | titlecase }}
+        </td>
+        <td class="auto">
+          <button class="btn btn-danger btn-sm text-white" data-toggle="modal" [attr.data-target]="'#Modal-4'+sta.id_candidato_status">
+            <i class="fas fa-trash-alt"></i>  
+          </button>
+        </td>
+      </tr>   
+    </tbody>
+  </table> 
+</div> -->
+<div class="row">
+  <div class="col-md-1 col-sm-4 col-xs-6 ml-0">
+    <!-- <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/recursosinternos']"><i class="fas fa-backward"></i></button> -->
+  </div>
+  <div class="col-md-10 col-sm-4 col-xs-6 table-bordered som">
+  <!--<div class="container sombra">-->  
+    <!--<div class="row tamanorow">-->  
+      <!--<div class="table-responsive sombra1">-->
+        <div class="table-responsive"> 
+          <div class="text-justify mt-3" *ngFor="let datCand of datosCandidato">
+              <div class="rowcan">
+                  <div class="col-md-6 col-sm-4 col-xs-6">
+                    <h6>Empleado:&nbsp;<b>{{ datCand.nombres | titlecase }}&nbsp;{{ datCand.apellidos | titlecase }}.</b></h6>
+                  </div>
+                  <!-- <button type="button" style="background:#006595" class="btn btn-outline-light status" data-toggle="modal" [attr.data-target]="'#Modal-3'+proceso.id_candidato">Status&nbsp;<i class="fas fa-list-alt"></i></button> -->
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                    <h6>Status:&nbsp;<b>Contratado.</b></h6>
+                  </div>
+                </div>
+          </div>
+          
+            <ul class="nav nav-tabs mt-4 rowcan" id="myTab" role="tablist">
+              <li role="presentation" class="nav-item estilo">
+                <a class="nav-link active" aria-expanded="false" id="datosBasicos-tab" data-toggle="tab" href="#datosBasicos" role="tab" aria-controls="datosBasicos" aria-selected="true">Datos Básicos</a>
+              </li>
+              <li role="presentation" class="nav-item estilo1">
+                <a class="nav-link" aria-expanded="false" id="datosAcademicos-tab" data-toggle="tab" href="#datosAcademicos" role="tab" aria-controls="datosAcademicos" aria-selected="false">Datos Acádemicos</a>
+              </li>
+              <li role="presentation" class="nav-item estilo2">
+                <a class="nav-link" aria-expanded="false" id="datosLaborales-tab" data-toggle="tab" href="#datosLaborales" role="tab" aria-controls="datosLaborales" aria-selected="false">Datos Laborales</a>
+              </li>
+              <li role="presentation" class="nav-item estilo3">
+                <a class="nav-link" aria-expanded="false" id="conocimientos-tab" data-toggle="tab" href="#conocimientos" role="tab" aria-controls="conocimientos" aria-selected="false">Conocimientos</a>
+              </li>
+              <li role="presentation" class="nav-item estilo4">
+                <a class="nav-link" aria-expanded="false" id="curriculo-tab" data-toggle="tab" href="#curriculo" role="tab" aria-controls="curriculo" aria-selected="false">Currículo y Certificados</a>
+              </li>
+              <li role="presentation" class="nav-item estilo5">
+                <a class="nav-link" aria-expanded="false" id="observaciones-tab" data-toggle="tab" href="#observaciones" role="tab" aria-controls="observaciones" aria-selected="false">Observaciones</a>
+              </li>
+            </ul>
+            
+          
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="datosBasicos" role="tabpanel" aria-labelledby="datosBasicos-tab"> 
+                <hr>
+              <div class="rowcan" *ngFor="let datCand of datosCandidato">
+                
+                <table class="table table-striped table-bordered table-hover table-sm">
+                  <tbody>
+                    <tr>
+                      <td colspan="2">
+                        <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Nombres y Apellidos: </b></h6>
+                        <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.nombres | titlecase }}&nbsp;{{ datCand.apellidos | titlecase }}</p>
+                      </td>
+                    </tr>     
+                    <tr>
+                      <td>
+                        <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Cédula de Identidad: </b></h6>
+                        <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.dni }}</p>
+                      </td>
+                      <td>
+                        <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Fecha de Nacimiento: </b></h6>
+                        <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.fec_nac }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                          <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Email: </b></h6>
+                          <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.email }}</p>
+                      </td>
+                      <td>
+                          <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Género: </b></h6>
+                          <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.genero | titlecase }}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Télefono de Habitación </b></h6>
+                        <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.tel_habitacion }}</p>
+                      </td>
+                      <td>
+                        <h6 class="card-title">&nbsp;&nbsp;&nbsp;<b>Télefono Móvil: </b></h6>
+                        <p class="card-text">&nbsp;&nbsp;&nbsp;{{ datCand.tel_movil }}</p>
+                      </td>
+                    </tr>           
+                  </tbody>
+                </table>
+              </div> 
+            </div>
+            <div class="tab-pane fade" id="datosAcademicos" role="tabpanel" aria-labelledby="datosAcademicos-tab">  
+              <div *ngIf="erroracademico" class="alert alert-info tamano1">
+                {{ erroracademico }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="academicoon && !erroracademico">
+                <!-- <tr *ngFor="let verAca of verAcademicos">
+                  <table class="table table-striped table-bordered table-hover table-sm sombra2">
+                    <tbody>
+                        <tr>
+                          <td colspan="2">
+                            <h6 class="card-title"><b>Pais: </b></h6>
+                            <p class="card-text">{{ verAca.pais | titlecase }}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="card-title"><b>Tipo de Estudio </b></h6>
+                            <p class="card-text text-center">{{ verAca.estudio | titlecase }}</p>
+                          </td>
+                          <td>
+                            <h6 class="card-title"><b>Institucion: </b></h6>
+                            <p class="card-text text-center">{{ verAca.institucion | titlecase }}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </tr> -->
+                <hr>
+                  <div class="row1 invoice-info" *ngFor="let verAca of verAcademicos">
+                    
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                        País:
+                        <br>
+                        <strong>{{ verAca.pais | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">                    
+                      <address>
+                          Tipo de Estudio:
+                          <br>
+                          <strong>{{ verAca.estudio | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                          Institución:
+                          <br>
+                          <strong>{{ verAca.institucion | titlecase }}</strong>
+                      </address>
+                    </div> 
+                    <div class="col-sm-3 invoice-col"></div> 
+                  </div>     
+              </div>  
+            </div>
+            <div class="tab-pane fade" id="datosLaborales" role="tabpanel" aria-labelledby="datosLaborales-tab">
+              <div *ngIf="errorlaborales" class="alert alert-info tamano1">
+                {{ errorlaborales }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="laboraleson && !errorlaborales">
+                <!-- <tr *ngFor="let verLab of verLaborales">
+                  <table class="table table-striped table-bordered table-hover table-sm sombra2">
+                    <tbody>
+                        <tr>
+                          <td>
+                            <h6 class="card-title"><b>Empresa: </b></h6>
+                            <p class="card-text">{{ verLab.empresa | titlecase }}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="card-title"><b>Area de Trabajo: </b></h6>
+                            <p class="card-text">{{ verLab.area | titlecase }}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="card-title"><b>Funciones Principales: </b></h6>
+                            <p class="card-text">{{ verLab.funciones_principales }}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </tr> -->
+                <hr>
+                <div class="row1 invoice-info" *ngFor="let verLab of verLaborales">
+                    
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                        Empresa:
+                        <br>
+                        <strong>{{ verLab.empresa | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">                    
+                      <address>
+                          Aréa de Trabajo:
+                          <br>
+                          <strong>{{ verLab.area | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                          Funciones Principales:
+                          <br>
+                          <strong>{{ verLab.funciones_principales }}</strong>
+                      </address>
+                    </div> 
+                    <div class="col-sm-3 invoice-col"></div> 
+                  </div> 
+              </div>
+            </div>
+            <div class="tab-pane fade" id="conocimientos" role="tabpanel" aria-labelledby="conocimientos-tab">
+              <div *ngIf="errorhabilidades" class="alert alert-info tamano1">
+                {{ errorhabilidades }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="habilidadeson && !errorhabilidades">
+                <!-- <tr *ngFor="let verHab of verHabilidades">
+                  <table class="table table-striped table-bordered table-hover table-sm sombra2">
+                    <tbody>
+                        <tr>
+                          <td>
+                            <h6 class="card-title"><b>Profesion: </b></h6><br>
+                            <p class="card-text text-center">{{ verHab.profesion | titlecase }}</p>
+                          </td>
+                          <td>
+                            <h6 class="card-title"><b>Idiomas: </b></h6><br>
+                            <p class="card-text text-center">{{ verHab.idioma | titlecase }}</p>
+                          </td>
+                          <td>
+                            <h6 class="card-title"><b>Conocimientos: </b></h6><br>
+                            <p class="card-text text-center">{{ verHab.conocimiento | titlecase }}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </tr> -->
+                <hr>
+                <div class="row1 invoice-info" *ngFor="let verHab of verHabilidades">
+                    
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                        Profesión:
+                        <br>
+                        <strong>{{ verHab.profesion | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">                    
+                      <address>
+                          Idiomas:
+                          <br>
+                          <strong>{{ verHab.idioma | titlecase }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-3 invoice-col">
+                      <address>
+                          Conocimientos:
+                          <br>
+                          <strong>{{ verHab.conocimiento | titlecase }}</strong>
+                      </address>
+                    </div> 
+                    <div class="col-sm-3 invoice-col"></div> 
+                  </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="curriculo" role="tabpanel" aria-labelledby="curriculo-tab">
+              <div *ngIf="errorarchivos" class="alert alert-info tamano1">
+                {{ errorarchivos }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="archivoson && !errorarchivos">
+                <!-- <tr *ngFor="let verArc of verArchivos">
+                  <table class="table table-striped table-bordered table-hover table-sm sombra2">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h6 class="card-title text-center"><br><b>Curriculo y Certificados: </b><br></h6>
+                          <p class="card-text text-center">{{ verArc.nombre_archivo }}</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </tr>  -->
+                <hr>
+                <div class="row1 invoice-info" *ngFor="let verArc of verArchivos">
+                    
+                    <div class="col-sm-10 invoice-col">
+                      <address>
+                        Currículo y Certificados:
+                        <br>
+                        <strong>{{ verArc.nombre_archivo }}</strong>
+                      </address>
+                    </div>
+                    <div class="col-sm-2 invoice-col"></div>
+                  </div> 
+              </div>              
+            </div>
+
+            
+            <div class="tab-pane fade" id="observaciones" role="tabpanel" aria-labelledby="observaciones-tab">
+              <div *ngIf="errorobs" class="alert alert-info tamano1">
+                {{ errorobs }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="obson && !errorobs">
+                <!-- <tr *ngFor="let verObs of observacionesCandidatos">
+                  <table class="table table-striped table-bordered table-hover table-sm sombra2">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h6 class="card-title text-center"><br><b>Entrevistador: </b><br></h6>
+                          <p class="card-text text-center">{{ verObs.entrevistador | titlecase }}</p>
+                        </td>
+                        <td>
+                          <h6 class="card-title text-center"><br><b>Rol: </b><br></h6>
+                          <p class="card-text text-center">{{ verObs.rol | titlecase }}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <h6 class="card-title text-justify"><br><b>Observacion: </b><br></h6>
+                          <p class="card-text text-justify">{{ verObs.observaciones }} <br><div class="text-right"><b>{{ verObs.fecha_observacion }}&nbsp;&nbsp;</b></div></p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </tr>  -->
+                <hr>
+                <div class="row1 invoice-info" *ngFor="let verObs of observacionesCandidatos; let indice=index">
+                  <div class="col-sm-1 invoice-col">
+                    <b>{{indice+1}}-</b>
+                  </div>
+                  <div class="col-sm-3 invoice-col">
+                    <address>
+                      Entrevistador:
+                      <br>
+                      <strong>{{ verObs.entrevistador | titlecase }}</strong>
+                    </address>
+                  </div>
+                  <div class="col-sm-3 invoice-col">                    
+                    <address>
+                        Rol:
+                        <br>
+                        <strong>{{ verObs.rol | titlecase }}</strong>
+                    </address>
+                  </div>
+                  <div class="col-sm-3 invoice-col">
+                    <address>
+                        Observación:
+                        <br>
+                        <strong>{{ verObs.observaciones }}</strong>
+                    </address>
+                  </div> 
+                  <div class="col-sm-2 invoice-col">
+                      <address>
+                          Fecha de Observación:
+                          <br>
+                          <strong>{{ verObs.fecha_observacion }}</strong>
+                      </address>
+                  </div>
+                  
+                </div>  
+              </div>
+            </div>
+          </div>  
+        </div>        
+      <!--</div>
+    </div>
+  </div> -->
+  </div>
+  <div class="col-md-1 col-sm-4 col-xs-6">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1 col-sm-4 col-xs-6 ml-2">
+    <button class="btn som btn-outline-light" style="color:white; background:#006595" [routerLink]="['/dashboard/reclutamiento/recursosinternos']"><i class="fas fa-backward"></i></button>
+  </div>
+</div>
+<!-- <div *ngFor="let datCand of datosCandidato">
+  <div class="btn-group margen" role="group" aria-label="Basic example">
+    <button type="button" style="background:#006595" class="btn btn-outline-light Cita" data-toggle="modal" [attr.data-target]="'#Modal-'+proceso.id_candidato">Asignar Cita</button>
+    <button type="button" style="background:#9fcbed" class="btn btn-outline-light Solicitud" data-toggle="modal" [attr.data-target]="'#Modal-1'+proceso.id_candidato">Asignar Solicitud</button>
+    <button type="button" style="background:#A1A1A4" class="btn btn-outline-light Observaciones" data-toggle="modal" [attr.data-target]="'#Modal-2'+proceso.id_candidato">Realizar Observaciones</button>
+  </div>
+</div> -->
+
+<!--Modal-->
+    <div class="modal" [attr.id]="'Modal-'+proceso.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="proceso.id_candidato" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" [attr.id]="proceso.id_candidato">Fecha para la Entrevista</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form #citaForm="ngForm" (ngSubmit)="onSubmit(citaForm)" method="POST" action="/reclutamiento/candidato/visualizar/:id_candidato">
+            <div class="modal-body">
+              <div class="text-justify">
+                <input type="date" name="fecha_entrevista" class="form-control"
+                        [(ngModel)]="citacandidato.fecha_entrevista" 
+                        required>
+                <input type="hidden" name="id_candidato" class="form-control" 
+                            [(ngModel)]="citacandidato.id_candidato" [value]="id_candidato"
+                            required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button class="btn btn-primary" [disabled]="!citaForm.form.valid">Cita</button>
+            </div>
+          </form>       
+        </div>
+      </div>
+    </div>
+<!-- Fin Modal -->
+<!--Modal1-->
+<div class="modal" [attr.id]="'Modal-1'+proceso.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="proceso.id_candidato" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [attr.id]="proceso.id_candidato">Asignar Solicitud</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #asigSoliForm="ngForm" (ngSubmit)="onSubmit3(asigSoliForm)" method="POST" action="/reclutamiento/candidato/visualizar/:id_candidato">
+          <div class="modal-body">
+            <div class="text-justify">
+              <label for="">Solicitud</label>
+              <div *ngIf="descripcion_trabajoo==null">Cargando...</div>
+              <select name="descripcion_trabajo" class="form-control" *ngIf="descripcion_trabajoo" 
+                    [(ngModel)]="solicitudacandidato.id_solicitud"
+                    required>
+                <option value="null">Seleccione...</option>
+                <option *ngFor="let descripcion_trabajoo of descripcion_trabajoo" value="{{ descripcion_trabajoo.id_solicitud }}">{{ descripcion_trabajoo.descripcion_trabajo | titlecase }}</option>
+              </select>
+              
+              <!-- <input type="text" name="id_solicitud" class="form-control" 
+                          [(ngModel)]="solicitudacandidato.id_solicitud" [value]="id_solicitud"
+                          required> -->
+              <input type="hidden" name="id_candidato" class="form-control" 
+                          [(ngModel)]="solicitudacandidato.id_candidato" [value]="id_candidato"
+                          required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" [disabled]="!asigSoliForm.form.valid">Asignar</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+<!-- Fin Modal1 -->
+<!--Modal2-->
+<div class="modal" [attr.id]="'Modal-2'+proceso.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="proceso.id_candidato" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [attr.id]="proceso.id_candidato">Observacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #obsForm="ngForm" (ngSubmit)="onSubmit1(obsForm)" method="POST" action="/reclutamiento/candidato/visualizar/:id_candidato">
+          <div class="modal-body">
+            <div class="text-justify">
+              <label for="">Entrevistador</label>
+              <input type="text" name="obs_analista" class="form-control"
+                      [(ngModel)]="observacionescandidato.entrevistador" 
+                      required>
+              <label for="">Rol del Entrevistador</label>
+              <select name="rol" class="form-control" *ngIf="roles" 
+                    [(ngModel)]="observacionescandidato.rol"
+                    required>
+                <option value="null">Seleccione...</option>
+                <option *ngFor="let rol of roles" value="{{ rol.id_rol }}">{{ rol.descripcion | titlecase }}</option>
+              </select>
+              <label for="">Fecha de la Observacion</label>
+              <input type="date" name="fecha_observacion" class="form-control"
+                      [(ngModel)]="observacionescandidato.fecha_observacion" 
+                      required>
+              <label for="">Observaciones sobre el Candidato</label>
+              <textarea rows="3" type="text" name="observaciones" class="form-control"
+                      [(ngModel)]="observacionescandidato.observaciones" 
+                      required>
+              </textarea>
+              <input type="hidden" name="id_candidato" class="form-control" 
+                          [(ngModel)]="observacionescandidato.id_candidato" [value]="id_candidato"
+                          required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" [disabled]="!obsForm.form.valid">Guardar</button>
+          </div>
+        </form>            
+      </div>
+    </div>
+  </div>
+<!-- Fin Modal2 -->
+<!--Modal3-->
+<div class="modal" [attr.id]="'Modal-3'+proceso.id_candidato" tabindex="-1" role="dialog" [attr.aria-labelledby]="proceso.id_candidato" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [attr.id]="proceso.id_candidato">Status del Candidato</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #statusForm="ngForm" (ngSubmit)="onSubmit2(statusForm)" method="POST" action="/reclutamiento/candidato/visualizar/:id_candidato">
+          <div class="modal-body">
+            <div class="text-justify">
+              <div *ngIf="lstatus==null">Cargando...</div>
+              <select name="status" class="form-control" *ngIf="lstatus" 
+                    [(ngModel)]="statuscandidato.status_proceso"
+                    required>
+                <option value="null">Seleccione...</option>
+                <option *ngFor="let status of lstatus" value="{{ status.id_status }}">{{ status.descripcion }}</option>
+              </select>
+              <input type="hidden" name="id_candidato" class="form-control" 
+                          [(ngModel)]="statuscandidato.id_candidato" [value]="id_candidato"
+                          required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" [disabled]="!statusForm.form.valid">Guardar</button>
+          </div>
+        </form>            
+      </div>
+    </div>
+  </div>
+<!-- Fin Modal3 -->
+<!-- Modal4-->
+<div *ngFor="let sta of statusCandidatos">
+  <div class="modal" [attr.id]="'Modal-4'+sta.id_candidato_status" tabindex="-1" role="dialog" [attr.aria-labelledby]="sta.id_candidato_status" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" [attr.id]="sta.id_candidato_status">Eliminar Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <label for="status">Status</label><br>
+              <input type="text" class="text-center" style="width: 400px" [attr.value]='sta.status'/><br>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" id="removeCourse" (click)="removeStatus(sta.id_candidato_status)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div> 
+<!-- Fin Modal4 -->
+<!-- Modal5-->
+<div *ngFor="let cit of citaCandidato">
+  <div class="modal" [attr.id]="'Modal-5'+cit.id_candidato_entrevista" tabindex="-1" role="dialog" [attr.aria-labelledby]="cit.id_candidato_entrevista" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" [attr.id]="cit.id_candidato_entrevista">Eliminar Cita</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <label for="status">Fecha Cita</label><br>
+              <input type="date" class="text-center" style="width: 400px" [attr.value]='cit.fecha_entrevista'/><br>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button class="btn btn-primary" id="removeCourse" (click)="removeCita(cit.id_candidato_entrevista)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div> 
+<!-- Fin Modal5 -->
+

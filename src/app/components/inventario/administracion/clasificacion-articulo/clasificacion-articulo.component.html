@@ -1,0 +1,39 @@
+
+<div  class="navbar navbar-light" >
+        <span class="navbar-brand mb-0 h1" style="color: RGB(0, 101, 149)"><h2>
+            <a [routerLink]="'/dashboard/intranet'" ><i class="fas fa-arrow-alt-circle-left" style="color: RGB(0, 101, 149);"></i> </a> 
+          REGISTRO DE NUEVO TIPO DE ARTICULO<hr></h2></span>
+</div>
+
+
+<div *ngIf="show" (click)="BorrarMensaje()" class="alert alert-success">{{ message }}</div>
+<form #newForm="ngForm" (ngSubmit)="OnSubmit(newForm)"  method="POST" >
+
+
+<div class="form-row">
+
+    <div class="form-group col-md-3">
+        <label for="id_tipo_articulo"><b> Clasificación:</b></label>
+        
+        <select class="form-control" id="sel_clasificacion" name="clasificacion" matInput #clasificacion [(ngModel)]="tipoArticulo.clase" required>
+        <option value="null">Selecciona...</option>  
+        <option *ngFor="let clas of clase" value="{{ clas.descripcion }}">{{ clas.descripcion | titlecase }}</option>                         
+        </select>
+        
+    </div>
+    
+
+    <div class="form-group col-md-3">
+        <label for="tipo"><b>Tipo de Articulo: </b></label>
+        <input type="text" name ="tipo"  matInput #tipo [(ngModel)]="tipoArticulo.descripcion" class="form-control" placeholder="Escriba el tipo de articulo">
+    </div>
+    
+</div>
+
+<button type="submit" class="btn btn-primary" [disabled]="!newForm.form.valid">Registrar</button>
+
+</form>
+
+
+
+

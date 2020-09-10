@@ -1,0 +1,103 @@
+<div class= "text-center">
+  <h3 class="arial">
+  Actividades del Proyecto
+</h3>
+
+
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="alert alert-info" *ngIf="status == 'success'">
+        La Actividade se Registro Correctamente
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            La  Actividade no se Registro Correctamente
+        </div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="inputNombre">Proyectos</label>
+    <!--<input type="nombre" class="form-control" id="inputNombre" placeholder="Nombre">-->
+ 
+
+ 
+  <div *ngIf="id_proyecto == null">Cargando...</div>
+  <select (change)="obtener()" class="form-control" id="sel_id_proyecto" name="proyecto" matInput #proyecto [(ngModel)]="registraractividad.id_proyecto">
+    <option value="null">Selecciona...</option>  
+    <option *ngFor="let idproyecto of id_proyecto" value="{{ idproyecto.id_proyecto }}">{{ idproyecto.nombre | titlecase }}</option>                         
+    
+    </select>
+  </div>
+  <div class="margenlado">
+  </div>
+ 
+    <div class="form-group col-md-2">
+        <label for="inputAddress">Fecha Inicio</label>
+        
+        <p>{{fecha}}</p>
+      </div>
+      <div class="form-group col-md-2">
+          <label for="inputAddress2">Fecha Fin</label>
+          
+          <p>{{ffin}}</p>
+        </div>
+    
+</div>
+
+<div class= "text-center">
+  <h6><p class="arial">
+      Actividades del Sprint
+    </p></h6>
+  </div>
+<div class="form-group col-md-4">
+  <label for="inputNombre4">Sprints</label>
+  <select  class="form-control" id="sel_id_periodo" name="periodo" matInput #idperiodo [(ngModel)]="registraractividad.id_periodo">
+    <option value="null">Selecciona...</option>  
+    <option *ngFor="let idperiodo of id_periodo" value="{{ idperiodo.id_periodo }}">{{ idperiodo.sprint | titlecase }}</option>                         
+    
+    </select>
+</div>
+
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputactividades4">Actividad</label>
+                    <input  type="nombre" name="nombre"  #nombre="ngModel" [(ngModel)]="registraractividad.nombre" class="form-control" id="id_actividad" placeholder="nombre" required/>
+                  </div>
+                 
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Duracion</label>
+                    <input type="text" name="duracion"  #fases="ngModel" [(ngModel)]="registraractividad.duracion" class="form-control" id="text" placeholder="text">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputfecha_inicio">Observaciones</label>
+                    <input type="text" name="observaciones"  #observaciones="ngModel" [(ngModel)]="registraractividad.observaciones" class="form-control" id="text" placeholder="text">
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="fecha_inicio">Fecha Inicio</label>
+                      <input type="date" name="fecha_inicio" #fecha_inicio="ngModel" [(ngModel)]="registraractividad.fecha_inicio" class="form-control" id="date" placeholder="fecha_inicio" required />
+                      <span *ngIf="!fecha_inicio.valid && fecha_inicio.touched"> esta vacio el campo</span>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="fecha_fin">Fecha Fin</label>
+                      <input type="date" name="fecha_fin" #fecha_fin="ngModel" [(ngModel)]="registraractividad.fecha_fin" class="form-control" id="date" placeholder="fecha_fin" required/>
+                      <span *ngIf="!fecha_fin.valid && fecha_fin.touched"> esta vacio el campo</span>
+                    </div>
+                
+                    </div>
+      
+                  </div>
+                  <div class="form-row">
+                  
+                   
+                     
+        
+                      <div class="form-group col-md-2; boton3">
+                          
+                          <button type="submit" class="btn btn-primary">Registrar</button>
+                      </div>
+                    
+                </div>
+                 
+              
+
+  </form>
+</div>

@@ -1,0 +1,44 @@
+<body>
+   
+  <div  class="navbar navbar-light" >
+      
+    <span class="navbar-brand mb-0 h1" style="color: RGB(0, 101, 149)"><h2> 
+      <a [routerLink]="'/dashboard/intranet'" ><i class="fas fa-arrow-alt-circle-left" style="color: RGB(0, 101, 149);"></i> </a> 
+      TIPO DE REGISTRO <hr></h2></span>
+  </div>
+
+  
+  
+  <div class="row">
+    <div class="mobi">
+        <div class="mobimagen">
+            <img src="assets/img/mobi.png" alt="">
+        </div>
+        <div class="mobibuttonr">
+                <a [routerLink]="'/dashboard/inventario/nuevoregistro/mobiliarios'" class=" botonmobi btn btn-primary" style="width: 180px">Mobiliarios</a>
+        </div>
+    </div>
+
+    <div class="elec">
+        <div class="elecimagen">
+            <img src="assets/img/aire.png" alt="">
+        </div>
+        <div class="electrobuttonr">            
+                <a [routerLink]="'/dashboard/inventario/nuevoregistro/electrodomesticos'" class=" botonmobi btn btn-primary" style="width: 180px">Electrodomesticos</a>
+        </div>
+    </div>
+    
+    <div class="compu">
+        <div class="compuimagen">
+            <img src="assets/img/compu.png"  alt="">
+        </div>
+        <div class="compubuttonr">
+                <a [routerLink]="'/dashboard/inventario/nuevoregistro/computacion'" class=" botonmobi btn btn-primary" style="width: 180px">Computación</a>
+        </div>
+    </div>    
+  </div>
+   
+
+    
+</body>
+

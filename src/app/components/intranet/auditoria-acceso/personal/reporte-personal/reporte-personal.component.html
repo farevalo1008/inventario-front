@@ -1,0 +1,39 @@
+<div class="row mx-0 mb-2">
+	<div id="datos" class="col-10" *ngFor="let datos of user">
+		<b class="mr-2">Nombre:</b><span class="mr-4" id="nombre">{{datos.nombres}}</span> 
+		<b class="mr-2">Apellido:</b> <span class="mr-4">{{datos.apellidos}}</span> 
+		<b class="mr-2">Cédula:</b> <span class="mr-4">{{datos.dni}}</span>
+		
+	</div>
+	<div class="col-2  text-right mx-0">
+		<div class="btn-group">
+			<a class="btn color-1" [routerLink]="['/dashboard/intranet/auditoriadeacceso']"><i class="fas fa-caret-left"></i></a>
+			<button class="btn color-1" (click)='generarPDF()'>PDF</button>
+		</div>
+	</div>
+</div>
+<div class="row mx-0">
+	<div class="col-12" id="contenido">
+		<table class="table  LetraTabla table-striped">
+			<thead class="color-1">
+			    <tr>
+			      <th class="size">Fecha</th>
+			      <th>Hora de Entrada</th>
+			      <th>Hora de Salida</th>
+			      <th>Evento</th>
+			      <th>Observaciones</th>
+			    </tr>
+			</thead>
+
+		  	<tbody>
+			    <tr *ngFor="let reporte of reportes">
+				    <td>{{ reporte.fecha }}</td>
+				    <td>{{ reporte.hora_entrada }}</td>
+				    <td>{{ reporte.hora_salida }}</td>
+				    <td>{{ reporte.evento }}</td>
+				    <td>{{ reporte.observaciones }}</td>
+			    </tr>
+		  	</tbody>
+		</table>
+	</div>
+</div>
